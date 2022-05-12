@@ -25,18 +25,18 @@ const MenuScreen = () => {
                     </Text>
                 </View>
 
-                <View
+                {/* <View
                     style={{ flex: 1, backgroundColor: '#5FE0E6' }}
                     onPress={() => { }} // Action
                 >
                     <Image
-                        source={Report}
+                        source={Hear}
                         style={styles.report}
                     />
                     <Text style={styles.text}>
                         Report
                     </Text>
-                </View>
+                </View> */}
 
             </View>
             <View style={{ flex: 1, flexDirection: "row" }}>
@@ -45,7 +45,7 @@ const MenuScreen = () => {
                     onPress={() => { }} // Action
                 >
                     <Image
-                        source={Words}
+                        source={Hear}
                         style={styles.words}
                     />
                     <Text style={styles.text2}>
@@ -53,18 +53,18 @@ const MenuScreen = () => {
                     </Text>
                 </View>
 
-                <View
+                {/* <View
                     style={{ flex: 1, backgroundColor: '#5FE0E6' }}
                     onPress={() => { }} // Action
                 >
                     <Image
-                        source={Profiler}
+                        source={Hear}
                         style={styles.profiler}
                     />
                     <Text style={styles.text2}>
                         Profile
                     </Text>
-                </View>
+                </View> */}
 
             </View>
         </View >
