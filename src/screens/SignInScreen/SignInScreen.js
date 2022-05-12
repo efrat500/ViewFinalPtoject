@@ -1,43 +1,51 @@
-import { View, Text, StyleSheet, Image, useWindowDimensions } from 'react-native';
-import Logo from '../../../assets/children.png'
+import { View, Text, StyleSheet, Image, useWindowDimensions} from 'react-native'
 import React, {useState} from 'react'
-import CustomInput from '../../components/CustomInput';
-import CustemButton from '../../components/CustemButton';
+import Logo from '../../../assets/children.png'
+import CustomInput from '../../components/CustomInput'
+import CustemButton from '../../components/CustemButton'
+import { useNavigation } from '@react-navigation/native'
+import { useForm, Controller } from 'react-hook-form'
+
+
 
 const SignInScreen = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const {height} = useWindowDimensions();
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const {height} = useWindowDimensions()
+    const navigation = useNavigation()
+    // const {control, handleSubmit, errors} = useForm();
+    // console.log(errors)
+
+
     const onSignInPress = () =>{
-        console.warn("sign in");
+        navigation.navigate('Home')
     }
     const onForgotPassworPressed = () =>{
-        console.warn("onForgotPassworPressed");
+        navigation.navigate('ForgotPassword')
     }
     const onSignUpPressed =() =>{
-        console.warn("onForgotPassworPressed");
+        navigation.navigate('SignUp')
     }
     
     return (
         <View style={styles.root}>
-            <Image
-                source={Logo}
-                style={[styles.logo, {height: height*0.3}]}
-                resizeMode="contain"
-            />  
+            <Text style={styles.title}>Welcome Back</Text> 
             <CustomInput 
                 placeholder={'Username'} 
                 value={username} 
                 setValue={setUsername}
+                icon_AntDesign={'user'}
             />
             <CustomInput 
                 placeholder={'Password'} 
                 value={password} 
                 setValue={setPassword}
                 secureTextEntry={true}
+                icon_material={'lock'}
             />
             <CustemButton 
                 text='Sign In' 
+                // check befor press signin all the data is valid
                 onPress={onSignInPress}
             />
             
@@ -62,11 +70,20 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       padding: 70,
     },
+    background:{
+        flex: 1,
+    },
     logo: {
         width: '70%',
         maxWidth: 300,
         maxHeight: 200,
-    }
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: 'black',
+        margin: 10,
+    },
   });
 
 export default SignInScreen;
