@@ -21,7 +21,7 @@ const ConfirmEmail = () => {
         console.warn("onResendPressed")
     }
 
-    
+    // sssss
     return (
         <ImageBackground source={require('../../../assets/op1.jpg')} style={styles.root}>
             <Text style={styles.title}>Confirm your email</Text> 
