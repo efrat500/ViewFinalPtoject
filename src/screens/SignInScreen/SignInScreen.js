@@ -1,25 +1,32 @@
-import { View, Text, StyleSheet, Image, useWindowDimensions} from 'react-native'
+import { View, Text, StyleSheet, Image, useWindowDimensions, Alert, ImageBackground} from 'react-native'
 import React, {useState} from 'react'
 import Logo from '../../../assets/children.png'
 import CustomInput from '../../components/CustomInput'
 import CustemButton from '../../components/CustemButton'
 import { useNavigation } from '@react-navigation/native'
-import { useForm, Controller } from 'react-hook-form'
+import {Formik} from 'formik'
+import * as Yup from 'yup'
 
-
+const validationSchema = Yup.object({
+    username: Yup.string().trim(). min(3,'Invalid name').required('Username is require'),
+    password: Yup.string().trim(). min(8,'Password is too short').required('Password is require')
+})
 
 const SignInScreen = () => {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
     const {height} = useWindowDimensions()
     const navigation = useNavigation()
-    // const {control, handleSubmit, errors} = useForm();
-    // console.log(errors)
-
-
-    const onSignInPress = () =>{
-        navigation.navigate('Home')
-    }
+    // const onSignInPress = () =>{
+    //     if (!username.trim()) {
+    //         Alert.alert('OOPS!','Please Enter Name',[{text: 'Understood'}]);
+    //         return;
+    //     }
+          
+    //     if (!password.trim()) {
+    //         Alert.alert('OOPS!','Please Enter password',[{text: 'Understood'}]);
+    //         return;
+    //     }
+    //     navigation.navigate('Home')
+    // }
     const onForgotPassworPressed = () =>{
         navigation.navigate('ForgotPassword')
     }
@@ -28,39 +35,55 @@ const SignInScreen = () => {
     }
     
     return (
-        <View style={styles.root}>
+        <ImageBackground source={require('../../../assets/o3.jpg')} style={styles.root}>
             <Text style={styles.title}>Welcome Back</Text> 
-            <CustomInput 
-                placeholder={'Username'} 
-                value={username} 
-                setValue={setUsername}
-                icon_AntDesign={'user'}
-            />
-            <CustomInput 
-                placeholder={'Password'} 
-                value={password} 
-                setValue={setPassword}
-                secureTextEntry={true}
-                icon_material={'lock'}
-            />
-            <CustemButton 
-                text='Sign In' 
-                // check befor press signin all the data is valid
-                onPress={onSignInPress}
-            />
-            
-            <CustemButton 
-                text='Forget Password?' 
-                onPress={onForgotPassworPressed} 
-                type="TERTIARY"
-            />
-            <CustemButton 
-                text="Don't have an account? Create one" 
-                onPress={onSignUpPressed} 
-                type="TERTIARY"
-            />
-    
-        </View>
+            <Formik 
+                initialValues={{username: '',password: ''}} 
+                validationSchema={validationSchema} 
+                onSubmit={(values, formikAction) => 
+                    navigation.navigate('Home')
+                }>
+                {({values, errors, handleChange, handleBlur, touched, handleSubmit}) => {
+                    const {username, password} = values
+                    return ( 
+                        <>
+                            <CustomInput 
+                                placeholder={'Username'} 
+                                value={username} 
+                                error={touched.username && errors.username}
+                                setValue={handleChange('username')}
+                                onBlur={handleBlur('username')}
+                                icon_AntDesign={'user'}
+                            />
+                            <CustomInput 
+                                placeholder={'Password'} 
+                                value={password} 
+                                onBlur={handleBlur('password')}
+                                setValue={handleChange('password')}
+                                secureTextEntry={true}
+                                icon_material={'lock'}
+                                error={touched.password && errors.password}
+                            />
+                            <CustemButton 
+                                text='Sign In' 
+                                // check befor press signin all the data is valid
+                                onPress={handleSubmit}
+                            />
+                            <CustemButton 
+                                text='Forget Password?' 
+                                onPress={onForgotPassworPressed} 
+                                type="TERTIARY"
+                            />
+                            <CustemButton 
+                                text="Don't have an account? Create one" 
+                                onPress={onSignUpPressed} 
+                                type="TERTIARY"
+                            />
+                        </>
+                    )
+                }}
+            </Formik>
+        </ImageBackground>
     );
 }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import SignInScreen from './src/screens/SignInScreen/SignInScreen'
 import SignUpScreen from './src/screens/SignUpScreen/SignUpScreen'
 import ConfirmEmail from './src/screens/ConfirmEmailScreen/ConfirmEmailScreen'
@@ -10,15 +10,21 @@ import HomeScreen from './src/screens/HomeScreen/HomeScreen'
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <Navigation />
-    </SafeAreaView>
+    <TouchableWithoutFeedback onPress={() => {
+      Keyboard.dismiss()
+    }}>
+      <SafeAreaView style={styles.container}>
+        <Navigation />
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
+   
+  
   },
 });

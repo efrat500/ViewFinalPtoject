@@ -1,18 +1,18 @@
-import { View, Text, StyleSheet, Image, useWindowDimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, useWindowDimensions, ImageBackground } from 'react-native';
 import Logo from '../../../assets/children.png'
 import React, {useState} from 'react'
 import CustomInput from '../../components/CustomInput'
 import CustemButton from '../../components/CustemButton'
 import { useNavigation } from '@react-navigation/native'
+import {Formik} from 'formik'
+import * as Yup from 'yup'
 
+const validationSchema = Yup.object({
+    code: Yup.string().trim().required('Confirmation code is require')
+})
 const ConfirmEmail = () => {
-    const [code, setCode] = useState('')
-    const {height} = useWindowDimensions()
     const navigation = useNavigation()
 
-    const onConfirmPressed = () =>{
-        navigation.navigate('NewPassword')
-    }
     const onSignInPressed = () =>{
         navigation.navigate('SignIn')
         
@@ -23,29 +23,43 @@ const ConfirmEmail = () => {
 
     
     return (
-        <View style={styles.root}>
+        <ImageBackground source={require('../../../assets/op1.jpg')} style={styles.root}>
             <Text style={styles.title}>Confirm your email</Text> 
-            <CustomInput 
-                placeholder={'Enter your confirmation code'} 
-                value={code} 
-                setValue={setCode}
-            />
-            <CustemButton 
-                text='Confirm' 
-                onPress={onConfirmPressed}
-            />
-            <CustemButton 
-                text="Resend code" 
-                onPress={onResendPressed} 
-                type="SECONDARY"
-            />
-            <CustemButton 
-                text="Back to Sign in" 
-                onPress={onSignInPressed} 
-                type="TERTIARY"
-            />
-    
-        </View>
+            <Formik 
+              initialValues={{code: ''}} 
+              validationSchema={validationSchema} 
+              onSubmit={(values, formikAction) => navigation.navigate('NewPassword')}
+            >
+                {({values, errors, handleChange, handleBlur, touched, handleSubmit}) => {
+                    const {code} = values
+                    return ( 
+                        <>
+                            <CustomInput 
+                                placeholder={'Enter your confirmation code'}  
+                                value={code} 
+                                error={touched.code && errors.code}
+                                setValue={handleChange('code')}
+                                onBlur={handleBlur('code')}
+                            />
+                            <CustemButton 
+                                text='Confirm' 
+                                onPress={handleSubmit}
+                            />
+                            <CustemButton 
+                                text="Resend code" 
+                                onPress={onResendPressed} 
+                                type="SECONDARY"
+                            />
+                            <CustemButton 
+                                text="Back to Sign in" 
+                                onPress={onSignInPressed} 
+                                type="TERTIARY"
+                            />
+                        </>
+                    )
+                }}
+            </Formik>
+        </ImageBackground>
     );
 }
 
