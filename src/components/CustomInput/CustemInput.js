@@ -1,30 +1,46 @@
-import { View, TextInput, StyleSheet } from 'react-native'
+import { View, TextInput, StyleSheet, Text} from 'react-native'
 import React from 'react'
-import { borderColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
+import {MaterialCommunityIcons} from '@expo/vector-icons'
+import {AntDesign} from '@expo/vector-icons'
 
-const CustemInput = ({value, setValue, placeholder, secureTextEntry}) => {
+const CustemInput = ({value, setValue, placeholder, secureTextEntry, icon_material, icon_AntDesign, error}) => {
   return (
-    <View style={styles.container}>
-      <TextInput 
-        value={value}
-        onChangeText={setValue}
-        placeholder={placeholder}
-        style={styles.input}
-        secureTextEntry={secureTextEntry}
+    <View>
+      <View>
+        {error ? (<Text style={{ color: 'red', fontSize: 16}}>{error} </Text>) : null}
+      </View>
+      <View style={styles.container}>
+        <MaterialCommunityIcons name={icon_material} size={30} />
+        <AntDesign name={icon_AntDesign} size={30} />
+        <TextInput 
+          autoCapitalize='none'
+          value={value}
+          onChangeText={setValue}
+          placeholder={placeholder}
+          style={styles.input}
+          secureTextEntry={secureTextEntry}
         />
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
-        width:'100%',
-        borderColor: '#e8e8e8',
-        borderWidth: 2,
-        borderRadius: 10,
-        paddingHorizontal: 10,
-        marginVertical: 9,
+      // borderTopColor:'black',
+      // borderBottomColor: 'black',
+      // borderEndColor:'black',
+      // borderStartColor:'black',
+      borderColor: '#e8e8e8',
+      borderWidth: 2,
+      backgroundColor: 'white',
+      height: 60,
+      width: 300,
+      borderRadius: 10,
+      paddingHorizontal: 5,
+      paddingVertical: 12,
+      marginVertical: 10,
+      flexDirection: 'row',
 
 
 
