@@ -7,10 +7,10 @@ import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
 
-const MenuScreen = () => {
+const MenuScreen = (props) => {
     return (
         <View style={{ flex: 1 }}>
-            <Text style={styles.text3}>Welcome!</Text>
+            <Text style={styles.text3}>Welcome {props.name}!</Text>
             <View style={{ flex: 1, flexDirection: "row" }}>
                 <View
                     style={{ flex: 1, backgroundColor: '#5FE0E6' }}
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
         width: '100%',
         maxWidth: 200,
         maxHeight: 180,
-        paddingHorizontal: 80,
+        paddingHorizontal: 70,
         borderColor: 'black',
         borderWidth: 5,
         top: 100
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         width: '100%',
         maxWidth: 200,
         maxHeight: 180,
-        paddingHorizontal: 80,
+        paddingHorizontal: 70,
         borderColor: 'black',
         borderWidth: 5,
         top: 100
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         width: '100%',
         maxWidth: 200,
         maxHeight: 180,
-        paddingHorizontal: 80,
+        paddingHorizontal: 50,
         borderColor: 'black',
         borderWidth: 5
     },
@@ -107,13 +107,13 @@ const styles = StyleSheet.create({
         width: '100%',
         maxWidth: 200,
         maxHeight: 180,
-        paddingHorizontal: 80,
+        paddingHorizontal: 50,
         borderColor: 'black',
         borderWidth: 5
     },
     text: {
         alignItems: 'center',
-        marginTop: 50,
+        marginTop: 45,
         padding: 50,
         fontWeight: 'bold',
         fontSize: 30,
@@ -127,8 +127,9 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     text3: {
+        justifyContent: 'center',
         alignItems: 'center',
-        left: 100,
+        left: 20,
         fontWeight: 'bold',
         fontSize: 50,
         top: 10
