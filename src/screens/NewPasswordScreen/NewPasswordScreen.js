@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, useWindowDimensions, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, Image, useWindowDimensions, ImageBackground, Alert } from 'react-native';
 import Logo from '../../../assets/children.png'
 import React, {useState} from 'react'
 import CustomInput from '../../components/CustomInput'
@@ -12,7 +12,32 @@ const validationSchema = Yup.object({
     passwordRepeat: Yup.string().equals([Yup.ref('password'), null], 'Password does not match').required('Repeat password is require')
 })
 
-const NewPasswordScreen = () => {
+const NewPasswordScreen = (props) => {
+
+    const insertData = (values) => {
+        fetch('http://192.168.1.234:5000/updatepassword', {
+            method:'put',
+            headers: {
+                'Content-Type':'application/json',
+                Accept: 'application/json'
+
+            },
+            timeout: 4000,
+            body: JSON.stringify({username:values.username, password:values.password})
+        })
+        .then((responseJson) => {
+            if (responseJson.status != 200){
+                Alert.alert('OOPS','The username is incorrect, Please enter another username!',[{text: 'Understood'}])
+                return
+            }
+            else{
+                Alert.alert('Note','Your password successfully change!',[{text: 'OK'}])
+                props.navigation.navigate('SignIn') 
+            }
+        })
+        .catch(error => console.log(error))
+    }
+
     const navigation = useNavigation()
 
     const onSignInPressed =() =>{
@@ -25,12 +50,25 @@ const NewPasswordScreen = () => {
             <Formik
                 initialValues={{password: '', passwordRepeat: ''}} 
                 validationSchema={validationSchema} 
-                onSubmit={(values, formikAction) => navigation.navigate('SignIn')}
+                onSubmit={(values, formikAction) => {
+                    console.log(values)
+                    insertData(values)
+                } }
+                //  navigation.navigate('SignIn')}
             >
                 {({values, errors, handleChange, handleBlur, touched, handleSubmit}) => {
-                    const {password, passwordRepeat} = values
+                    const {username, password, passwordRepeat} = values
                     return ( 
                         <>
+                            <CustomInput 
+                                placeholder={'Username'} 
+                                value={username} 
+                                error={touched.username && errors.username}
+                                setValue={handleChange('username')}
+                                onBlur={handleBlur('username')}
+                                icon_AntDesign={'user'}
+                                
+                            />
                             <CustomInput 
                                 placeholder={'Password'} 
                                 value={password} 

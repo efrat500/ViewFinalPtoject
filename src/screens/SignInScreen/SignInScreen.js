@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image, useWindowDimensions, Alert, ImageBackground} from 'react-native'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Logo from '../../../assets/children.png'
 import CustomInput from '../../components/CustomInput'
 import CustemButton from '../../components/CustemButton'
@@ -8,12 +8,33 @@ import {Formik} from 'formik'
 import * as Yup from 'yup'
 
 const validationSchema = Yup.object({
-    username: Yup.string().trim(). min(3,'Invalid name').required('Username is require'),
-    password: Yup.string().trim(). min(8,'Password is too short').required('Password is require')
+    username: Yup.string().trim().required('Username is required'),
+    password: Yup.string().trim().required('Password is required')
 })
 
-const SignInScreen = () => {
-    const {height} = useWindowDimensions()
+const SignInScreen = (props) => {
+    const insertData = (values) => {
+        fetch('http://192.168.1.234:5000/login', {
+            method:'post',
+            headers: {
+                'Content-Type':'application/json',
+                Accept: 'application/json'
+
+            },
+            timeout: 4000,
+            body: JSON.stringify({username:values.username, password:values.password})
+        })
+        .then((responseJson) => {
+            if (responseJson.status != 200){
+                Alert.alert('OOPS','The username or password is incorrect, Please try again!',[{text: 'Understood'}])
+                return
+            }
+            else{
+                props.navigation.navigate('Home') 
+            }
+        })
+        .catch(error => console.log(error))
+    }
     const navigation = useNavigation()
     // const onSignInPress = () =>{
     //     if (!username.trim()) {
@@ -28,7 +49,7 @@ const SignInScreen = () => {
     //     navigation.navigate('Home')
     // }
     const onForgotPassworPressed = () =>{
-        navigation.navigate('ForgotPassword')
+        navigation.navigate('NewPassword')
     }
     const onSignUpPressed =() =>{
         navigation.navigate('SignUp')
@@ -40,8 +61,10 @@ const SignInScreen = () => {
             <Formik 
                 initialValues={{username: '',password: ''}} 
                 validationSchema={validationSchema} 
-                onSubmit={(values, formikAction) => 
-                    navigation.navigate('Home')
+                onSubmit={(values, formikAction) => {
+                    //console.log(values)
+                    insertData(values)
+                }
                 }>
                 {({values, errors, handleChange, handleBlur, touched, handleSubmit}) => {
                     const {username, password} = values

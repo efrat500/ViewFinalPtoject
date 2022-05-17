@@ -7,14 +7,17 @@ import ForgotPasswordScreen from './src/screens/ForgotPassworfScreen/ForgotPassw
 import NewPasswordScreen from './src/screens/NewPasswordScreen/NewPasswordScreen'
 import Navigation from './src/navigation/Navigation'
 import HomeScreen from './src/screens/HomeScreen/HomeScreen'
+import MenuScreen from './src/screens/MenuScreen'
 
 export default function App() {
+  const name = "efrat"
   return (
     <TouchableWithoutFeedback onPress={() => {
       Keyboard.dismiss()
     }}>
       <SafeAreaView style={styles.container}>
-        <Navigation />
+        <Navigation/>
+        {/* <MenuScreen name= {name} /> */}
       </SafeAreaView>
     </TouchableWithoutFeedback>
 
@@ -24,7 +27,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-   
-  
+    backgroundColor: '#5FE0E6'
   },
 });
