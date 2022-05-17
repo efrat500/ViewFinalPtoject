@@ -71,7 +71,7 @@ const MenuScreen = (props) => {
     );
 }
 
-//jhiu
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
