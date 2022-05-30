@@ -8,6 +8,7 @@ import NewPasswordScreen from './src/screens/NewPasswordScreen/NewPasswordScreen
 import Navigation from './src/navigation/Navigation'
 import HomeScreen from './src/screens/HomeScreen/HomeScreen'
 import MenuScreen from './src/screens/MenuScreen'
+import Story from './src/screens/Story'
 
 export default function App() {
   const name = "efrat"
@@ -16,7 +17,8 @@ export default function App() {
       Keyboard.dismiss()
     }}>
       <SafeAreaView style={styles.container}>
-        <Navigation/>
+        {/* <Navigation/> */}
+        <Story />
         {/* <MenuScreen name= {name} /> */}
       </SafeAreaView>
     </TouchableWithoutFeedback>

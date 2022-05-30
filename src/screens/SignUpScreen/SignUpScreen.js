@@ -23,35 +23,43 @@ const validationSchema = Yup.object({
 
 const SignUpScreen = (props) => {
 
-    const insertData = (values) => {
-        fetch('http://192.168.1.234:5000/register', {
-            method:'post',
-            headers: {
-                'Content-Type':'application/json',
-                Accept: 'application/json'
+    // const insertData = (values) => {
+    //     fetch('http://192.168.1.235:5000/register', {
+    //         method:'post',
+    //         headers: {
+    //             'Content-Type':'application/json',
+    //             Accept: 'application/json'
 
-            },
-            timeout: 4000,
-            body: JSON.stringify({username:values.username, password:values.password, email:values.email})
+    //         },
+    //         timeout: 4000,
+    //         body: JSON.stringify({username:values.username, password:values.password, email:values.email})
+    //     })
+    //     .then((responseJson) => {
+    //         if (responseJson.status != 200){
+    //             Alert.alert('OOPS','The username already exists, Please enter another username!',[{text: 'Understood'}])
+    //             return
+    //         }
+    //         else{
+    //             props.navigation.navigate('Home') 
+    //         }
+    //     })
+    //     .catch(error => console.log(error))
+    // }
+    
+    const insertData = (values) => {
+        axios.post('http://192.168.1.235:5000/register', {username:values.username, password:values.password, email:values.email})
+        .then(resp => {
+            console.log(resp.data)
+            props.navigation.navigate('Home') 
         })
-        .then((responseJson) => {
-            if (responseJson.status != 200){
+        .catch(error => {
+            if (error.status != 200){
                 Alert.alert('OOPS','The username already exists, Please enter another username!',[{text: 'Understood'}])
                 return
             }
-            else{
-                props.navigation.navigate('Home') 
-            }
         })
-        .catch(error => console.log(error))
+        .finally(() => console.log("done"))
     }
-    
-    // const insertData = (values) => {
-    //     axios.post('http://192.168.56.1:5000/register', {username: values.username ,password: values.password})
-    //     .then(resp => {console.log(resp)})
-    //     .catch(error => {console.log(error.toJSON())})
-    //     .finally(() => console.log("done"))
-    // }
 
     const navigation = useNavigation()
 
@@ -66,7 +74,6 @@ const SignUpScreen = (props) => {
                 initialValues={{username: '', email:'',password: '', passwordRepeat: ''}} 
                 validationSchema={validationSchema} 
                 onSubmit={(values, formikAction) => {
-                    console.log(values)
                     insertData(values)
                 }
 

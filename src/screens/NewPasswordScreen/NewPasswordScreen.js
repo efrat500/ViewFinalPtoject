@@ -25,16 +25,26 @@ const NewPasswordScreen = (props) => {
             timeout: 4000,
             body: JSON.stringify({username:values.username, password:values.password})
         })
-        .then((responseJson) => {
-            if (responseJson.status != 200){
-                Alert.alert('OOPS','The username is incorrect, Please enter another username!',[{text: 'Understood'}])
-                return
-            }
-            else{
-                Alert.alert('Note','Your password successfully change!',[{text: 'OK'}])
-                props.navigation.navigate('SignIn') 
-            }
+        .then((response) => {
+            console.log(response.arrayBuffer())
+            console.log(response.bodyUsed)
+            console.log(response.json())
+            console.log(response.formData())
+            console.log(response.toLocaleString())
+            console.log(response.object)
+            console.log(response.object)
+            console.log(response.object)
         })
+        // .then((responseJson) => {
+        //     if (responseJson.status != 200){
+        //         Alert.alert('OOPS','The username is incorrect, Please enter another username!',[{text: 'Understood'}])
+        //         return
+        //     }
+        //     else{
+        //         Alert.alert('Note','Your password successfully change!',[{text: 'OK'}])
+        //         props.navigation.navigate('SignIn') 
+        //     }
+        // })
         .catch(error => console.log(error))
     }
 //

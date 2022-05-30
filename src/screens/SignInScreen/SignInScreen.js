@@ -6,26 +6,45 @@ import CustemButton from '../../components/CustemButton'
 import { useNavigation } from '@react-navigation/native'
 import {Formik} from 'formik'
 import * as Yup from 'yup'
+import axios from "axios"
 
 const validationSchema = Yup.object({
     username: Yup.string().trim().required('Username is required'),
     password: Yup.string().trim().required('Password is required')
 })
 
-const SignInScreen = (props) => {
-    const insertData = (values) => {
-        fetch('http://192.168.1.234:5000/login', {
-            method:'post',
-            headers: {
-                'Content-Type':'application/json',
-                Accept: 'application/json'
 
-            },
-            timeout: 4000,
-            body: JSON.stringify({username:values.username, password:values.password})
-        })
-        .then((responseJson) => {
-            if (responseJson.status != 200){
+const SignInScreen = (props) => {
+    // const insertData = (values) => {
+    //     fetch('http://192.168.1.235:5000/login', {
+    //         method:'post',
+    //         headers: {
+    //             'Content-Type':'application/json',
+    //             Accept: 'application/json'
+
+    //         },
+    //         timeout: 4000,
+    //         body: JSON.stringify({username:values.username, password:values.password})
+    //     })
+    //     .then((res) => {
+    //         console.log(res.text())
+    //         check = JSON.parse(res)
+    //         console.log(check)
+    //         if (res.status != 200){
+    //             Alert.alert('OOPS','The username or password is incorrect, Please try again!',[{text: 'Understood'}])
+    //             return
+    //         }
+    //         else{
+    //             props.navigation.navigate('Home') 
+    //         }
+    //     })
+    //     .catch(error => console.log(error))
+    // }
+    const insertData = (values) => {
+        axios.post('http://192.168.1.235:5000/login', {username: values.username ,password: values.password})
+        .then(resp => {
+            console.log(resp.data)
+            if (resp.status != 200){
                 Alert.alert('OOPS','The username or password is incorrect, Please try again!',[{text: 'Understood'}])
                 return
             }
@@ -33,21 +52,16 @@ const SignInScreen = (props) => {
                 props.navigation.navigate('Home') 
             }
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            if (error.status != 200){
+                Alert.alert('OOPS','The username or password is incorrect, Please try again!',[{text: 'Understood'}])
+                return
+            }
+        })
+        .finally(() => console.log("done"))
     }
     const navigation = useNavigation()
-    // const onSignInPress = () =>{
-    //     if (!username.trim()) {
-    //         Alert.alert('OOPS!','Please Enter Name',[{text: 'Understood'}]);
-    //         return;
-    //     }
-          
-    //     if (!password.trim()) {
-    //         Alert.alert('OOPS!','Please Enter password',[{text: 'Understood'}]);
-    //         return;
-    //     }
-    //     navigation.navigate('Home')
-    // }
+
     const onForgotPassworPressed = () =>{
         navigation.navigate('NewPassword')
     }
