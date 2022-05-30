@@ -3,79 +3,60 @@ import Story from '../../assets/story.jpg';
 import Report from '../../assets/report.png';
 import Words from '../../assets/words.jpg';
 import Profiler from '../../assets/profile.jpg';
-import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
-
+import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import Appear from '../components/Appear';
+import MyCard from '../components/Card/Card';
 
 const MenuScreen = () => {
-    return (
-        <View style={{ flex: 1 }}>
-            <Text style={styles.text3}>Welcome!</Text>
-            <View style={{ flex: 1, flexDirection: "row" }}>
-                <View
-                    style={{ flex: 1, backgroundColor: '#5FE0E6' }}
-                    onPress={() => { }}
-                >
-                    <Image
-                        source={Story}
-                        style={styles.story}
-                    />
-                    <Text style={styles.text}>
-                        Story
-                    </Text>
-                </View>
-
-                <View
-                    style={{ flex: 1, backgroundColor: '#5FE0E6' }}
-                    onPress={() => { }} // Action
-                >
-                    <Image
-                        source={Report}
-                        style={styles.report}
-                    />
-                    <Text style={styles.text}>
-                        Report
-                    </Text>
-                </View>
-
-            </View>
-            <View style={{ flex: 1, flexDirection: "row" }}>
-                <View
-                    style={{ flex: 1, backgroundColor: '#5FE0E6' }}
-                    onPress={() => { }} // Action
-                >
-                    <Image
-                        source={Words}
-                        style={styles.words}
-                    />
-                    <Text style={styles.text2}>
-                        Words
-                    </Text>
-                </View>
-
-                <View
-                    style={{ flex: 1, backgroundColor: '#5FE0E6' }}
-                    onPress={() => { }} // Action
-                >
-                    <Image
-                        source={Profiler}
-                        style={styles.profiler}
-                    />
-                    <Text style={styles.text2}>
-                        Profile
-                    </Text>
-                </View>
-
-            </View>
-        </View >
-    );
+    return (<ScrollView>
+        <Appear />
+        <Card
+            style={styles.container}>
+            <Card.Content style={styles.container}>
+                <Title>Report</Title>
+            </Card.Content>
+            <Card.Cover source={Report}
+                style={styles.words} />
+            <Card.Actions
+                style={styles.container}>
+            </Card.Actions>
+        </Card>
+        <Card>
+            <Card.Content>
+                <Title>Story</Title>
+            </Card.Content>
+            <Card.Cover source={Story}
+                style={styles.words} />
+            <Card.Actions>
+            </Card.Actions>
+        </Card>
+        <Card>
+            <Card.Content>
+                <Title>Profile</Title>
+            </Card.Content>
+            <Card.Cover source={Profiler}
+                style={styles.words} />
+            <Card.Actions>
+            </Card.Actions>
+        </Card>
+        <Card>
+            <Card.Content>
+                <Title>Words</Title>
+            </Card.Content>
+            <Card.Cover source={Words}
+                style={styles.words} />
+            <Card.Actions>
+            </Card.Actions>
+        </Card>
+    </ScrollView >);
 }
+export default MenuScreen;
 
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        flexDirection: 'row',
+        color: 'white',
     },
     story: {
         width: '100%',
@@ -96,12 +77,16 @@ const styles = StyleSheet.create({
         top: 100
     },
     words: {
+        backgroundColor: 'white',
         width: '100%',
-        maxWidth: 200,
-        maxHeight: 180,
+        flex: 1,
+        flexDirection: 'column',
+        padding: 0,
         paddingHorizontal: 80,
-        borderColor: 'black',
-        borderWidth: 5
+        borderRadius: 50,
+        resizeMode: "contain",
+        borderColor: '#DDE1DF',
+        borderWidth: 5,
     },
     profiler: {
         width: '100%',
@@ -135,4 +120,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default MenuScreen;
+

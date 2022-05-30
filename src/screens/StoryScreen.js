@@ -3,47 +3,36 @@ import Story from '../../assets/story.jpg';
 import Report from '../../assets/report.png';
 import Hear from '../../assets/hear.jpg';
 import Read from '../../assets/read.jpg';
-import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
+import Appear from '../components/Appear';
+import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 
 
 const StoryScreen = () => {
-    return (
-        <View style={{ flex: 1 }}>
-            <Text style={styles.text3}>Sroties!</Text>
-            <View style={{ flex: 1, flexDirection: "row" }}>
-                <View
-                    style={{ flex: 1, backgroundColor: '#EB71A6' }}
-                    onPress={() => { }} // Action
-                >
-                    <Image
-                        source={Read}
-                        style={styles.report}
-                    />
-                    <Text style={styles.text}>
-                        Reading stories
-                    </Text>
-                </View>
-
-            </View>
-            <View style={{ flex: 1, flexDirection: "row" }}>
-
-                <View
-                    style={{ flex: 1, backgroundColor: '#EB71A6' }}
-                    onPress={() => { }} // Action
-                >
-                    <Image
-                        source={Hear}
-                        style={styles.profiler}
-                    />
-                    <Text style={styles.text2}>
-                        Hearing stories
-                    </Text>
-                </View>
-
-            </View>
-        </View >
-    );
+    return (<ScrollView>
+        <Appear />
+        <Card
+            style={styles.container}>
+            <Card.Content style={styles.container}>
+                <Title>Reading</Title>
+            </Card.Content>
+            <Card.Cover source={Read}
+                style={styles.words} />
+            <Card.Actions
+                style={styles.container}>
+            </Card.Actions>
+        </Card>
+        <Card>
+            <Card.Content>
+                <Title>Hearing</Title>
+            </Card.Content>
+            <Card.Cover source={Hear}
+                style={styles.words} />
+            <Card.Actions>
+            </Card.Actions>
+        </Card>
+    </ScrollView >);
 }
 
 
