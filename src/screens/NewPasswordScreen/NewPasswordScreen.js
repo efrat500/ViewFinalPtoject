@@ -47,7 +47,7 @@ const NewPasswordScreen = (props) => {
         // })
         .catch(error => console.log(error))
     }
-//
+
     const navigation = useNavigation()
 
     const onSignInPressed =() =>{
