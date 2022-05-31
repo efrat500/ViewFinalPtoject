@@ -1,0 +1,73 @@
+import React from 'react'
+import { FlatList, Text, ScrollView } from 'react-native';
+import { Appbar, Card } from 'react-native-paper';
+import Appear from '../components/Appear';
+
+const mydata = [
+    { id: 1, title: "First Title", description: "First Description" },
+    { id: 2, title: "Second Title", description: "Second Description" },
+    { id: 3, title: "Third Title", description: "Third Description" },
+    { id: 4, title: "Fourth Title", description: "Fourth Description" },
+    { id: 5, title: "geekscoders.com", description: "Fourth Description" },
+    { id: 6, title: "geekscoders.com", description: "Fourth Description" },
+    { id: 7, title: "geekscoders.com", description: "Fourth Description" },
+    { id: 8, title: "geekscoders.com", description: "Fourth Description" },
+    { id: 9, title: "geekscoders.com", description: "Fourth Description" },
+    { id: 1, title: "First Title", description: "First Description" },
+    { id: 2, title: "Second Title", description: "Second Description" },
+    { id: 3, title: "Third Title", description: "Third Description" },
+    { id: 4, title: "Fourth Title", description: "Fourth Description" },
+    { id: 5, title: "geekscoders.com", description: "Fourth Description" },
+    { id: 6, title: "geekscoders.com", description: "Fourth Description" },
+    { id: 7, title: "geekscoders.com", description: "Fourth Description" },
+    { id: 8, title: "geekscoders.com", description: "Fourth Description" },
+    { id: 9, title: "geekscoders.com", description: "Fourth Description" },
+]
+
+const renderData = (item) => {
+    return (
+        <Card style={{ padding: 10, margin: 10, backgroundColor: "#85E3DE" }}>
+            <Text style={{ fontSize: 20 }}>{item.title}</Text>
+            <Text style={{ fontSize: 12 }}>{item.description}</Text>
+
+        </Card>
+    );
+
+}
+
+const StoriesOption = () => {
+    return (<ScrollView>
+        <Appear></Appear>
+        <FlatList
+            data={mydata}
+            renderItem={({ item }) => {
+                return renderData(item)
+            }}
+            keyExtractor={item => `${item.id}`}
+
+
+        />
+    </ScrollView >);
+}
+
+
+
+// export default StoriesOptionScreen;
+// const StoriesOption = () => {
+//     return (
+//         <Appear></Appear>
+//         <FlatList
+//             data={mydata}
+//             renderItem={({ item }) => {
+//                 return renderData(item)
+//             }}
+//             keyExtractor={item => `${item.id}`}
+
+
+//         />
+
+
+//     );
+// }
+
+export default StoriesOption;
