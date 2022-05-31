@@ -3,7 +3,7 @@ import React from 'react'
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 import {AntDesign} from '@expo/vector-icons'
 
-const CustemInput = ({value, setValue, placeholder, secureTextEntry, icon_material, icon_AntDesign, error}) => {
+const CustemInput = ({value, setValue, placeholder, secureTextEntry, icon_material, icon_AntDesign, error, onChangeText}) => {
   return (
     <View>
       <View>

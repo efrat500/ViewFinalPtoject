@@ -7,6 +7,10 @@ import ForgotPasswordScreen from './src/screens/ForgotPassworfScreen/ForgotPassw
 import NewPasswordScreen from './src/screens/NewPasswordScreen/NewPasswordScreen'
 import Navigation from './src/navigation/Navigation'
 import HomeScreen from './src/screens/HomeScreen/HomeScreen'
+
+import MenuScreen from './src/screens/MenuScreen'
+import Story from './src/screens/Story'
+
 import StoryScreen from './src/screens/StoryScreen'
 import StoriesOptionScreen from './src/screens/StoriesOptionScreen'
 import MenuStoryScreen from './src/screens/MenuStoryScreen'
@@ -19,14 +23,21 @@ import Appear from './src/components/Appear'
 import ReadScreen from './src/screens/ReadScreen'
 import logo from './assets/backgroud.jpg'
 
+
 export default function App() {
+  const name = "efrat"
   return (
 
-    <SafeAreaView style={styles.container}>
+    <TouchableWithoutFeedback onPress={() => {
+      Keyboard.dismiss()
+    }}>
+      <SafeAreaView style={styles.container}>
+        {/* <Navigation/> */}
+        <Story />
+        {/* <MenuScreen name= {name} /> */}
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
 
-
-      <MenuScreen />
-    </SafeAreaView>
 
   );
 }
@@ -35,6 +46,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
 
+    backgroundColor: '#5FE0E6'
 
   },
 });
