@@ -46,7 +46,7 @@ const Story = () => {
     return(
         <View>
             {/* {useWords} */}
-            {useStory}
+            {useStories}
         </View>
     )
    
@@ -54,8 +54,7 @@ const Story = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'row',
-        marginLeft
+        flexDirection: 'row'
     },
 })
 
