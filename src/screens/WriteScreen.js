@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Text } from 'react-native';
 import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import Appear from '../components/Appear';
@@ -17,8 +17,9 @@ const previewCount = 3;
 //itemWidth will be =>>> itemWidth = screenWidth / (3 + 1/4 + 1/4)
 const itemWidth = width / (previewCount + .5);
 //to center items you start from 3/4 firstItemWidth 
-const startScroll = (itemWidth * 3 / 4);
 const windowWidth = Dimensions.get('window').width;
+const startScroll = (windowWidth * 3 / 4);
+
 const windowHeight = Dimensions.get('window').height;
 
 const WriteScreen = (props) => {
@@ -26,11 +27,23 @@ const WriteScreen = (props) => {
     const data = [...Array(20).keys()];
     const flatlistRef = React.useRef();
 
-
+    const [words, setWords] = useState([])
+    // useEffect(() => {
+    //     const axiosWords = async () => {
+    //         const response = await axios.post('http://192.168.1.25:5000/getwords', { username: "shahar" })
+    //         setWords(response.data.allWords)
+    //     }
+    //     axiosWords()
+    // }, [])
     React.useEffect(() => {
         if (flatlistRef.current) flatlistRef.current.scrollToOffset({
             offset: startScroll, animated: false
         });
+        const axiosWords = async () => {
+            const response = await axios.post('http://192.168.1.25:5000/getwords', { username: "shahar" })
+            setWords(response.data.allWords)
+        }
+        axiosWords()
     }, [flatlistRef]);
 
 
@@ -42,21 +55,28 @@ const WriteScreen = (props) => {
         return ((i * (itemWidth) * previewCount) + startScroll)
     })
 
+    const useWords = () => {
+        return (
+            <FlatList
+                ref={flatlistRef}
+                style={styles.container}
+                pagingEnabled={true}
+                horizontal={true}
+                decelerationRate={0}
+                snapToOffsets={snapToOffsets}
+                snapToAlignment={"center"}
+                data={words}
+                renderItem={(item) => (
+                    <MyCard title={item} ></MyCard>
+                )} />
+        );
+    }
+
+
+
 
     return (
-
-        <FlatList
-            ref={flatlistRef}
-            style={styles.container}
-            pagingEnabled={true}
-            horizontal={true}
-            decelerationRate={0}
-            snapToOffsets={snapToOffsets}
-            snapToAlignment={"center"}
-            data={data}
-            renderItem={({ item, index }) => (
-                <MyCard style={styles.card} title="word" ></MyCard>
-            )} />
+        { useWords }
     );
 
 }
@@ -72,8 +92,7 @@ const styles = StyleSheet.create({
     },
     card: {
         flex: 1,
-        width: itemWidth - 20, //20 is margin left and right
-        margin: 10,
+        width: itemWidth - 10, //20 is margin left and right
     }
 });
 

@@ -6,6 +6,7 @@ import InputText from '../components/InputText'
 import { Button } from 'react-native-paper';
 import Appear from '../components/Appear';
 import { TextInput } from 'react-native-paper';
+import { AntDesign } from '@expo/vector-icons'
 
 const cards = [
     {
@@ -24,7 +25,8 @@ const cards = [
         text: 'a',
     },
 ];
-
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export default class DeckSwiperExample extends Component {
     render() {
@@ -39,12 +41,12 @@ export default class DeckSwiperExample extends Component {
                             <Card sytle={styles.view}>
                                 <CardItem>
                                     <Left>
-                                        <Body sytle={styles.view}>
-                                            <Text style={styles.text}>{item.text}</Text>
+                                        <Body>
+                                            <View sytle={styles.container}>
+                                                <Text style={styles.text}>{item.text}</Text>
+                                                <AntDesign style={styles.sound} name="sound" size={50} />
+                                            </View>
                                             <Button style={styles.button} color="green" mode="contained" onPress={() => console.log('Pressed')}>
-                                                Start Read
-                                            </Button>
-                                            <Button style={styles.button} color="blue" mode="contained" onPress={() => console.log('Pressed')}>
                                                 Translate
                                             </Button>
                                         </Body>
@@ -58,11 +60,10 @@ export default class DeckSwiperExample extends Component {
         );
     }
 }
+
 const styles = StyleSheet.create({
-    view: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+    container: {
+        flexDirection: 'row',
     },
     text: {
         flex: 1,
@@ -82,11 +83,12 @@ const styles = StyleSheet.create({
         marginTop: 60,
         marginLeft: 30,
         height: 40,
+    },
+    sound: {
+        marginTop: -60,
+        marginLeft: 250,
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: '#aaa',
     }
 });
-
-
-
-
-
-
