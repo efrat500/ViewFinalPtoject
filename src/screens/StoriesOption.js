@@ -1,45 +1,50 @@
-import React from 'react'
+import React, {useState,useEffect} from 'react'
 import { FlatList, Text, ScrollView } from 'react-native';
 import { Appbar, Card } from 'react-native-paper';
 import Appear from '../components/Appear';
+import axios from "axios"
 
 const mydata = [
-    { id: 1, title: "First Title", description: "First Description" },
-    { id: 2, title: "Second Title", description: "Second Description" },
-    { id: 3, title: "Third Title", description: "Third Description" },
-    { id: 4, title: "Fourth Title", description: "Fourth Description" },
-    { id: 5, title: "geekscoders.com", description: "Fourth Description" },
-    { id: 6, title: "geekscoders.com", description: "Fourth Description" },
-    { id: 7, title: "geekscoders.com", description: "Fourth Description" },
-    { id: 8, title: "geekscoders.com", description: "Fourth Description" },
-    { id: 9, title: "geekscoders.com", description: "Fourth Description" },
-    { id: 1, title: "First Title", description: "First Description" },
-    { id: 2, title: "Second Title", description: "Second Description" },
-    { id: 3, title: "Third Title", description: "Third Description" },
-    { id: 4, title: "Fourth Title", description: "Fourth Description" },
-    { id: 5, title: "geekscoders.com", description: "Fourth Description" },
-    { id: 6, title: "geekscoders.com", description: "Fourth Description" },
-    { id: 7, title: "geekscoders.com", description: "Fourth Description" },
-    { id: 8, title: "geekscoders.com", description: "Fourth Description" },
-    { id: 9, title: "geekscoders.com", description: "Fourth Description" },
-]
+    { title: "First Title"},
+    { title: "Second Title"},
+    { title: "Third Title"},
+    { title: "Fourth Title"},
+    { title: "geekscoders.com"},
+    { title: "geekscoders.com"},
+    { title: "geekscoders.com"},
+    { title: "geekscoders.com"},
+    { title: "geekscoders.com"},
+    { title: "First Title"},
+    { title: "Second Title"},
+    { title: "Third Title"},
+    { title: "Fourth Title"},
 
+]
 const renderData = (item) => {
     return (
         <Card style={{ padding: 10, margin: 10, backgroundColor: "#85E3DE" }}>
             <Text style={{ fontSize: 20 }}>{item.title}</Text>
-            <Text style={{ fontSize: 12 }}>{item.description}</Text>
-
         </Card>
     );
 
 }
 
 const StoriesOption = () => {
+    const [stories , setStories]=useState([])
+    useEffect(() => {
+        const axiosStories = async () => {
+            const response = await axios.get('http://192.168.1.235:5000/getallstories')
+            setStories(response.data)
+            console.log(stories)
+            // const response = await axios.post('http://192.168.1.235:5000/getwords', {username:"e"})
+            // setStories(response.data.word) 
+        }
+        axiosStories()
+    }, [])
     return (<ScrollView>
-        <Appear></Appear>
         <FlatList
-            data={mydata}
+        {...console.log(stories)}
+            data={stories}
             renderItem={({ item }) => {
                 return renderData(item)
             }}
