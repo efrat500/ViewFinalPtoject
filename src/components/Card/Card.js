@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { Card, Title, Paragraph } from 'react-native-paper';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, Dimensions } from 'react-native';
 import InputText from '../../components/InputText'
 import { Button } from 'react-native-paper';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+const itemWidth = windowWidth / (3 + .5);
 
 const MyCard = (props) => (
   <Card style={styles.view}>
@@ -21,7 +24,7 @@ export default MyCard;
 const styles = StyleSheet.create({
   view: {
     backgroundColor: '#eee',
-    width: 400, //20 is margin left and right
+    width: windowWidth - 20, //20 is margin left and right
     margin: 10,
     height: 400,
     borderRadius: 10,
