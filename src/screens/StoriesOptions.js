@@ -1,18 +1,9 @@
 import React, {useState,useEffect} from 'react'
-import { FlatList, Text, ScrollView } from 'react-native';
+import { FlatList, Text, View, ScrollView } from 'react-native';
 import { Appbar, Card } from 'react-native-paper';
+import Appear from '../components/Appear';
+import axios from "axios";
 
-import axios from "axios"
-
-
-const renderData = (item) => {
-    return (
-        <Card style={{ padding: 10, margin: 10, backgroundColor: "#85E3DE" }}>
-            <Text style={{ fontSize: 20 }}>{item.title}</Text>
-        </Card>
-    );
-
-}
 
 const StoriesOption = () => {
     const [stories , setStories]=useState([])
@@ -25,18 +16,19 @@ const StoriesOption = () => {
         axiosStories()
     }, [])
     return (
-        <ScrollView>
-        <FlatList
-        {...console.log(stories)}
-            data={stories}
-            renderItem={({ item }) => {
-                return renderData(item)
-            }}
-            keyExtractor={item => `${item.id}`}
+        <View>
+            <Appear></Appear>
+            <FlatList
+                data={stories}
+                renderItem={({ item }) => {
+                    return (<Card style={{ padding: 10, margin: 10, backgroundColor: "#85E3DE" }}>
+                        <Text style={{ fontSize: 20 }}>{item.title}</Text>
+                    </Card>);
+                }}
+                keyExtractor={item => item.title.toString()}
+            />
 
-
-        />
-        </ScrollView>
+        </View>
     );
 }
 export default StoriesOption;
