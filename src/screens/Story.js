@@ -11,7 +11,7 @@ const Story = () => {
 
     useEffect(() => {
         const axiosStories = async () => {
-            const response = await axios.post('http://192.168.1.234:5000/getstory', {title_story: "A RED BERRY"})
+            const response = await axios.post('http://192.168.1.41:5000/getstory', {title_story: "A RED BERRY"})
             setStories(response.data.story)
             console.log(stories)
            
@@ -20,8 +20,22 @@ const Story = () => {
     }, [])
  
     var temp
+
+    const calcGrade = () =>{
+        axios.post('http://192.168.1.41:5000/calculateGrade', {title_story: "A RED BERRY" , username:"e1" })
+        .then(resp => {
+            console.log(resp.data)
+            temp = resp.data.translated
+        })
+        .catch(error => {
+            console.log(error)
+        })
+        .finally(() => console.log("done"))
+        
+    }
+
     const onStartRead = () =>{
-        axios.post('http://192.168.1.234:5000/speechToWriting', {title_story: "A RED BERRY", current_index: currentIndex })
+        axios.post('http://192.168.1.41:5000/speechToWriting', {title_story: "A RED BERRY", current_index: currentIndex, username:"e1" })
         .then(resp => {
             console.log(resp.data)
             temp = resp.data.translated
@@ -32,7 +46,17 @@ const Story = () => {
                 console.log("after" + currentIndex)
                 console.log(stories.length)
                 if (currentIndex == stories.length-1){
-                    Alert.alert('Congratulations',"You have finished reading the story, your score is 100",[{text: 'Understood'}])
+                    var grade
+                    axios.post('http://192.168.1.41:5000/calculateGrade', {title_story: "A RED BERRY" , username:"e1" })
+                    .then(resp => {
+                        console.log(resp.data.grade)
+                        grade = resp.data.grade
+                        Alert.alert('Congratulations',"You have finished reading the story, your score is" +  grade ,[{text: 'Understood'}])
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                    .finally(() => console.log("done"))
                 }
                 else{
                     onStartRead()
@@ -48,7 +72,7 @@ const Story = () => {
     }
 
     const onPressFunction = () =>{
-        axios.post('http://192.168.1.234:5000/translatWord', {word_required:stories[currentIndex]})
+        axios.post('http://192.168.1.41:5000/translatWord', {word_required:stories[currentIndex]})
         .then(resp => {
             trans = resp.data.translated
             console.log(trans)
