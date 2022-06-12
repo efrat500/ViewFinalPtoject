@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, Text, ScrollView } from 'react-native';
+import { FlatList, Text, ScrollView, View } from 'react-native';
 import { Appbar, Card } from 'react-native-paper';
 import Appear from '../components/Appear';
 
@@ -36,18 +36,17 @@ const renderData = (item) => {
 }
 
 const WordsOptions = () => {
-    return (<ScrollView>
+    return (
+        <View>
         <Appear></Appear>
         <FlatList
             data={mydata}
             renderItem={({ item }) => {
                 return renderData(item)
             }}
-            keyExtractor={item => `${item.id}`}
-
-
         />
-    </ScrollView >);
+
+    </View>);
 }
 
 export default WordsOptions;
