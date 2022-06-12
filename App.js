@@ -10,18 +10,11 @@ import HomeScreen from './src/screens/HomeScreen/HomeScreen'
 
 import MenuScreen from './src/screens/MenuScreen'
 import Story from './src/screens/Story'
-
-import StoryScreen from './src/screens/StoryScreen'
+import ReportScreen from './src/screens/ReportScreen'
+import WordsOptions from './src/screens/WordsOptions'
 import StoriesOptionScreen from './src/screens/StoriesOptionScreen'
-import MenuStoryScreen from './src/screens/MenuStoryScreen'
-import LevelStory from './src/screens/levelStory'
-import WriteScreen from './src/screens/WriteScreen'
 import StoriesOption from './src/screens/StoriesOption'
-import { Appbar, Card } from 'react-native-paper';
-import Appear from './src/components/Appear'
-import ReadScreen from './src/screens/ReadScreen'
-import logo from './assets/backgroud.jpg'
-import TranslateScreen from './src/screens/TranslateScreen'
+
 
 
 export default function App() {
@@ -33,7 +26,11 @@ export default function App() {
     }}>
       <SafeAreaView style={styles.container}>
         {/* <Navigation/> */}
-        <Story />
+        {/* <Story /> */}
+        {/* <StoriesOptionScreen></StoriesOptionScreen> */}
+        {/* <ReportScreen></ReportScreen> */}
+        {/* <WordsOptions></WordsOptions> */}
+        <StoriesOption></StoriesOption>
         {/* <WriteScreen /> */}
         {/* <ReadScreen /> */}
         {/* <TranslateScreen /> */}
