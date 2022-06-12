@@ -11,7 +11,7 @@ const Story = () => {
 
     useEffect(() => {
         const axiosStories = async () => {
-            const response = await axios.post('http://192.168.1.234:5000/getstory', {title_story: "A RED BERRY"})
+            const response = await axios.post('http://192.168.1.21:5000/getstory', {title_story: "A RED BERRY"})
             setStories(response.data.story)
             console.log(stories)
            
@@ -21,7 +21,7 @@ const Story = () => {
  
     var temp
     const onStartRead = () =>{
-        axios.post('http://192.168.1.234:5000/speechToWriting', {title_story: "A RED BERRY", current_index: currentIndex })
+        axios.post('http://192.168.1.21:5000/speechToWriting', {title_story: "A RED BERRY", current_index: currentIndex })
         .then(resp => {
             console.log(resp.data)
             temp = resp.data.translated
@@ -48,7 +48,7 @@ const Story = () => {
     }
 
     const onPressFunction = () =>{
-        axios.post('http://192.168.1.234:5000/translatWord', {word_required:stories[currentIndex]})
+        axios.post('http://192.168.1.21:5000/translatWord', {word_required:stories[currentIndex]})
         .then(resp => {
             trans = resp.data.translated
             console.log(trans)
