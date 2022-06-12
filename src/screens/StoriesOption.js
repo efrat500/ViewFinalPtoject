@@ -3,7 +3,6 @@ import { FlatList, Text, ScrollView } from 'react-native';
 import { Appbar, Card } from 'react-native-paper';
 import Appear from '../components/Appear';
 import axios from "axios"
-import { View } from 'react-native-web';
 
 
 const renderData = (item) => {
@@ -26,20 +25,18 @@ const StoriesOption = () => {
         axiosStories()
     }, [])
     return (
-        <View>
-            <ScrollView>
-                <FlatList
-                {...console.log(stories)}
-                    data={stories}
-                    renderItem={({ item }) => {
-                        return renderData(item)
-                    }}
-                    keyExtractor={item => `${item.id}`}
+        <ScrollView>
+        <FlatList
+        {...console.log(stories)}
+            data={stories}
+            renderItem={({ item }) => {
+                return renderData(item)
+            }}
+            keyExtractor={item => `${item.id}`}
 
 
-                />
-            </ScrollView>
-        </View>
+        />
+        </ScrollView>
     );
 }
 export default StoriesOption;
