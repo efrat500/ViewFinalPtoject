@@ -8,9 +8,9 @@ import StoriesOption from './StoriesOption';
 
 
 const StoriesOptionScreen = () => {
-    return (<ScrollView>
+    return (
         <StoriesOption></StoriesOption>
-    </ScrollView>);
+    );
 }
 
 
