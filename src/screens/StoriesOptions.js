@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react'
 import { FlatList, Text, ScrollView } from 'react-native';
 import { Appbar, Card } from 'react-native-paper';
-import Appear from '../components/Appear';
+
 import axios from "axios"
 
 
