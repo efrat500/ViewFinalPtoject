@@ -1,5 +1,4 @@
 import { View, Text, StyleSheet, Alert, FlatList, Pressable, TouchableOpacity} from 'react-native'
-import { Appbar, Card } from 'react-native-paper';
 import React, {useState, useEffect} from 'react'
 import axios from "axios"
 import CustemButton from '../components/CustemButton'
@@ -11,7 +10,8 @@ const Story = () => {
 
     useEffect(() => {
         const axiosStories = async () => {
-            const response = await axios.post('http://192.168.1.41:5000/getstory', {title_story: "A RED BERRY"})
+            console.log("getStory")
+            const response = await axios.post('http://192.168.1.21:5000/getstory', {title_story: "A RED BERRY"})
             setStories(response.data.story)
             console.log(stories)
            
@@ -22,7 +22,7 @@ const Story = () => {
     var temp
 
     const calcGrade = () =>{
-        axios.post('http://192.168.1.41:5000/calculateGrade', {title_story: "A RED BERRY" , username:"e1" })
+        axios.post('http://192.168.1.21:5000/calculateGrade', {title_story: "A RED BERRY" , username:"e1" })
         .then(resp => {
             console.log(resp.data)
             temp = resp.data.translated
@@ -35,7 +35,8 @@ const Story = () => {
     }
 
     const onStartRead = () =>{
-        axios.post('http://192.168.1.41:5000/speechToWriting', {title_story: "A RED BERRY", current_index: currentIndex, username:"e1" })
+        console.log("onStartFunc")
+        axios.post('http://192.168.1.21:5000/speechToWriting', {title_story: "A RED BERRY", current_index: currentIndex, username:"e11" })
         .then(resp => {
             console.log(resp.data)
             temp = resp.data.translated
@@ -47,7 +48,7 @@ const Story = () => {
                 console.log(stories.length)
                 if (currentIndex == stories.length-1){
                     var grade
-                    axios.post('http://192.168.1.41:5000/calculateGrade', {title_story: "A RED BERRY" , username:"e1" })
+                    axios.post('http://192.168.1.21:5000/calculateGrade', {title_story: "A RED BERRY" , username:"e1" })
                     .then(resp => {
                         console.log(resp.data.grade)
                         grade = resp.data.grade
@@ -72,7 +73,7 @@ const Story = () => {
     }
 
     const onPressFunction = () =>{
-        axios.post('http://192.168.1.41:5000/translatWord', {word_required:stories[currentIndex]})
+        axios.post('http://192.168.1.21:5000/translatWord', {word_required:stories[currentIndex]})
         .then(resp => {
             trans = resp.data.translated
             console.log(trans)
