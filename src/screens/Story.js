@@ -4,7 +4,7 @@ import axios from "axios"
 import CustemButton from '../components/CustemButton'
 import { ScrollView } from 'react-native-virtualized-view';
 import { Button } from 'react-native-paper';
-
+import Appear from '../components/Appear';
 
 
 const Story = () => {
@@ -90,10 +90,11 @@ const Story = () => {
     var [currentIndex , setCurrentIndex]=useState(0)
     return (
         <View>
-            <Text style={{fontSize:30, fontWeight: 'bold',alignItems: 'center',justifyContent: 'center',marginLeft: 115, marginTop: 40}}>A RED BERRY</Text>
+            <Appear></Appear>
+            <Text style={{fontSize:30, fontWeight: 'bold',alignItems: 'center',justifyContent: 'center',marginLeft: 105, marginTop: 40, color:'gray',}}>A RED BERRY</Text>
             {stories.length == 0 ? null:
                     <View style={{padding: 20}}>
-                    <View style={{fontSize:20, borderWidth:  3,  borderColor:  'gray', padding: 20, marginTop: 30}}>
+                    <View style={{fontSize:20, borderWidth:  5,  borderColor:  'gray', padding: 10, marginTop: 20}}>
                         <ScrollView>
                             {currentIndex > 0 ? 
                                 <Text style={{fontSize:20}}> {stories.slice(0, currentIndex)} </Text> 
@@ -143,9 +144,11 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 300,
-        marginTop: 40,
-        marginLeft: 60,
+        marginTop: 10,
+        marginLeft: 50,
         height: 40,
+        borderWidth:  1,  
+        borderColor:  'gray'
     },
 })
 
