@@ -7,31 +7,43 @@ import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView } from 'rea
 import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 import Appear from '../components/Appear';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native'
 
 
 const StoryScreen = () => {
+    const navigation = useNavigation()
+
+    const onHearing = () =>{
+        navigation.navigate('Level Screen')
+    }
+    const onReading = () =>{
+        navigation.navigate('Level Screen')
+    }
     return (<ScrollView>
-        <Appear />
-        <Card
-            style={styles.container}>
-            <Card.Content style={styles.container}>
-                <Title>Reading</Title>
-            </Card.Content>
-            <Card.Cover source={Read}
-                style={styles.words} />
-            <Card.Actions
+        <TouchableOpacity onPress={onHearing}>
+            <Card
                 style={styles.container}>
-            </Card.Actions>
-        </Card>
-        <Card>
-            <Card.Content>
-                <Title>Hearing</Title>
-            </Card.Content>
-            <Card.Cover source={Hear}
-                style={styles.words} />
-            <Card.Actions>
-            </Card.Actions>
-        </Card>
+                <Card.Content style={styles.container}>
+                    <Title>Reading</Title>
+                </Card.Content>
+                <Card.Cover source={Read}
+                    style={styles.words} />
+                <Card.Actions
+                    style={styles.container}>
+                </Card.Actions>
+            </Card>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={onReading}>
+            <Card>
+                <Card.Content>
+                    <Title>Hearing</Title>
+                </Card.Content>
+                <Card.Cover source={Hear}
+                    style={styles.words} />
+                <Card.Actions>
+                </Card.Actions>
+            </Card>
+        </TouchableOpacity>
     </ScrollView >);
 }
 

@@ -7,32 +7,48 @@ import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView } from 'rea
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import Appear from '../components/Appear';
 import MyCard from '../components/Card/Card';
+import { useNavigation } from '@react-navigation/native'
 
 
 const MenuScreen = () => {
+    const navigation = useNavigation()
+
+    const onReport = () =>{
+        navigation.navigate('Report')
+    }
+    const onStories = () =>{
+        navigation.navigate('Stories Menu')
+    }
+    const onWords = () =>{
+        navigation.navigate('Words Menu')
+    }
+
     return (<ScrollView>
-        <Appear />
-        <Card
-            style={styles.container}>
-            <Card.Content style={styles.container}>
-                <Title>Report</Title>
-            </Card.Content>
-            <Card.Cover source={Report}
-                style={styles.words} />
-            <Card.Actions
+        <TouchableOpacity onPress={onReport}>
+            <Card
                 style={styles.container}>
-            </Card.Actions>
-        </Card>
-        <Card>
-            <Card.Content>
-                <Title>Story</Title>
-            </Card.Content>
-            <Card.Cover source={Story}
-                style={styles.words} />
-            <Card.Actions>
-            </Card.Actions>
-        </Card>
-        <Card>
+                <Card.Content style={styles.container}>
+                    <Title>Report</Title>
+                </Card.Content>
+                <Card.Cover source={Report}
+                    style={styles.words} />
+                <Card.Actions
+                    style={styles.container}>
+                </Card.Actions>
+            </Card>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={onStories}>
+            <Card>
+                <Card.Content>
+                    <Title>Stories</Title>
+                </Card.Content>
+                <Card.Cover source={Story}
+                    style={styles.words} />
+                <Card.Actions>
+                </Card.Actions>
+            </Card>
+        </TouchableOpacity>
+        {/* <Card>
             <Card.Content>
                 <Title>Profile</Title>
             </Card.Content>
@@ -40,16 +56,18 @@ const MenuScreen = () => {
                 style={styles.words} />
             <Card.Actions>
             </Card.Actions>
-        </Card>
-        <Card>
-            <Card.Content>
-                <Title>Words</Title>
-            </Card.Content>
-            <Card.Cover source={Words}
-                style={styles.words} />
-            <Card.Actions>
-            </Card.Actions>
-        </Card>
+        </Card> */}
+        <TouchableOpacity onPress={onWords}>
+            <Card>
+                <Card.Content>
+                    <Title>Words</Title>
+                </Card.Content>
+                <Card.Cover source={Words}
+                    style={styles.words} />
+                <Card.Actions>
+                </Card.Actions>
+            </Card>
+        </TouchableOpacity>
     </ScrollView >);
 }
 export default MenuScreen;

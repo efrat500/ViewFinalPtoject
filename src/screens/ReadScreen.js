@@ -22,14 +22,14 @@ const ReadScreen = () => {
     const [buttonColorTranslate, setButtonColorTranslate] = useState('gray');
     useEffect(() => {
         const axiosWords = async () => {
-            const response = await axios.post('http://192.168.1.234:5000/getwords', {username:"e"})
+            const response = await axios.post('http://192.168.1.41:5000/getwordsreading', {username:"e1"})
             setWords(response.data.allwords)
         }
         axiosWords()
     }, [])
     var read
     const onReadPressed = (item) =>{
-        axios.post('http://192.168.1.234:5000/speechWordToWriting', {speech_word: item})
+        axios.post('http://192.168.1.41:5000/speechWordToWriting', {speech_word: item})
         .then(resp => {
             console.log(resp.data.feedback)
             read = resp.data.feedback
@@ -42,7 +42,7 @@ const ReadScreen = () => {
     }
     var trans 
     const onTranslatePressed = (item) =>{
-        axios.post('http://192.168.1.234:5000/translatWord', {word_required:item})
+        axios.post('http://192.168.1.41:5000/translatWord', {word_required:item})
         .then(resp => {
             trans = resp.data.translated
             Alert.alert('Translate',trans,[{text: 'Understood'}])
@@ -54,7 +54,6 @@ const ReadScreen = () => {
     }
     return (
         <Container sytle={styles.view}>
-        <Appear></Appear>
         <Header />
         <View sytle={styles.view}>
             {words.length == 0 ? null:

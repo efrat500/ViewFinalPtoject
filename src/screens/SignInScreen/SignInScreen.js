@@ -41,7 +41,7 @@ const SignInScreen = (props) => {
     //     .catch(error => console.log(error))
     // }
     const insertData = (values) => {
-        axios.post('http://192.168.1.235:5000/login', {username: values.username ,password: values.password})
+        axios.post('http://192.168.1.41:5000/login', {username: values.username ,password: values.password})
         .then(resp => {
             console.log(resp.data)
             if (resp.status != 200){
