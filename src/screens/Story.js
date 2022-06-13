@@ -1,11 +1,10 @@
 import { View, Text, StyleSheet, Alert, FlatList, Pressable, TouchableOpacity} from 'react-native'
-import { Appbar, Card } from 'react-native-paper';
 import React, {useState, useEffect} from 'react'
 import axios from "axios"
 import CustemButton from '../components/CustemButton'
 import { ScrollView } from 'react-native-virtualized-view';
 import { Button } from 'react-native-paper';
-
+import Appear from '../components/Appear';
 
 
 const Story = () => {
@@ -13,7 +12,8 @@ const Story = () => {
 
     useEffect(() => {
         const axiosStories = async () => {
-            const response = await axios.post('http://192.168.1.41:5000/getstory', {title_story: "A RED BERRY"})
+            console.log("getStory")
+            const response = await axios.post('http://192.168.1.21:5000/getstory', {title_story: "A RED BERRY"})
             setStories(response.data.story)
             console.log(stories)
            
@@ -24,7 +24,7 @@ const Story = () => {
     var temp
 
     const calcGrade = () =>{
-        axios.post('http://192.168.1.41:5000/calculateGrade', {title_story: "A RED BERRY" , username:"e1" })
+        axios.post('http://192.168.1.21:5000/calculateGrade', {title_story: "A RED BERRY" , username:"e1" })
         .then(resp => {
             console.log(resp.data)
             temp = resp.data.translated
@@ -37,8 +37,8 @@ const Story = () => {
     }
 
     const onStartRead = () =>{
-        console.log("Sd")
-        axios.post('http://192.168.1.41:5000/speechToWriting', {title_story: "A RED BERRY", current_index: currentIndex, username:"e1" })
+        console.log("onStartFunc")
+        axios.post('http://192.168.1.21:5000/speechToWriting', {title_story: "A RED BERRY", current_index: currentIndex, username:"e11" })
         .then(resp => {
             console.log(resp.data)
             temp = resp.data.translated
@@ -50,7 +50,7 @@ const Story = () => {
                 console.log(stories.length)
                 if (currentIndex == stories.length-1){
                     var grade
-                    axios.post('http://192.168.1.41:5000/calculateGrade', {title_story: "A RED BERRY" , username:"e1" })
+                    axios.post('http://192.168.1.21:5000/calculateGrade', {title_story: "A RED BERRY" , username:"e1" })
                     .then(resp => {
                         console.log(resp.data.grade)
                         grade = resp.data.grade
@@ -75,7 +75,7 @@ const Story = () => {
     }
 
     const onPressFunction = () =>{
-        axios.post('http://192.168.1.41:5000/translatWord', {word_required:stories[currentIndex]})
+        axios.post('http://192.168.1.21:5000/translatWord', {word_required:stories[currentIndex]})
         .then(resp => {
             trans = resp.data.translated
             console.log(trans)
@@ -90,10 +90,11 @@ const Story = () => {
     var [currentIndex , setCurrentIndex]=useState(0)
     return (
         <View>
-            <Text style={{fontSize:30, fontWeight: 'bold',alignItems: 'center',justifyContent: 'center',marginLeft: 115, marginTop: 40}}>A RED BERRY</Text>
+            <Appear></Appear>
+            <Text style={{fontSize:30, fontWeight: 'bold',alignItems: 'center',justifyContent: 'center',marginLeft: 105, marginTop: 40, color:'gray',}}>A RED BERRY</Text>
             {stories.length == 0 ? null:
                     <View style={{padding: 20}}>
-                    <View style={{fontSize:20, borderWidth:  3,  borderColor:  'gray', padding: 20, marginTop: 30}}>
+                    <View style={{fontSize:20, borderWidth:  5,  borderColor:  'gray', padding: 10, marginTop: 20}}>
                         <ScrollView>
                             {currentIndex > 0 ? 
                                 <Text style={{fontSize:20}}> {stories.slice(0, currentIndex)} </Text> 
@@ -143,9 +144,11 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 300,
-        marginTop: 40,
-        marginLeft: 60,
+        marginTop: 10,
+        marginLeft: 50,
         height: 40,
+        borderWidth:  1,  
+        borderColor:  'gray'
     },
 })
 

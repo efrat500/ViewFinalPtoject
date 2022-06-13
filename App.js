@@ -21,27 +21,22 @@ export default function App() {
   const name = "efrat"
   return (
 
-    <TouchableWithoutFeedback onPress={() => {
-      Keyboard.dismiss()
-    }}>
+    // <TouchableWithoutFeedback onPress={() => {
+    //   Keyboard.dismiss()
+    // }}>
       <SafeAreaView style={styles.container}>
         {/* <Navigation/> */}
-        {/* <WriteScreen></WriteScreen> */}
-        {/* <LevelStory></LevelStory> */}
-        {/* <MenuScreen/> */}
-        {/* <MenuScreenUpdate/> */}
-        {/* <Story /> */}
-        <LevelStory></LevelStory>
+        {/* <StoriesOptionScreen></StoriesOptionScreen> */}
         {/* <ReportScreen></ReportScreen> */}
         {/* <WordsOptions></WordsOptions> */}
-        {/* <StoriesOption/> */}
+        {/* <StoriesOption></StoriesOption> */}
         {/* <WriteScreen /> */}
         {/* <WordsScreen /> */}
         {/* <ReadScreen /> */}
         {/* <TranslateScreen /> */}
         {/* <StoriesOptionScreen /> */}
       </SafeAreaView>
-    </TouchableWithoutFeedback>
+    // </TouchableWithoutFeedback>
 
 
   );
