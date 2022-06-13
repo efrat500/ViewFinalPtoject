@@ -8,11 +8,6 @@ import {Formik} from 'formik'
 import * as Yup from 'yup'
 import axios from "axios"
 
-    
-// axios.create({
-//         timeout: 4000,
-//       });
-
 const validationSchema = Yup.object({
     username: Yup.string().trim(). min(3,'Invalid name').required('Username is required'),
     email: Yup.string().trim(). email('Invalid email').required('Email is required'),
@@ -22,32 +17,8 @@ const validationSchema = Yup.object({
 })
 
 const SignUpScreen = (props) => {
-
-    // const insertData = (values) => {
-    //     fetch('http://192.168.1.235:5000/register', {
-    //         method:'post',
-    //         headers: {
-    //             'Content-Type':'application/json',
-    //             Accept: 'application/json'
-
-    //         },
-    //         timeout: 4000,
-    //         body: JSON.stringify({username:values.username, password:values.password, email:values.email})
-    //     })
-    //     .then((responseJson) => {
-    //         if (responseJson.status != 200){
-    //             Alert.alert('OOPS','The username already exists, Please enter another username!',[{text: 'Understood'}])
-    //             return
-    //         }
-    //         else{
-    //             props.navigation.navigate('Home') 
-    //         }
-    //     })
-    //     .catch(error => console.log(error))
-    // }
-    
     const insertData = (values) => {
-        axios.post('http://192.168.1.235:5000/register', {username:values.username, password:values.password, email:values.email})
+        axios.post('http://192.168.1.41:5000/register', {username:values.username, password:values.password, email:values.email})
         .then(resp => {
             console.log(resp.data)
             props.navigation.navigate('Home') 

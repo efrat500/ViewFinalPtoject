@@ -21,69 +21,6 @@ const levelStory = () => {
         <Appear />
         <Level></Level>
     </ScrollView >);
-    // return (
-    //     <View style={{ flex: 1 }}>
-    //         <Text style={styles.text3}>Words</Text>
-    //         <CustemButton
-    //             text="Resend code"
-    //             onPress={onResendPressed}
-    //             type="SECONDARY"
-    //         />
-    //         <View style={{ flex: 1, flexDirection: "row" }}>
-
-    //             <View
-    //                 style={{ flex: 1, backgroundColor: '#93DED6' }}
-    //                 onPress={() => { }} // Action
-    //             >
-
-    //                 <Image
-    //                     source={Write}
-    //                     style={styles.profiler}
-    //                 />
-    //                 <Text style={styles.text2}>
-    //                     Writing
-    //                 </Text>
-
-    //             </View>
-
-    //         </View>
-    //         <View style={{ flex: 1, flexDirection: "row" }}>
-
-    //             <View
-    //                 style={{ flex: 1, backgroundColor: '#93DED6' }}
-    //                 onPress={() => { }} // Action
-    //             >
-    //                 <Image
-    //                     source={Hear}
-    //                     style={styles.profiler}
-    //                 />
-    //                 <Text style={styles.text2}>
-    //                     Hearing
-    //                 </Text>
-    //                 {/* <Text style={styles.text2}>
-    //                     Words
-    //                 </Text> */}
-    //             </View>
-
-    //         </View>
-    //         <View style={{ flex: 1, flexDirection: "row" }}>
-
-    //             <View
-    //                 style={{ flex: 1, backgroundColor: '#93DED6' }}
-    //                 onPress={() => { }} // Action
-    //             >
-    //                 <Image
-    //                     source={Read}
-    //                     style={styles.profiler}
-    //                 />
-    //                 <Text style={styles.text2}>
-    //                     Reading
-    //                 </Text>
-    //             </View>
-
-    //         </View>
-    //     </View >
-    // );
 }
 
 

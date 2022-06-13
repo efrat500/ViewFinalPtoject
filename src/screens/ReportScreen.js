@@ -21,8 +21,7 @@ const data = {
 };
 const ReportScreen = () => {
     return (
-        <View>
-            <Appear></Appear>
+        <ScrollView>
             <Text style={styles.text}>Current Level: Easy</Text>
             <Text style={styles.text2}>Number Of Stories: 50</Text>
             <Text style={styles.text3}>Words:</Text>
@@ -65,7 +64,7 @@ const ReportScreen = () => {
                     marginTop: 20
                 }}
             />
-        </View>)
+        </ScrollView>)
 }
 
 

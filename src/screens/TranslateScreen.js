@@ -24,14 +24,14 @@ const TranslateScreen = () => {
     const [buttonColorTranslate, setButtonColorTranslate] = useState('gray');
     useEffect(() => {
         const axiosWords = async () => {
-            const response = await axios.post('http://192.168.1.234:5000/getwords', {username:"e"})
+            const response = await axios.post('http://192.168.1.41:5000/getwordsgeneral', {username:"e1"})
             setWords(response.data.allwords)
         }
         axiosWords()
     }, [])
     var trans 
     const onTranslatePressed = (item) =>{
-        axios.post('http://192.168.1.234:5000/translatWord', {word_required:item})
+        axios.post('http://192.168.1.41:5000/translatWord', {word_required:item})
         .then(resp => {
             trans = resp.data.translated
             Alert.alert('Translate',trans,[{text: 'Understood'}])
@@ -53,7 +53,6 @@ const TranslateScreen = () => {
     }
     return (
         <Container sytle={styles.view}>
-        <Appear></Appear>
         <Header />
         <View sytle={styles.view}>
             {words.length == 0 ? null:

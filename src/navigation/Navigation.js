@@ -7,7 +7,15 @@ import SignUpScreen from '../screens/SignUpScreen/SignUpScreen'
 import ConfirmEmail from '../screens/ConfirmEmailScreen/ConfirmEmailScreen'
 import ForgotPasswordScreen from '../screens/ForgotPassworfScreen/ForgotPasswordScreen'
 import NewPasswordScreen from '../screens/NewPasswordScreen/NewPasswordScreen'
-import HomeScreen from '../screens/HomeScreen/HomeScreen'
+import MenuScreen from '../screens/MenuScreen'
+import ReportScreen from '../screens/ReportScreen'
+import StoriesMenu from '../screens/StoryScreen'
+import WordsMenu from '../screens/WordsScreen'
+import LevelScreen from '../screens/levelStory'
+import WriteScreen from '../screens/WriteScreen'
+import TranslateScreen from '../screens/TranslateScreen'
+import ReadScreen from '../screens/ReadScreen'
+
 const Stack = createNativeStackNavigator()
 
 function LogoTitle() {
@@ -28,7 +36,18 @@ const Navigation = () => {
         <Stack.Screen name="ConfirmEmail" component={ConfirmEmail} options={{headerShown:false}}/>
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} options={{headerShown:false}}/>
         <Stack.Screen name="NewPassword" component={NewPasswordScreen} options={{headerShown:false}}/>
-        <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="Home" component={MenuScreen}/>
+        <Stack.Screen name="Report" component={ReportScreen}/>
+        <Stack.Screen name="Stories Menu" component={StoriesMenu}/>
+        <Stack.Screen name="Words Menu" component={WordsMenu}/>
+        <Stack.Screen name="Level Screen" component={LevelScreen}/>
+        <Stack.Screen name="Write Screen" component={WriteScreen}/>
+        <Stack.Screen name="Translate Screen" component={TranslateScreen}/>
+        <Stack.Screen name="Read Screen" component={ReadScreen}/>
+        
+        {/* <Stack.Screen name="allStories" component={StoriesOption}/> */}
+    
+        
         </Stack.Navigator>
     </NavigationContainer>
   )

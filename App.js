@@ -6,14 +6,14 @@ import ConfirmEmail from './src/screens/ConfirmEmailScreen/ConfirmEmailScreen'
 import ForgotPasswordScreen from './src/screens/ForgotPassworfScreen/ForgotPasswordScreen'
 import NewPasswordScreen from './src/screens/NewPasswordScreen/NewPasswordScreen'
 import Navigation from './src/navigation/Navigation'
-import HomeScreen from './src/screens/HomeScreen/HomeScreen'
-
 import MenuScreen from './src/screens/MenuScreen'
 import Story from './src/screens/Story'
 import ReportScreen from './src/screens/ReportScreen'
 import WordsOptions from './src/screens/WordsOptions'
-import StoriesOptionScreen from './src/screens/StoriesOptionScreen'
 import StoriesOption from './src/screens/StoriesOption'
+import WordsScreen from './src/screens/WordsScreen'
+import WriteScreen from './src/screens/WriteScreen'
+import LevelStory from './src/screens/levelStory'
 
 
 
@@ -26,12 +26,12 @@ export default function App() {
     // }}>
       <SafeAreaView style={styles.container}>
         {/* <Navigation/> */}
-        <Story />
         {/* <StoriesOptionScreen></StoriesOptionScreen> */}
         {/* <ReportScreen></ReportScreen> */}
         {/* <WordsOptions></WordsOptions> */}
         {/* <StoriesOption></StoriesOption> */}
         {/* <WriteScreen /> */}
+        {/* <WordsScreen /> */}
         {/* <ReadScreen /> */}
         {/* <TranslateScreen /> */}
         {/* <StoriesOptionScreen /> */}

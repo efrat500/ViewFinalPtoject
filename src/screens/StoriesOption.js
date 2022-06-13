@@ -3,13 +3,19 @@ import { FlatList, Text, View, ScrollView } from 'react-native';
 import { Appbar, Card } from 'react-native-paper';
 import Appear from '../components/Appear';
 import axios from "axios";
+import { useNavigation } from '@react-navigation/native'
 
 
 const StoriesOption = () => {
+    const navigation = useNavigation()
+
+    const onReport = () =>{
+        navigation.navigate('Report')
+    }
     const [stories , setStories]=useState([])
     useEffect(() => {
         const axiosStories = async () => {
-            const response = await axios.get('http://192.168.1.21:5000/getallstories')
+            const response = await axios.get('http://192.168.1.41:5000/getallstories')
             setStories(response.data)
             console.log(stories)
         }
