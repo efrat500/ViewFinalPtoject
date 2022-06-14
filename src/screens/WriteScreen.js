@@ -14,7 +14,7 @@ const WriteScreen = () => {
     const [textInput , onChangetext]=useState(' ')
     useEffect(() => {
         const axiosWords = async () => {
-            const response = await axios.post('http://192.168.1.41:5000/getwordstranslating', {username:"e1"})
+            const response = await axios.post('http://192.168.1.235:5000/getwordstranslating', {username:"e44"})
             setWords(response.data.allwords)
             // console.log("my data") 
             console.log(response.data.allwords)

@@ -25,8 +25,9 @@ export default function App() {
     //   Keyboard.dismiss()
     // }}>
       <SafeAreaView style={styles.container}>
-        <Navigation/>
+        {/* <Navigation/> */}
         {/* <LevelStory /> */}
+        <Story />
         {/* <StoriesOptionScreen></StoriesOptionScreen> */}
         {/* <ReportScreen></ReportScreen> */}
         {/* <WordsOptions></WordsOptions> */}

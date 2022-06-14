@@ -4,8 +4,6 @@ import {
 import { FlatList, Text, ScrollView, View, Dimensions, StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import Appear from '../components/Appear';
-import { useNavigation, useRoute } from '@react-navigation/native'
-
 const screenWidth = Dimensions.get("window").width;
 const chartConfig = {
     backgroundGradientFrom: "#1E2923",
@@ -22,10 +20,10 @@ const data = {
     data: [0.4, 0.6]
 };
 const ReportScreen = () => {
-    const route = useRoute()
+    
     return (
         <ScrollView>
-            <Text style={styles.text}>{route.params.name}</Text>
+            <Text style={styles.text}>Current Level: Easy</Text>
             <Text style={styles.text2}>Number Of Stories: 50</Text>
             <Text style={styles.text3}>Words:</Text>
             <ProgressChart

@@ -26,8 +26,7 @@ const Level = () => {
     return (
         <List.Section title="">
             <List.Accordion
-                title="First Level"
-                onPress={handlePress}>
+                title="First Level">
                 {stories.map((item)=>{
                     return(<List.Item title={item.title} />);
                 })}
