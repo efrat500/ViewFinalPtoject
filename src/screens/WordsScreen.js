@@ -12,16 +12,16 @@ const WordsScreen = () => {
     console.log(route.params.name)
     const navigation = useNavigation()
     const onWriting = () =>{
-        navigation.navigate('Write Screen', {name:route.params.name})
+        navigation.navigate('Write Screen', {name: route.params.name})
         console.log(route.params.name)
     }
 
     const onHearing = () =>{
-        navigation.navigate('Translate Screen', {name:route.params.name})
+        navigation.navigate('Translate Screen', {name: route.params.name})
     }
 
     const onReading = () =>{
-        navigation.navigate('Read Screen', {name:route.params.name})
+        navigation.navigate('Read Screen', {name: route.params.name})
     }
     return (<ScrollView>
         <TouchableOpacity onPress={onWriting}>

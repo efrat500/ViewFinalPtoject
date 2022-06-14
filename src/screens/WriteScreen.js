@@ -25,7 +25,8 @@ const WriteScreen = () => {
     }, [])
     var check
     const onCheckPressed = (item, value) =>{
-        axios.post('http://192.168.1.21:5000/comperTransletetWord', {word_english:item, translate:value})
+        var type_list = "words_list_translating"       
+        axios.post('http://192.168.1.21:5000/comperTransletetWord', {word_english:item, translate:value, username: route.params.name, which_list: type_list})
         .then(resp => {
             check = resp.data.feedback
             console.log(resp.data.feedback)

@@ -26,7 +26,7 @@ const TranslateScreen = () => {
     const [buttonColorTranslate, setButtonColorTranslate] = useState('gray');
     useEffect(() => {
         const axiosWords = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getwordstranslating', {username: route.params.name})
+            const response = await axios.post('http://192.168.1.21:5000/getwordsgeneral', {username: route.params.name})
             setWords(response.data.allwords)
         }
         axiosWords()
