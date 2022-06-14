@@ -6,7 +6,7 @@ const Level = () => {
     const [stories , setStories]=useState([])
     useEffect(() => {
         const axiosStories = async () => {
-            const response = await axios.get('http://192.168.1.41:5000/getallstories')
+            const response = await axios.get('http://192.168.1.235:5000/getallstories')
             setStories(response.data)
             console.log(stories)
         }
@@ -18,17 +18,23 @@ const Level = () => {
         { id: 3, title: "Hard" },
     ];
  
-
+    const handlePress = () => {
+        console.log("s")
+    }
+    // const ex = false
+    // expanded={ex} >
     return (
         <List.Section title="">
             <List.Accordion
-                title="First Level">
+                title="First Level"
+                onPress={handlePress}>
                 {stories.map((item)=>{
                     return(<List.Item title={item.title} />);
                 })}
             </List.Accordion>
             <List.Accordion
-                title="Second Level">
+                title="Second Level"
+                onPress={handlePress}>
                 {mydata.map((item)=>{
                     return(<List.Item title={item.title} />);
                 })}

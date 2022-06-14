@@ -7,14 +7,16 @@ import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView } from 'rea
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import Appear from '../components/Appear';
 import MyCard from '../components/Card/Card';
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 
-const MenuScreen = () => {
+const MenuScreen = ({}) => {
+    const route = useRoute()
     const navigation = useNavigation()
 
     const onReport = () =>{
-        navigation.navigate('Report')
+        console.log(route.params.name)
+        navigation.navigate('Report',{name:route.params.name})
     }
     const onStories = () =>{
         navigation.navigate('Stories Menu')

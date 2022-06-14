@@ -15,48 +15,22 @@ const validationSchema = Yup.object({
 
 
 const SignInScreen = (props) => {
-    // const insertData = (values) => {
-    //     fetch('http://192.168.1.235:5000/login', {
-    //         method:'post',
-    //         headers: {
-    //             'Content-Type':'application/json',
-    //             Accept: 'application/json'
-
-    //         },
-    //         timeout: 4000,
-    //         body: JSON.stringify({username:values.username, password:values.password})
-    //     })
-    //     .then((res) => {
-    //         console.log(res.text())
-    //         check = JSON.parse(res)
-    //         console.log(check)
-    //         if (res.status != 200){
-    //             Alert.alert('OOPS','The username or password is incorrect, Please try again!',[{text: 'Understood'}])
-    //             return
-    //         }
-    //         else{
-    //             props.navigation.navigate('Home') 
-    //         }
-    //     })
-    //     .catch(error => console.log(error))
-    // }
     const insertData = (values) => {
-        axios.post('http://192.168.1.41:5000/login', {username: values.username ,password: values.password})
+        axios.post('http://192.168.1.235:5000/login', {username: values.username ,password: values.password})
         .then(resp => {
             console.log(resp.data)
+            console.log(resp.status)
             if (resp.status != 200){
+                console.log("s1")
                 Alert.alert('OOPS','The username or password is incorrect, Please try again!',[{text: 'Understood'}])
                 return
             }
             else{
-                props.navigation.navigate('Home') 
+                props.navigation.navigate('Home', {name:values.username}) 
             }
         })
         .catch(error => {
-            if (error.status != 200){
-                Alert.alert('OOPS','The username or password is incorrect, Please try again!',[{text: 'Understood'}])
-                return
-            }
+            console.log("s2")
         })
         .finally(() => console.log("done"))
     }
