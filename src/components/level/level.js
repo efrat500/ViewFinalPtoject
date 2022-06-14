@@ -6,7 +6,7 @@ const Level = () => {
     const [stories , setStories]=useState([])
     useEffect(() => {
         const axiosStories = async () => {
-            const response = await axios.get('http://192.168.1.235:5000/getallstories')
+            const response = await axios.get('http://192.168.1.21:5000/getallstories')
             setStories(response.data)
             console.log(stories)
         }

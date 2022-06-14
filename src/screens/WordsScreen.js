@@ -1,27 +1,26 @@
 import React from 'react';
-import Story from '../../assets/story.jpg';
 import Write from '../../assets/write.jpg';
 import Hear from '../../assets/hear.jpg';
 import Read from '../../assets/read1.jpg';
-import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
-import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
-import Appear from '../components/Appear';
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native'
+import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { Card, Title } from 'react-native-paper';
+import { useNavigation, useRoute} from '@react-navigation/native'
 
 
-const StoryScreen = () => {
+const WordsScreen = () => {
+    const route = useRoute()
     const navigation = useNavigation()
     const onWriting = () =>{
-        navigation.navigate('Write Screen')
+        navigation.navigate('Write Screen', {name:route.params.name})
+        console.log(route.params.name)
     }
 
     const onHearing = () =>{
-        navigation.navigate('Translate Screen')
+        navigation.navigate('Translate Screen', {name:route.params.name})
     }
 
     const onReading = () =>{
-        navigation.navigate('Read Screen')
+        navigation.navigate('Read Screen', {name:route.params.name})
     }
     return (<ScrollView>
         <TouchableOpacity onPress={onWriting}>
@@ -113,7 +112,7 @@ const styles = StyleSheet.create({
     },
 })
 
-export default StoryScreen;
+export default WordsScreen;
 // import React from 'react';
 // import Story from '../../assets/story.jpg';
 // import Write from '../../assets/write.jpg';
