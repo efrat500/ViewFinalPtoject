@@ -9,6 +9,7 @@ import { useNavigation, useRoute} from '@react-navigation/native'
 
 const WordsScreen = () => {
     const route = useRoute()
+    console.log(route.params.name)
     const navigation = useNavigation()
     const onWriting = () =>{
         navigation.navigate('Write Screen', {name:route.params.name})

@@ -20,12 +20,13 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const TranslateScreen = () => {
+    const route = useRoute()
     const [words , setWords]=useState([])
     const [buttonTranslate, setButtonTranslate] = useState('Translate');
     const [buttonColorTranslate, setButtonColorTranslate] = useState('gray');
     useEffect(() => {
         const axiosWords = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getwordsgeneral', {username: route.params.name})
+            const response = await axios.post('http://192.168.1.21:5000/getwordstranslating', {username: route.params.name})
             setWords(response.data.allwords)
         }
         axiosWords()

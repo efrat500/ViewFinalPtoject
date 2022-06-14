@@ -11,7 +11,7 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 
 
 const WriteScreen = () => {
-  const route = useRoute()
+    const route = useRoute()
     const [words , setWords]=useState([])
     const [textInput , onChangetext]=useState(' ')
     useEffect(() => {
