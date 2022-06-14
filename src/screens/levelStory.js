@@ -16,7 +16,7 @@ const onResendPressed = () => {
     console.warn("onResendPressed")
 }
 
-const levelStory = () => {
+const LevelStory = () => {
     return (<ScrollView>
         <Appear />
         <Level></Level>
@@ -74,4 +74,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default levelStory;
+export default LevelStory;
