@@ -11,6 +11,7 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 
 
 const ReadScreen = () => {
+    const route = useRoute()
     const [words , setWords]=useState([])
     const [buttonRead, setButtonRead] = useState('Start Read');
     const [buttonColorRead, setButtonColorRead] = useState('gray');
