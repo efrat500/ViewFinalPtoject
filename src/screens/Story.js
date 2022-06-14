@@ -13,7 +13,7 @@ const Story = () => {
     useEffect(() => {
         const axiosStories = async () => {
             console.log("getStory")
-            const response = await axios.post('http://192.168.1.21:5000/getstory', {title_story: "A RED BERRY"})
+            const response = await axios.post('http://192.168.1.41:5000/getstory', {title_story: "A RED BERRY"})
             setStories(response.data.story)
             console.log(stories)
            
@@ -21,24 +21,24 @@ const Story = () => {
         axiosStories()
     }, [])
  
-    var temp
+    // var temp
 
-    const calcGrade = () =>{
-        axios.post('http://192.168.1.21:5000/calculateGrade', {title_story: "A RED BERRY" , username:"e1" })
-        .then(resp => {
-            console.log(resp.data)
-            temp = resp.data.translated
-        })
-        .catch(error => {
-            console.log(error)
-        })
-        .finally(() => console.log("done"))
+    // const calcGrade = () =>{
+    //     axios.post('http://192.168.1.41:5000/calculateGrade', {title_story: "A RED BERRY" , username:"e1" })
+    //     .then(resp => {
+    //         console.log(resp.data)
+    //         temp = resp.data.translated
+    //     })
+    //     .catch(error => {
+    //         console.log(error)
+    //     })
+    //     .finally(() => console.log("done"))
         
-    }
+    // }
 
     const onStartRead = () =>{
         console.log("onStartFunc")
-        axios.post('http://192.168.1.21:5000/speechToWriting', {title_story: "A RED BERRY", current_index: currentIndex, username:"e11" })
+        axios.post('http://192.168.1.41:5000/speechToWriting', {title_story: "A RED BERRY", current_index: currentIndex, username:"e1" })
         .then(resp => {
             console.log(resp.data)
             temp = resp.data.translated
@@ -50,7 +50,7 @@ const Story = () => {
                 console.log(stories.length)
                 if (currentIndex == stories.length-1){
                     var grade
-                    axios.post('http://192.168.1.21:5000/calculateGrade', {title_story: "A RED BERRY" , username:"e1" })
+                    axios.post('http://192.168.1.41:5000/calculateGrade', {title_story: "A RED BERRY" , username:"e1" })
                     .then(resp => {
                         console.log(resp.data.grade)
                         grade = resp.data.grade
@@ -74,8 +74,9 @@ const Story = () => {
         
     }
 
+    var trans
     const onPressFunction = () =>{
-        axios.post('http://192.168.1.21:5000/translatWord', {word_required:stories[currentIndex]})
+        axios.post('http://192.168.1.41:5000/translatWord', {word_required:stories[currentIndex]})
         .then(resp => {
             trans = resp.data.translated
             console.log(trans)

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react'
 import Story from '../../assets/story.jpg';
 import Write from '../../assets/write.jpg';
 import Hear from '../../assets/hear.jpg';

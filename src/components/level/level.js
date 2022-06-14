@@ -1,25 +1,40 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react'
 import { List } from 'react-native-paper';
+import axios from "axios"
 
 const Level = () => {
-    const [expanded, setExpanded] = React.useState(true);
+    const [stories , setStories]=useState([])
+    useEffect(() => {
+        const axiosStories = async () => {
+            const response = await axios.get('http://192.168.1.235:5000/getallstories')
+            setStories(response.data)
+            console.log(stories)
+        }
+        axiosStories()
+    }, [])
     const mydata = [
         { id: 1, title: "Kaka" },
         { id: 2, title: "Kipa" },
         { id: 3, title: "Hard" },
     ];
-    const handlePress = () => setExpanded(!expanded);
-
+ 
+    const handlePress = () => {
+        console.log("s")
+    }
+    // const ex = false
+    // expanded={ex} >
     return (
-        <List.Section title="Levels">
+        <List.Section title="">
             <List.Accordion
-                title="First Level">
-                {mydata.map((item)=>{
+                title="First Level"
+                onPress={handlePress}>
+                {stories.map((item)=>{
                     return(<List.Item title={item.title} />);
                 })}
             </List.Accordion>
             <List.Accordion
-                title="Second Level">
+                title="Second Level"
+                onPress={handlePress}>
                 {mydata.map((item)=>{
                     return(<List.Item title={item.title} />);
                 })}
