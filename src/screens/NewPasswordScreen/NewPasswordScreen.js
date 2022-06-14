@@ -15,7 +15,7 @@ const validationSchema = Yup.object({
 const NewPasswordScreen = (props) => {
 
     const insertData = (values) => {
-        fetch('http://192.168.1.234:5000/updatepassword', {
+        fetch('http://192.168.1.21:5000/updatepassword', {
             method:'put',
             headers: {
                 'Content-Type':'application/json',

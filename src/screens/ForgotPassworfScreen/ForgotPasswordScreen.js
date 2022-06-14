@@ -44,7 +44,7 @@ const validationSchema = Yup.object({
 const ForgotPasswordScreen = () => {
 
     const insertData = (values) => {
-        fetch('http://192.168.1.234:5000/register', {
+        fetch('http://192.168.1.21:5000/register', {
             method:'get',
             headers: {
                 'Content-Type':'application/json',

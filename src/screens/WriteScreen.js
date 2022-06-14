@@ -14,7 +14,7 @@ const WriteScreen = () => {
     const [textInput , onChangetext]=useState(' ')
     useEffect(() => {
         const axiosWords = async () => {
-            const response = await axios.post('http://192.168.1.41:5000/getwordstranslating', {username:"e1"})
+            const response = await axios.post('http://192.168.1.21:5000/getwordstranslating', {username:"e1"})
             setWords(response.data.allwords)
             // console.log("my data") 
             console.log(response.data.allwords)
@@ -23,7 +23,7 @@ const WriteScreen = () => {
     }, [])
     var check
     const onCheckPressed = (item, value) =>{
-        axios.post('http://192.168.1.41:5000/comperTransletetWord', {word_english:item, translate:value})
+        axios.post('http://192.168.1.21:5000/comperTransletetWord', {word_english:item, translate:value})
         .then(resp => {
             check = resp.data.feedback
             console.log(resp.data.feedback)
