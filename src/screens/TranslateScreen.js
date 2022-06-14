@@ -8,6 +8,7 @@ import Appear from '../components/Appear';
 import { TextInput } from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'
 import axios from "axios"
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 const cards = [
   {
@@ -24,7 +25,7 @@ const TranslateScreen = () => {
     const [buttonColorTranslate, setButtonColorTranslate] = useState('gray');
     useEffect(() => {
         const axiosWords = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getwordsgeneral', {username:"e1"})
+            const response = await axios.post('http://192.168.1.21:5000/getwordsgeneral', {username: route.params.name})
             setWords(response.data.allwords)
         }
         axiosWords()

@@ -11,10 +11,13 @@ import MenuScreen from '../screens/MenuScreen'
 import ReportScreen from '../screens/ReportScreen'
 import StoriesMenu from '../screens/StoryScreen'
 import WordsMenu from '../screens/WordsScreen'
-import LevelScreen from '../screens/LevelStory'
+import LevelStoryRead from '../screens/LevelStoryRead'
 import WriteScreen from '../screens/WriteScreen'
 import TranslateScreen from '../screens/TranslateScreen'
 import ReadScreen from '../screens/ReadScreen'
+import ListenStory from '../screens/ListenStory'
+import Story from '../screens/Story'
+import LevelStoryListen from '../screens/LevelStoryListen'
 
 const Stack = createNativeStackNavigator()
 
@@ -44,10 +47,13 @@ const Navigation = () => {
         <Stack.Screen name="Report" component={ReportScreen}/>
         <Stack.Screen name="Stories Menu" component={StoriesMenu}/>
         <Stack.Screen name="Words Menu" component={WordsMenu}/>
-        <Stack.Screen name="Level Screen" component={LevelScreen}/>
+        <Stack.Screen name="Level Story Read" component={LevelStoryRead}/>
         <Stack.Screen name="Write Screen" component={WriteScreen}/>
         <Stack.Screen name="Translate Screen" component={TranslateScreen}/>
         <Stack.Screen name="Read Screen" component={ReadScreen}/>
+        <Stack.Screen name="Listen Story" component={ListenStory}/>
+        <Stack.Screen name="Read Story" component={Story}/>
+        <Stack.Screen name="Level Story Listen" component={LevelStoryListen}/>
         
        
         

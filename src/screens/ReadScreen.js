@@ -7,12 +7,8 @@ import { Button } from 'react-native-paper';
 import Appear from '../components/Appear';
 import { TextInput } from 'react-native-paper';
 import axios from "axios"
+import { useNavigation, useRoute } from '@react-navigation/native'
 
-const cards = [
-  {
-    word: '',
-  },
-];
 
 const ReadScreen = () => {
     const [words , setWords]=useState([])
@@ -22,7 +18,7 @@ const ReadScreen = () => {
     const [buttonColorTranslate, setButtonColorTranslate] = useState('gray');
     useEffect(() => {
         const axiosWords = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getwordsreading', {username:"e1"})
+            const response = await axios.post('http://192.168.1.21:5000/getwordsreading', {username: route.params.name})
             setWords(response.data.allwords)
         }
         axiosWords()

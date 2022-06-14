@@ -19,10 +19,10 @@ const MenuScreen = ({}) => {
         navigation.navigate('Report',{name:route.params.name})
     }
     const onStories = () =>{
-        navigation.navigate('Stories Menu')
+        navigation.navigate('Stories Menu', {name:route.params.name})
     }
     const onWords = () =>{
-        navigation.navigate('Words Menu')
+        navigation.navigate('Words Menu' , {name:route.params.name})
     }
 
     return (<ScrollView>
@@ -50,15 +50,6 @@ const MenuScreen = ({}) => {
                 </Card.Actions>
             </Card>
         </TouchableOpacity>
-        {/* <Card>
-            <Card.Content>
-                <Title>Profile</Title>
-            </Card.Content>
-            <Card.Cover source={Profiler}
-                style={styles.words} />
-            <Card.Actions>
-            </Card.Actions>
-        </Card> */}
         <TouchableOpacity onPress={onWords}>
             <Card>
                 <Card.Content>

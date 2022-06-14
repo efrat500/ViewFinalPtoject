@@ -7,20 +7,22 @@ import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView } from 'rea
 import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 import Appear from '../components/Appear';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 
 const StoryScreen = () => {
+    const route = useRoute()
     const navigation = useNavigation()
 
     const onHearing = () =>{
-        navigation.navigate('Level Screen')
+        navigation.navigate('Level Story Listen', {name:route.params.name})
     }
     const onReading = () =>{
-        navigation.navigate('Level Screen')
+        navigation.navigate('Level Story Read', {name:route.params.name})
     }
     return (<ScrollView>
-        <TouchableOpacity onPress={onHearing}>
+        {console.log(route.params.name)}
+        <TouchableOpacity onPress={onReading}>
             <Card
                 style={styles.container}>
                 <Card.Content style={styles.container}>
@@ -33,7 +35,7 @@ const StoryScreen = () => {
                 </Card.Actions>
             </Card>
         </TouchableOpacity>
-        <TouchableOpacity onPress={onReading}>
+        <TouchableOpacity onPress={onHearing}>
             <Card>
                 <Card.Content>
                     <Title>Hearing</Title>

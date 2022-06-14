@@ -5,40 +5,27 @@ import CustemButton from '../components/CustemButton'
 import { ScrollView } from 'react-native-virtualized-view';
 import { Button } from 'react-native-paper';
 import Appear from '../components/Appear';
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 
 const Story = () => {
+    const route = useRoute()
     const [stories , setStories]=useState([])
 
     useEffect(() => {
         const axiosStories = async () => {
             console.log("getStory")
-            const response = await axios.post('http://192.168.1.41:5000/getstory', {title_story: "A RED BERRY"})
+            const response = await axios.post('http://192.168.1.21:5000/getstory', {title_story: route.params.title_Story})
             setStories(response.data.story)
             console.log(stories)
            
         }
         axiosStories()
     }, [])
- 
-    // var temp
-
-    // const calcGrade = () =>{
-    //     axios.post('http://192.168.1.41:5000/calculateGrade', {title_story: "A RED BERRY" , username:"e1" })
-    //     .then(resp => {
-    //         console.log(resp.data)
-    //         temp = resp.data.translated
-    //     })
-    //     .catch(error => {
-    //         console.log(error)
-    //     })
-    //     .finally(() => console.log("done"))
-        
-    // }
 
     const onStartRead = () =>{
         console.log("onStartFunc")
-        axios.post('http://192.168.1.41:5000/speechToWriting', {title_story: "A RED BERRY", current_index: currentIndex, username:"e1" })
+        axios.post('http://192.168.1.21:5000/speechToWriting', {title_story: route.params.title_Story, current_index: currentIndex, username: route.params.name })
         .then(resp => {
             console.log(resp.data)
             temp = resp.data.translated
@@ -50,7 +37,7 @@ const Story = () => {
                 console.log(stories.length)
                 if (currentIndex == stories.length-1){
                     var grade
-                    axios.post('http://192.168.1.41:5000/calculateGrade', {title_story: "A RED BERRY" , username:"e1" })
+                    axios.post('http://192.168.1.21:5000/calculateGrade', {title_story: route.params.title_Story , username: route.params.name })
                     .then(resp => {
                         console.log(resp.data.grade)
                         grade = resp.data.grade
@@ -76,7 +63,7 @@ const Story = () => {
 
     var trans
     const onPressFunction = () =>{
-        axios.post('http://192.168.1.41:5000/translatWord', {word_required:stories[currentIndex]})
+        axios.post('http://192.168.1.21:5000/translatWord', {word_required:stories[currentIndex]})
         .then(resp => {
             trans = resp.data.translated
             console.log(trans)
@@ -91,7 +78,6 @@ const Story = () => {
     var [currentIndex , setCurrentIndex]=useState(0)
     return (
         <View>
-            <Appear></Appear>
             <Text style={{fontSize:30, fontWeight: 'bold',alignItems: 'center',justifyContent: 'center',marginLeft: 105, marginTop: 40, color:'gray',}}>A RED BERRY</Text>
             {stories.length == 0 ? null:
                     <View style={{padding: 20}}>

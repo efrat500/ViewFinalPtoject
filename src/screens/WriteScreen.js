@@ -7,14 +7,16 @@ import { Button } from 'react-native-paper';
 import Appear from '../components/Appear';
 import { TextInput } from 'react-native-paper';
 import axios from "axios"
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 
 const WriteScreen = () => {
+  const route = useRoute()
     const [words , setWords]=useState([])
     const [textInput , onChangetext]=useState(' ')
     useEffect(() => {
         const axiosWords = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getwordstranslating', {username:"e1"})
+            const response = await axios.post('http://192.168.1.21:5000/getwordstranslating', {username: route.params.name})
             setWords(response.data.allwords)
             // console.log("my data") 
             console.log(response.data.allwords)
