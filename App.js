@@ -14,7 +14,7 @@ import StoriesOption from './src/screens/StoriesOption'
 import WordsScreen from './src/screens/WordsScreen'
 import WriteScreen from './src/screens/WriteScreen'
 import LevelStoryRead from './src/screens/LevelStoryRead'
-
+import './src/ignoreWarnings'
 
 
 export default function App() {
@@ -26,9 +26,9 @@ export default function App() {
     // }}>
       <SafeAreaView style={styles.container}>
         {/* <Navigation/> */}
-        {/* <LevelStory /> */}
-        <Story />
-        {/* <StoriesOptionScreen></StoriesOptionScreen> */}
+        <ReportScreen />
+        {/* <Story /> */}
+        {/* <LevelStoryRead /> */}
         {/* <ReportScreen></ReportScreen> */}
         {/* <WordsOptions></WordsOptions> */}
         {/* <StoriesOption></StoriesOption> */}

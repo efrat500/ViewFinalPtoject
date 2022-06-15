@@ -12,16 +12,28 @@ const validationSchema = Yup.object({
     username: Yup.string().trim(). min(3,'Invalid name').required('Username is required'),
     email: Yup.string().trim(). email('Invalid email').required('Email is required'),
     password: Yup.string().trim(). min(8,'Password is too short - you need at least 8 characters!').required('Password is required'),
-    passwordRepeat: Yup.string().equals([Yup.ref('password'), null], 'Password does not match').required('Repeat password is required')
+    passwordRepeat: Yup.string().equals([Yup.ref('password'), null], 'Password does not match').required('Repeat password is required'),
+    question: Yup.string().trim().required('This field is required')
 
 })
 
 const SignUpScreen = (props) => {
     const insertData = (values) => {
-        axios.post('http://192.168.1.21:5000/register', {username:values.username, password:values.password, email:values.email})
+        axios.post('http://192.168.1.235:5000/register', {username:values.username, password:values.password, email:values.email, question:values.question})
         .then(resp => {
             console.log(resp.data)
-            props.navigation.navigate('Home') 
+            // if (resp.status == 200){
+            //     Alert.alert('Congratulations','Your registration was successful, Enjoy!',[{text: 'OK'}])
+            //     props.navigation.navigate('SignIn') 
+            // }
+            if (resp.status != 200){
+                console.log("s1")
+                Alert.alert('OOPS','The username already exists, Please enter another username!',[{text: 'Understood'}])
+                return
+            }
+            else{
+                props.navigation.navigate('SignIn', {name:values.username}) 
+            }
         })
         .catch(error => {
             if (error.status != 200){
@@ -42,7 +54,7 @@ const SignUpScreen = (props) => {
         <ImageBackground source={require('../../../assets/op1.jpg')} style={styles.root} resizeMode={"cover"}>
             <Text style={styles.title}>Create a new account</Text> 
             <Formik
-                initialValues={{username: '', email:'',password: '', passwordRepeat: ''}} 
+                initialValues={{username: '', email:'',password: '', passwordRepeat: '', question:''}} 
                 validationSchema={validationSchema} 
                 onSubmit={(values, formikAction) => {
                     insertData(values)
@@ -51,7 +63,7 @@ const SignUpScreen = (props) => {
                 }
             >
                 {({values, errors, handleChange, handleBlur, touched, handleSubmit}) => {
-                    const {username, password, email, passwordRepeat} = values
+                    const {username, password, email, passwordRepeat, question} = values
                     return (
                         <>
                             <CustomInput 
@@ -90,6 +102,15 @@ const SignUpScreen = (props) => {
                                 icon_material={'lock'}
                                 error={touched.passwordRepeat && errors.passwordRepeat}
                             />
+                            <CustomInput 
+                                placeholder={'Insert your favorite animal'} 
+                                value={question} 
+                                setValue={handleChange('question')}
+                                onBlur={handleBlur('question')}
+                                icon_AntDesign={'question'}
+                                error={touched.question && errors.question}
+                                
+                            />
                             <CustemButton 
                                 text='Register' 
                                 onPress={handleSubmit}
@@ -111,7 +132,7 @@ const styles = StyleSheet.create({
     root: {
       flex: 1,
       alignItems: 'center',
-      padding: 70,
+      padding: 30,
     },
     logo: {
         width: '70%',
