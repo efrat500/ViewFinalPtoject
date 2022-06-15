@@ -4,7 +4,6 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import SignInScreen from '../screens/SignInScreen/SignInScreen'
 import SignUpScreen from '../screens/SignUpScreen/SignUpScreen'
-import ConfirmEmail from '../screens/ConfirmEmailScreen/ConfirmEmailScreen'
 import ForgotPasswordScreen from '../screens/ForgotPassworfScreen/ForgotPasswordScreen'
 import NewPasswordScreen from '../screens/NewPasswordScreen/NewPasswordScreen'
 import MenuScreen from '../screens/MenuScreen'
@@ -40,7 +39,6 @@ const Navigation = () => {
         >
         <Stack.Screen name="SignIn" component={SignInScreen} options={{headerShown:false}}/>
         <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="ConfirmEmail" component={ConfirmEmail} options={{headerShown:false}}/>
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} options={{headerShown:false}}/>
         <Stack.Screen name="NewPassword" component={NewPasswordScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Home" component={MenuScreen} options={{title: "hello"}}/>

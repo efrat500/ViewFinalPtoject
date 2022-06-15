@@ -2,7 +2,6 @@ import React from 'react'
 import { StyleSheet, Text, View, SafeAreaView, TouchableWithoutFeedback, Keyboard, ImageBackground } from 'react-native'
 import SignInScreen from './src/screens/SignInScreen/SignInScreen'
 import SignUpScreen from './src/screens/SignUpScreen/SignUpScreen'
-import ConfirmEmail from './src/screens/ConfirmEmailScreen/ConfirmEmailScreen'
 import ForgotPasswordScreen from './src/screens/ForgotPassworfScreen/ForgotPasswordScreen'
 import NewPasswordScreen from './src/screens/NewPasswordScreen/NewPasswordScreen'
 import Navigation from './src/navigation/Navigation'
@@ -25,8 +24,8 @@ export default function App() {
     //   Keyboard.dismiss()
     // }}>
       <SafeAreaView style={styles.container}>
-        {/* <Navigation/> */}
-        <ReportScreen />
+        <Navigation/>
+        {/* <ReportScreen /> */}
         {/* <Story /> */}
         {/* <LevelStoryRead /> */}
         {/* <ReportScreen></ReportScreen> */}

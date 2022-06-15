@@ -18,8 +18,8 @@ const chartConfig = {
 };
 
 const ReportScreen = () => {
-    // const route = useRoute()
-    // const navigation = useNavigation()
+    const route = useRoute()
+    const navigation = useNavigation()
     const [reportlevel , setReportlevel]=useState('')
     const [numStories , setNumStories]=useState('')
     const [list_titles , setlist_titles]=useState([])
@@ -31,7 +31,7 @@ const ReportScreen = () => {
     const [calc_translating , setcalc_translating]=useState('')
     useEffect(() => {
         const axiosStories = async () => {
-            const response = await axios.post('http://192.168.1.235:5000/getdatareport', {username: 'e44'})
+            const response = await axios.post('http://192.168.1.235:5000/getdatareport', {username: route.params.name})
             setReportlevel(response.data.current_level)
             setNumStories(response.data.num_stories)
             setsize_list_general(response.data.size_list_general)
