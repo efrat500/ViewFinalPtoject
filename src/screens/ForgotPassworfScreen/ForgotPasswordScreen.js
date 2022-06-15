@@ -6,96 +6,72 @@ import CustemButton from '../../components/CustemButton'
 import { useNavigation } from '@react-navigation/native'
 import {Formik} from 'formik'
 import * as Yup from 'yup'
+import axios from "axios"
 
 
 
 const validationSchema = Yup.object({
-    email: Yup.string().trim(). email('Invalid email').required('Email is require')
+    username: Yup.string().trim().required('Username is required'),
+    email: Yup.string().trim(). email('Invalid email').required('Email is require'),
+    question: Yup.string().trim().required('This field is required')
 })
 
-
-// export async function sendEmail(to, subject, body, options = {}) {
-//     const { cc, bcc } = options;
-
-//     let url = `mailto:${to}`;
-
-//     // Create email link query
-//     const query = JSON.stringify({
-//         subject: subject,
-//         body: body,
-//         cc: cc,
-//         bcc: bcc
-//     });
-
-//     if (query.length) {
-//         url += `?${query}`;
-//     }
-
-//     // check if we can use this link
-//     const canOpen = await Linking.canOpenURL(url);
-
-//     if (!canOpen) {
-//         Alert.alert('Provided URL can not be handled');
-//     }
-
-//     return Linking.openURL(url);
-// }
 
 const ForgotPasswordScreen = () => {
 
     const insertData = (values) => {
-        fetch('http://192.168.1.21:5000/register', {
-            method:'get',
-            headers: {
-                'Content-Type':'application/json',
-                Accept: 'application/json'
-
-            },
-            timeout: 4000,
-            body: JSON.stringify({email:values.email})
-        })
-        .then((responseJson) => {
-            if (responseJson.status != 200){
-                Alert.alert('OOPS','The username already exists, Please enter another username!',[{text: 'Understood'}])
+        console.log(values.username)
+        console.log(values.email)
+        console.log(values.question)
+        axios.post('http://192.168.1.235:5000/forgotpassword', {username: values.username ,email: values.email, question:values.question})
+        .then(resp => {
+            console.log(resp.data)
+            console.log(resp.status)
+            if (resp.data.check == 'please try again!'){
+                Alert.alert('OOPS','One of your details are incorrect, Please try again!',[{text: 'Understood'}])
                 return
             }
             else{
-                props.navigation.navigate('Home') 
+                console.log('ssss')
+                navigation.navigate('NewPassword', {name:values.username}) 
             }
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log("s2")
+        })
+        .finally(() => console.log("done"))
     }
-
 
 
     const navigation = useNavigation()
 
-    const onSendPressed = () =>{
-        navigation.navigate('ConfirmEmail')
-    }
     const onSignInPressed =() =>{
         navigation.navigate('SignIn')
     }
 
     return (
         <ImageBackground source={require('../../../assets/op1.jpg')} style={styles.root}>
-            <Text style={styles.title}>Reset your password</Text> 
+            <Text style={styles.title1}>Enter Verification</Text> 
+            <Text style={styles.title2}>Details</Text> 
             <Formik 
-              initialValues={{email: ''}} 
+              initialValues={{username:'', email: '', question:''}} 
               validationSchema={validationSchema} 
               onSubmit={(values, formikAction) =>{
-                // sendEmail(values.email,
-                //     'We need your feedback',
-                //     'UserName, we need 2 minutes of your time to fill this quick survey'
-                // ).then(() => {console.log('Our email successful provided to device mail ')})
-                Alert.alert('Note','The confirmation code was sent to your email, check it',[{text: 'Understood'}])
-                navigation.navigate('ConfirmEmail')
+                insertData(values)
               }}
             >
              {({values, errors, handleChange, handleBlur, touched, handleSubmit}) => {
-                    const {email} = values
+                    const {username,email,question} = values
                     return ( 
                         <>
+                            <CustomInput 
+                                placeholder={'Username'} 
+                                value={username} 
+                                error={touched.username && errors.username}
+                                setValue={handleChange('username')}
+                                onBlur={handleBlur('username')}
+                                icon_AntDesign={'user'}
+                            />
                             <CustomInput 
                                 placeholder={'Enter your email'} 
                                 value={email} 
@@ -104,8 +80,16 @@ const ForgotPasswordScreen = () => {
                                 onBlur={handleBlur('email')}
                                 icon_material={'gmail'}
                             />
+                            <CustomInput 
+                                placeholder={'Insert your favorite animal'} 
+                                value={question} 
+                                setValue={handleChange('question')}
+                                onBlur={handleBlur('question')}
+                                icon_AntDesign={'question'}
+                                
+                            />
                             <CustemButton 
-                                text='Send' 
+                                text='Verify' 
                                 onPress={handleSubmit}
                             />
                             <CustemButton 
@@ -133,11 +117,19 @@ const styles = StyleSheet.create({
         maxWidth: 300,
         maxHeight: 200,
     },
-    title: {
+    title1: {
+        paddingTop:20,
         fontSize: 24,
         fontWeight: 'bold',
         color: 'black',
-        margin: 10,
+       
+    },
+    title2: {
+        paddingBottom:20,
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: 'black',
+       
     },
   });
 

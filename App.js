@@ -2,7 +2,6 @@ import React from 'react'
 import { StyleSheet, Text, View, SafeAreaView, TouchableWithoutFeedback, Keyboard, ImageBackground } from 'react-native'
 import SignInScreen from './src/screens/SignInScreen/SignInScreen'
 import SignUpScreen from './src/screens/SignUpScreen/SignUpScreen'
-import ConfirmEmail from './src/screens/ConfirmEmailScreen/ConfirmEmailScreen'
 import ForgotPasswordScreen from './src/screens/ForgotPassworfScreen/ForgotPasswordScreen'
 import NewPasswordScreen from './src/screens/NewPasswordScreen/NewPasswordScreen'
 import Navigation from './src/navigation/Navigation'
@@ -14,7 +13,7 @@ import StoriesOption from './src/screens/StoriesOption'
 import WordsScreen from './src/screens/WordsScreen'
 import WriteScreen from './src/screens/WriteScreen'
 import LevelStoryRead from './src/screens/LevelStoryRead'
-
+import './src/ignoreWarnings'
 
 
 export default function App() {
@@ -26,10 +25,9 @@ export default function App() {
     // }}>
       <SafeAreaView style={styles.container}>
         <Navigation/>
-        {/* <WriteScreen></WriteScreen> */}
-        {/* <LevelStoryRead></LevelStoryRead> */}
-        {/* <LevelStory /> */}
-        {/* <StoriesOptionScreen></StoriesOptionScreen> */}
+        {/* <ReportScreen /> */}
+        {/* <Story /> */}
+        {/* <LevelStoryRead /> */}
         {/* <ReportScreen></ReportScreen> */}
         {/* <WordsOptions></WordsOptions> */}
         {/* <StoriesOption></StoriesOption> */}

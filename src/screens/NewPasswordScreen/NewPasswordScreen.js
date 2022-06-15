@@ -3,51 +3,34 @@ import Logo from '../../../assets/children.png'
 import React, {useState} from 'react'
 import CustomInput from '../../components/CustomInput'
 import CustemButton from '../../components/CustemButton'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import {Form, Formik} from 'formik'
 import * as Yup from 'yup'
+import axios from "axios"
 
 const validationSchema = Yup.object({
-    password: Yup.string().trim(). min(8,'Password is too short!').required('Password is require'),
+    password: Yup.string().trim(). min(8,'Password is too shortת You need at least 8 characters!').required('Password is require'),
     passwordRepeat: Yup.string().equals([Yup.ref('password'), null], 'Password does not match').required('Repeat password is require')
 })
 
 const NewPasswordScreen = (props) => {
-
     const insertData = (values) => {
-        fetch('http://192.168.1.21:5000/updatepassword', {
-            method:'put',
-            headers: {
-                'Content-Type':'application/json',
-                Accept: 'application/json'
-
-            },
-            timeout: 4000,
-            body: JSON.stringify({username:values.username, password:values.password})
+        console.log(route.params.name)
+        axios.put('http://192.168.1.235:5000/updatepassword', {username:route.params.name, password:values.password})
+        .then(resp => {
+            console.log(resp.data)
+            if (resp.status == 200){
+                Alert.alert('Note','Your password has been successfully changed!',[{text: 'OK'}])
+                navigation.navigate('SignIn') 
+            }
         })
-        .then((response) => {
-            console.log(response.arrayBuffer())
-            console.log(response.bodyUsed)
-            console.log(response.json())
-            console.log(response.formData())
-            console.log(response.toLocaleString())
-            console.log(response.object)
-            console.log(response.object)
-            console.log(response.object)
+        .catch(error => {
+            console.log('s')
         })
-        // .then((responseJson) => {
-        //     if (responseJson.status != 200){
-        //         Alert.alert('OOPS','The username is incorrect, Please enter another username!',[{text: 'Understood'}])
-        //         return
-        //     }
-        //     else{
-        //         Alert.alert('Note','Your password successfully change!',[{text: 'OK'}])
-        //         props.navigation.navigate('SignIn') 
-        //     }
-        // })
-        .catch(error => console.log(error))
+        .finally(() => console.log("done"))
     }
 
+    const route = useRoute()
     const navigation = useNavigation()
 
     const onSignInPressed =() =>{
@@ -64,21 +47,11 @@ const NewPasswordScreen = (props) => {
                     console.log(values)
                     insertData(values)
                 } }
-                //  navigation.navigate('SignIn')}
             >
                 {({values, errors, handleChange, handleBlur, touched, handleSubmit}) => {
-                    const {username, password, passwordRepeat} = values
+                    const {password, passwordRepeat} = values
                     return ( 
                         <>
-                            <CustomInput 
-                                placeholder={'Username'} 
-                                value={username} 
-                                error={touched.username && errors.username}
-                                setValue={handleChange('username')}
-                                onBlur={handleBlur('username')}
-                                icon_AntDesign={'user'}
-                                
-                            />
                             <CustomInput 
                                 placeholder={'Password'} 
                                 value={password} 
