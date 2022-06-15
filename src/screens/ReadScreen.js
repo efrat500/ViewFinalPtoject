@@ -21,12 +21,16 @@ const ReadScreen = () => {
         const axiosWords = async () => {
             const response = await axios.post('http://192.168.1.21:5000/getwordsreading', {username: route.params.name})
             setWords(response.data.allwords)
+            console.log(route.params.name)
         }
         axiosWords()
     }, [])
     var read
     const onReadPressed = (item) =>{
-        axios.post('http://192.168.1.21:5000/speechWordToWriting', {speech_word: item})
+        list_type = "words_list_reading"
+        console.log("sss")
+        console.log(route.params.name)
+        axios.post('http://192.168.1.21:5000/speechWordToWriting', {speech_word: item, username: route.params.name, which_list: list_type})
         .then(resp => {
             console.log(resp.data.feedback)
             read = resp.data.feedback
