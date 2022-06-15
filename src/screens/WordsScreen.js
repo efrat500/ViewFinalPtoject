@@ -23,6 +23,9 @@ const WordsScreen = () => {
     const onReading = () =>{
         navigation.navigate('Read Screen', {name: route.params.name})
     }
+    const onDictionary = () =>{
+        navigation.navigate('Dictionary Screen', {name: route.params.name})
+    }
     return (<ScrollView>
         <TouchableOpacity onPress={onWriting}>
             <Card
@@ -52,6 +55,17 @@ const WordsScreen = () => {
             <Card>
                 <Card.Content>
                     <Title>Reading</Title>
+                </Card.Content>
+                <Card.Cover source={Read}
+                    style={styles.words} />
+                <Card.Actions>
+                </Card.Actions>
+            </Card>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={onDictionary}>
+            <Card>
+                <Card.Content>
+                    <Title>Dictionary</Title>
                 </Card.Content>
                 <Card.Cover source={Read}
                     style={styles.words} />

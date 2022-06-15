@@ -55,8 +55,6 @@ const TranslateScreen = () => {
     }
     return (
         <Container sytle={styles.view}>
-        <Header />
-        <View sytle={styles.view}>
             {words.length == 0 ? null:
                 <DeckSwiper
                 dataSource={words}
@@ -76,7 +74,7 @@ const TranslateScreen = () => {
                                         Heard word
                                         <AntDesign style={styles.sound} name="sound" size={30} />
                                     </Button>
-                                   
+                                    
                                 </View>
                                 <Button style={styles.button} color='pink' mode="contained" onPress={() => onTranslatePressed(item.word)}>
                                 Translate
@@ -88,7 +86,6 @@ const TranslateScreen = () => {
                 }
                 />
             }
-        </View>
         </Container >
     );
    

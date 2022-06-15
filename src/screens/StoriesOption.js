@@ -25,7 +25,7 @@ const StoriesOption = () => {
         <View>
             <Appear></Appear>
             <FlatList
-                data={stories}
+                data={posts}
                 renderItem={({ item }) => {
                     return (<Card style={{ padding: 10, margin: 10, backgroundColor: "#85E3DE" }}>
                         <Text style={{ fontSize: 20 }}>{item.title}</Text>
