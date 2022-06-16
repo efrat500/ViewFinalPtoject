@@ -1,6 +1,4 @@
 import React from 'react';
-import Story from '../../assets/story.jpg';
-import Report from '../../assets/report.png';
 import Hear from '../../assets/hear.jpg';
 import Read from '../../assets/read.jpg';
 import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';

@@ -1,5 +1,4 @@
 import { View, Text, StyleSheet, Image, useWindowDimensions, Alert, ImageBackground, Linking } from 'react-native'
-import Logo from '../../../assets/children.png'
 import React, {useState} from 'react'
 import CustomInput from '../../components/CustomInput'
 import CustemButton from '../../components/CustemButton'
