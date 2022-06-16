@@ -9,6 +9,7 @@ import { TextInput } from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'
 import axios from "axios"
 import { useNavigation, useRoute } from '@react-navigation/native'
+import { IconButton,MD3Colors  } from 'react-native-paper';
 
 const cards = [
   {
@@ -44,7 +45,7 @@ const TranslateScreen = () => {
         .finally(() => console.log("done"))
     }
     const onSoundPressed = (item) =>{
-        axios.post('http://192.168.1.21:5000/convertWriting', {word_required:item})
+        axios.post('http://192.168.1.21:5000/convertWriting', {word_required:item.word})
         .then(resp => {
             console.log(resp.data)
         })
@@ -63,18 +64,14 @@ const TranslateScreen = () => {
                     <CardItem>
                         <Left>
                             <Body>
-                                {/* <View sytle={styles.container}> */}
+
                                 <Text style={styles.text}>{item.word}</Text>
-                                    {/* <TouchableHighlight onPress={() => console.log(item.word)}>
-                                        <AntDesign style={styles.sound} name="sound" size={50} />
-                                    </TouchableHighlight> */}
-                                {/* </View> */}
                                 <View sytle={styles.container}>
-                                    <Button style={styles.button} color='blue' mode="contained" onPress={() => onSoundPressed(item.word)}>
-                                        Heard word
-                                        <AntDesign style={styles.sound} name="sound" size={30} />
-                                    </Button>
-                                    
+                                    <IconButton
+                                        icon="volume-high"
+                                        size={30}
+                                        onPress={() => onSoundPressed(item)}
+                                    />    
                                 </View>
                                 <Button style={styles.button} color='pink' mode="contained" onPress={() => onTranslatePressed(item.word)}>
                                 Translate

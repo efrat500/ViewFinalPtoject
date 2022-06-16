@@ -1,9 +1,5 @@
-
-
-// import React in our code
 import React, { useState, useEffect } from 'react';
-
-// import all the components we are going to use
+import { useNavigation, useRoute } from '@react-navigation/native'
 import {
   SafeAreaView,
   Text,
@@ -11,10 +7,16 @@ import {
   View,
   FlatList,
   TextInput,
+  Alert,
+  Pressable,
 } from 'react-native';
 import axios from "axios"
 import { ScrollView } from 'react-native-virtualized-view';
-import Appear from '../components/Appear';
+import { AntDesign } from '@expo/vector-icons'; 
+import { FontAwesome } from '@expo/vector-icons'; 
+import { Button, TouchableHighlight, TouchableOpacity } from 'react-native-web';
+import { IconButton,MD3Colors  } from 'react-native-paper';
+
 
 const WordsOptions = () => {
     const route = useRoute()
@@ -23,7 +25,7 @@ const WordsOptions = () => {
     const [masterDataSource, setMasterDataSource] = useState([]);
     useEffect(() => {
         const axiosStories = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getwordsgeneral', {name: route.params.name})
+            const response = await axios.post('http://192.168.1.21:5000/getwordsgeneral', {username: route.params.name})
             setFilteredDataSource(response.data.allwords)
             setMasterDataSource(response.data.allwords)
         }
@@ -52,20 +54,39 @@ const WordsOptions = () => {
       setSearch(text);
     }
   };
-    // const Item = ({ title }) => {
-    //     return (
-    //       <View style={styles.item}>
-    //         <Text>{title}</Text>
-    //       </View>
-    //     );
-    //   };
-    // const renderItem = ({ item }) => <Item title={item.word} />;
-  const ItemView = ({ item }) => {
+  var trans
+  const onTranslatePressed = (item) =>{
+    axios.post('http://192.168.1.21:5000/translatWord', {word_required:item.word})
+    .then(resp => {
+        trans = resp.data.translated
+        Alert.alert('Translate',trans,[{text: 'Understood'}])
+    })
+    .catch(error => {
+        console.log(error)
+    })
+    .finally(() => console.log("done"))
+}
+const onSoundPressed = (item) =>{
+    axios.post('http://192.168.1.21:5000/convertWriting', {word_required:item.word})
+    .then(resp => {
+        console.log(resp.data)
+    })
+    .catch(error => {
+        console.log(error)
+    })
+    .finally(() => console.log("done"))
+}
+const ItemView = ({ item }) => {
     return (
       <View style={styles.item}>
-      <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-        {item.word}
-      </Text>
+        <Text style={styles.itemStyle} onPress={() => onTranslatePressed(item)}>
+            {item.word}
+        </Text>
+        <IconButton
+            icon="volume-high"
+            size={30}
+            onPress={() => onSoundPressed(item)}
+        />
       </View>
     );
   };
@@ -88,19 +109,41 @@ const WordsOptions = () => {
     alert('Id : ' + item.word);
   };
 
+  const onSearch = () =>{
+    setSearch("");
+    setFilteredDataSource(masterDataSource);
+    //setMasterDataSource(masterDataSource);
+  }
+
   return (
     <ScrollView>
-        <Appear></Appear>
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView>
         <View style={styles.container}>
-            <TextInput
-            style={styles.textInputStyle}
-            onChangeText={(text) => searchFilterFunction(text)}
-            value={search}
-            underlineColorAndroid="transparent"
-            placeholder="Search Here"
-            />
+            <View style={styles.searchWrapperStyle}>
+                <IconButton
+                    icon="magnify"
+                    size={24}
+                    onPress={() => onSearch()}
+                    style={styles.iconStyle}
+                />
+                {/* <FontAwesome name="search" size={24} color="black"  style={styles.iconStyle}/> */}
+                    <TextInput
+                    style={styles.searchInputStyle}
+                    onChangeText={(text) => searchFilterFunction(text)}
+                    value={search}
+                    // underlineColorAndroid="transparent"
+                    placeholder="Search Here..."
+                    />
+                <IconButton
+                    icon="close"
+                    size={24}
+                    onPress={() => onSearch()}
+                    style={styles.iconStyle}
+                />
+                {/* <FontAwesome name="close" size={24} color="black" style={styles.iconStyle}/> */}
+            </View>
             <FlatList
+            style={styles.flat}
             data={filteredDataSource}
             keyExtractor={(item, index) => index.toString()}
             ItemSeparatorComponent={ItemSeparatorView}
@@ -113,11 +156,17 @@ const WordsOptions = () => {
 };
 
 const styles = StyleSheet.create({
+    flat:{
+        narginTop: 15,
+        paddingTop: 10,
+    },
   container: {
     backgroundColor: 'white',
   },
   itemStyle: {
     padding: 10,
+    fontSize: 22,
+    //fontWeight: "bold",
   },
   textInputStyle: {
     height: 40,
@@ -128,11 +177,41 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   item: {
-    backgroundColor: "#f5f520",
-    padding: 20,
-    marginVertical: 8,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: "#64b5f6",
+    padding: 3,
+    marginVertical: 5,
     marginHorizontal: 16,
     },
+    iconStyle:{
+        marginTop: 12,
+        marginHorizontal: 8
+    },
+    cardStyle:{
+        marginTop: 12,
+        marginHorizontal: 8
+    },
+    searchWrapperStyle: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderWidth: 1,
+        borderColor: 'gray',
+    },
+    iconStyle: {
+        marginTop: 5,
+        marginHorizontal: 8,
+    },
+    searchInputStyle:{
+        flex: 1,
+        paddingVertical: 2,
+        paddingHorizontal: 0,
+        margin: 0,
+        color: "blask",
+        // borderWidth: 1,
+        //borderColor: '#009688',
+        backgroundColor: '#FFFFFF',
+    }
 });
 
 export default WordsOptions;
