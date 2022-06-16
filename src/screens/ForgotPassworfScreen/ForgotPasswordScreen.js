@@ -23,7 +23,7 @@ const ForgotPasswordScreen = () => {
         console.log(values.username)
         console.log(values.email)
         console.log(values.question)
-        axios.post('http://192.168.1.235:5000/forgotpassword', {username: values.username ,email: values.email, question:values.question})
+        axios.post('http://192.168.1.21:5000/forgotpassword', {username: values.username ,email: values.email, question:values.question})
         .then(resp => {
             console.log(resp.data)
             console.log(resp.status)

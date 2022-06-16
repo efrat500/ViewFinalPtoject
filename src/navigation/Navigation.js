@@ -17,6 +17,7 @@ import ReadScreen from '../screens/ReadScreen'
 import ListenStory from '../screens/ListenStory'
 import Story from '../screens/Story'
 import LevelStoryListen from '../screens/LevelStoryListen'
+import DictionaryScreen from '../screens/WordsOptions'
 
 const Stack = createNativeStackNavigator()
 
@@ -59,6 +60,7 @@ const Navigation = () => {
         <Stack.Screen name="Listen Story" component={ListenStory}/>
         <Stack.Screen name="Read Story" component={Story}/>
         <Stack.Screen name="Level Story Listen" component={LevelStoryListen}/>
+        <Stack.Screen name="Dictionary Screen" component={DictionaryScreen}/>
         
        
         

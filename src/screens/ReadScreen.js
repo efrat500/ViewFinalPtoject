@@ -21,7 +21,7 @@ const ReadScreen = () => {
         const axiosWords = async () => {
             const response = await axios.post('http://192.168.1.21:5000/getwordsreading', {username: route.params.name})
             setWords(response.data.allwords)
-            console.log(route.params.name)
+            console.log("sss")
         }
         axiosWords()
     }, [])
@@ -55,7 +55,6 @@ const ReadScreen = () => {
     }
     return (
         <Container sytle={styles.view}>
-        <Header />
         <View sytle={styles.view}>
             {words.length == 0 ? null:
                 <DeckSwiper

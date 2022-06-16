@@ -44,7 +44,6 @@ const WriteScreen = () => {
     }
     return (
         <Container sytle={styles.view}>
-        <Header />
         <View sytle={styles.view}>
             {words.length == 0 ? null:
                 <DeckSwiper
