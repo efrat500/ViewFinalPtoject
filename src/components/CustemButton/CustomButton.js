@@ -21,13 +21,12 @@ const styles = StyleSheet.create({
         
     },
     container_PRIMARY: {
-        borderColor: '#e8e8e8',
+        borderColor: 'whit',
         borderWidth: 2,
         paddingHorizontal: 70,
         paddingVertical: 10,
         alignItems: 'center',
         marginVertical: 15,
-        backgroundColor: 'white', 
     },
     container_SECONDARY: {
         borderColor: '#e8e8e8',

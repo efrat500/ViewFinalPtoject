@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView } from 'react-native'
+import { View, Text, SafeAreaView, Image } from 'react-native'
 import React, {useRoute} from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -34,14 +34,21 @@ const Navigation = () => {
     <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
-            headerTitleAlign: "center"
+            headerRight: () => (
+              <Image style={{ width: 50, height: 50}} source={require("../../assets/logo.png")} />
+              ),
+            headerTitleAlign: "center",
+            headerTintColor:"black",
+            headerStyle:{
+              backgroundColor: `white`
+            },
           }}
         >
-        <Stack.Screen name="SignIn" component={SignInScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="SignIn" component={SignInScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} options={{headerShown:false}}/>
-        <Stack.Screen name="NewPassword" component={NewPasswordScreen} options={{headerShown:false}}/>
-        <Stack.Screen name="Home" component={MenuScreen} options={{title: "hello"}}/>
+        <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+        <Stack.Screen name="NewPassword" component={NewPasswordScreen} />
+        <Stack.Screen name="Home" component={MenuScreen} />
         <Stack.Screen name="Report" component={ReportScreen}/>
         <Stack.Screen name="Stories Menu" component={StoriesMenu}/>
         <Stack.Screen name="Words Menu" component={WordsMenu}/>

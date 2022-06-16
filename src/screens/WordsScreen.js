@@ -1,5 +1,5 @@
 import React from 'react';
-import Write from '../../assets/write.jpg';
+import Write from '../../assets/translat.png';
 import Hear from '../../assets/hear.jpg';
 import Read from '../../assets/read1.jpg';
 import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native';

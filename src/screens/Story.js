@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Alert, FlatList, Pressable, TouchableOpacity} from 'react-native'
+import { View, Text, StyleSheet, Alert, FlatList, Pressable, TouchableOpacity, ImageBackground} from 'react-native'
 import React, {useState, useEffect} from 'react'
 import axios from "axios"
 import CustemButton from '../components/CustemButton'
@@ -77,11 +77,11 @@ const Story = () => {
 
     var [currentIndex , setCurrentIndex]=useState(0)
     return (
-        <View>
-            <Text style={{fontSize:30, fontWeight: 'bold',alignItems: 'center',justifyContent: 'center',marginLeft: 105, marginTop: 40, color:'gray',}}>A RED BERRY</Text>
+        <ImageBackground source={require('../../assets/a4.jpg')} style={styles.root}> 
+            <Text style={{fontSize:30, fontWeight: 'bold',alignItems: 'center',justifyContent: 'center',marginLeft: 105, marginTop: 40, color:'black',}}>A RED BERRY</Text>
             {stories.length == 0 ? null:
                     <View style={{padding: 20}}>
-                    <View style={{fontSize:20, borderWidth:  5,  borderColor:  'gray', padding: 10, marginTop: 20}}>
+                    <View style={{fontSize:20, borderWidth:  5,  borderColor:  'black', padding: 10, marginTop: 20, borderRadius: 10}}>
                         <ScrollView>
                             {currentIndex > 0 ? 
                                 <Text style={{fontSize:20}}> {stories.slice(0, currentIndex)} </Text> 
@@ -94,10 +94,7 @@ const Story = () => {
                             {/* </Text> */}
                         </ScrollView>
                     </View>
-                    </View>
-
-                
-               
+                    </View>    
             }
             <TouchableOpacity>
                 <Button style={styles.button} color='white' mode="contained" onPress={onStartRead}>
@@ -110,7 +107,7 @@ const Story = () => {
                 onPress={onStartRead}
             /> */}
             
-        </View>
+        </ImageBackground>
     )
    
 }

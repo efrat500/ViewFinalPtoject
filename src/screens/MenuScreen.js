@@ -1,9 +1,9 @@
 import React from 'react';
-import Story from '../../assets/story.jpg';
-import Report from '../../assets/report.png';
-import Words from '../../assets/words.jpg';
+import Story from '../../assets/s.png';
+import Report from '../../assets/lll.jpg';
+import Words from '../../assets/w.jpg';
 import Profiler from '../../assets/profile.jpg';
-import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, ImageBackground } from 'react-native';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import Appear from '../components/Appear';
 import MyCard from '../components/Card/Card';
@@ -25,50 +25,56 @@ const MenuScreen = ({}) => {
         navigation.navigate('Words Menu' , {name:route.params.name})
     }
 
-    return (<ScrollView>
-        <TouchableOpacity onPress={onReport}>
-            <Card
-                style={styles.container}>
-                <Card.Content style={styles.container}>
-                    <Title>Report</Title>
-                </Card.Content>
-                <Card.Cover source={Report}
-                    style={styles.words} />
-                <Card.Actions
-                    style={styles.container}>
-                </Card.Actions>
-            </Card>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={onStories}>
-            <Card>
-                <Card.Content>
-                    <Title>Stories</Title>
-                </Card.Content>
-                <Card.Cover source={Story}
-                    style={styles.words} />
-                <Card.Actions>
-                </Card.Actions>
-            </Card>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={onWords}>
-            <Card>
-                <Card.Content>
-                    <Title>Words</Title>
-                </Card.Content>
-                <Card.Cover source={Words}
-                    style={styles.words} />
-                <Card.Actions>
-                </Card.Actions>
-            </Card>
-        </TouchableOpacity>
-    </ScrollView >);
+    return (
+        <ImageBackground source={require('../../assets/a5.jpg')} style={styles.container}>
+            <ScrollView>
+                <TouchableOpacity onPress={onReport}>
+                    <Card
+                        style={styles.container}>
+                        <Card.Content style={styles.container}>
+                            <Title>Report</Title>
+                        </Card.Content>
+                        <Card.Cover source={Report}
+                            style={styles.words} />
+                        <Card.Actions
+                            style={styles.container}>
+                        </Card.Actions>
+                    </Card>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={onStories}>
+                    <Card
+                        style={styles.container}>
+                        <Card.Content>
+                            <Title>Stories</Title>
+                        </Card.Content>
+                        <Card.Cover source={Story}
+                            style={styles.words} />
+                        <Card.Actions>
+                        </Card.Actions>
+                    </Card>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={onWords}>
+                    <Card
+                        style={styles.container}>
+                        <Card.Content>
+                            <Title>Words</Title>
+                        </Card.Content>
+                        <Card.Cover source={Words}
+                            style={styles.words} />
+                        <Card.Actions>
+                        </Card.Actions>
+                    </Card>
+                </TouchableOpacity>
+            </ScrollView >
+        </ImageBackground>
+    );
 }
 export default MenuScreen;
 
 
 const styles = StyleSheet.create({
     container: {
-        color: 'white',
+        backgroundColor: `#87cefa`,
     },
     story: {
         width: '100%',

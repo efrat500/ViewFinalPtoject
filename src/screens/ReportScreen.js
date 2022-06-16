@@ -1,6 +1,7 @@
 import {LineChart, ProgressChart} from 'react-native-chart-kit';
-import { FlatList, Text, ScrollView, View, Dimensions, StyleSheet } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import { FlatList, Text, ScrollView, View, Dimensions, StyleSheet, Alert } from 'react-native';
+// import { TextInput } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import React, {useState, useEffect} from 'react'
 import axios from "axios"
 import { useNavigation, useRoute } from '@react-navigation/native'
@@ -48,6 +49,18 @@ const ReportScreen = () => {
         labels: ["Read", "Write"], // optional
         data: [0.4,0.6]
     };
+    const onCalc = () =>{
+        axios.post('http://192.168.1.235:5000/calcaverage', {username: route.params.name})
+        .then(resp => {
+            console.log(resp.data.average)
+            Alert.alert('Note','Your average is ' + resp.data.average,[{text: 'Understood'}])
+        })
+        .catch(error => {
+            console.log(error)
+        })
+        .finally(() => console.log("done"))
+    }
+
     return (
         <ScrollView>
             <Text style={styles.text}>Current Level: {reportlevel} </Text>
@@ -88,6 +101,9 @@ const ReportScreen = () => {
                     marginTop: 20
                 }}
             />
+            <Button icon="camera" mode="contained" style={{marginTop:20}} onPress={onCalc}>
+                Calculate average
+            </Button>
         </ScrollView>)
 }
 

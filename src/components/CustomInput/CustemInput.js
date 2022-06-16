@@ -31,9 +31,9 @@ const styles = StyleSheet.create({
       // borderBottomColor: 'black',
       // borderEndColor:'black',
       // borderStartColor:'black',
-      borderColor: '#e8e8e8',
+  
+      borderColor: 'black',
       borderWidth: 2,
-      backgroundColor: 'white',
       height: 60,
       width: 300,
       borderRadius: 10,

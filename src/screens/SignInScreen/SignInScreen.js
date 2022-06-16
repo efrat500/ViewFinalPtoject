@@ -19,18 +19,18 @@ const SignInScreen = (props) => {
         axios.post('http://192.168.1.235:5000/login', {username: values.username ,password: values.password})
         .then(resp => {
             console.log(resp.data)
+            console.log("s1")
             console.log(resp.status)
             if (resp.status != 200){
                 console.log("s1")
                 Alert.alert('OOPS','The username or password is incorrect, Please try again!',[{text: 'Understood'}])
-                return
             }
             else{
                 props.navigation.navigate('Home', {name:values.username}) 
             }
         })
         .catch(error => {
-            console.log("s2")
+            Alert.alert('OOPS','The username or password is incorrect, Please try again!',[{text: 'Understood'}])
         })
         .finally(() => console.log("done"))
     }
@@ -44,7 +44,8 @@ const SignInScreen = (props) => {
     }
     
     return (
-        <ImageBackground source={require('../../../assets/o3.jpg')} style={styles.root}>
+        <ImageBackground source={require('../../../assets/a4.jpg')} style={styles.root}> 
+            <Image source={require('../../../assets/logo.png')} style={styles.logo}/> 
             <Text style={styles.title}>Welcome Back</Text> 
             <Formik 
                 initialValues={{username: '',password: ''}} 
@@ -102,14 +103,14 @@ const styles = StyleSheet.create({
     root: {
       flex: 1,
       alignItems: 'center',
-      padding: 70,
+      padding: 50,
+      backgroundColor:`#87ceeb`,
     },
     background:{
         flex: 1,
     },
     logo: {
-        width: '70%',
-        maxWidth: 300,
+        maxWidth: 170,
         maxHeight: 200,
     },
     title: {
