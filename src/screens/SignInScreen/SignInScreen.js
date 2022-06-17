@@ -43,7 +43,7 @@ const SignInScreen = (props) => {
     }
     
     return (
-        <ImageBackground source={require('../../../assets/a4.jpg')} style={styles.root}> 
+        <ImageBackground source={require('../../../assets/b1.jpg')} style={styles.root}> 
             <Image source={require('../../../assets/logo.png')} style={styles.logo}/> 
             <Text style={styles.title}>Welcome Back</Text> 
             <Formik 

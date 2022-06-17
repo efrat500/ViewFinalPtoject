@@ -55,23 +55,26 @@ const TranslateScreen = () => {
         .finally(() => console.log("done"))
     }
     return (
-        <Container sytle={styles.view}>
+        <View style={styles.input}>
+        <Container sytle={styles.dir}>
             {words.length == 0 ? null:
+            
                 <DeckSwiper
+                style={styles.dir}
                 dataSource={words}
                 renderItem={item =>
-                    <Card sytle={styles.view}>
+                    <Card style={styles.dir}>
                     <CardItem>
                         <Left>
-                            <Body>
-
-                                <Text style={styles.text}>{item.word}</Text>
-                                <View sytle={styles.container}>
-                                    <IconButton
-                                        icon="volume-high"
-                                        size={30}
-                                        onPress={() => onSoundPressed(item)}
-                                    />    
+                            <Body >
+                                <View >
+                                    <Text style={styles.text}>{item.word}</Text>
+                                        <IconButton
+                                        style={styles.container}
+                                            icon="volume-high"
+                                            size={40}
+                                            onPress={() => onSoundPressed(item)}
+                                        />  
                                 </View>
                                 <Button style={styles.button} color='pink' mode="contained" onPress={() => onTranslatePressed(item.word)}>
                                 Translate
@@ -82,8 +85,10 @@ const TranslateScreen = () => {
                     </Card>
                 }
                 />
+                
             }
         </Container >
+        </View>
     );
    
 }
@@ -91,30 +96,70 @@ const TranslateScreen = () => {
 export default TranslateScreen;
 
 const styles = StyleSheet.create({
+    view:{
+        borderColor: 'black',
+        borderWidth: 2,
+        borderRadius: 10,
+    },
     container: {
-        flexDirection: 'row',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        shadowColor: "#000",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.20,
+        shadowRadius: 1.41,
+
+        elevation: 2,
+        //         flex:1,
+        // //flexDirection:'row',
+        // alignItems:'center',
+        // justifyContent:'center',
+        // marginTop: 0,
+        marginLeft: 84,
     },
     text: {
         flex: 1,
         marginTop: 50,
-        marginLeft: 100,
-        fontSize: 70,
+        paddingBottom:10,
+        fontSize: 50,
         fontWeight: 'bold',
         color: '#aaa',
+        textAlign: 'center',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+    },
+    dir:{
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.32,
+        shadowRadius: 5.46,
+        elevation: 9,
+        padding:30,
+        marginTop:20,
+        // borderColor: 'black',
+        borderWidth: 2,
+        borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
+        //textAlign: 'center',
     },
     input: {
-        marginTop: 30,
+        padding:30,
     },
     button: {
-        width: 300,
+        justifyContent: 'center',
+        alignItems: 'center',
         marginTop: 30,
-        marginLeft: 15,
-        height: 50,
+        // width: 250,
+        // marginTop: 30,
+        // marginLeft: 15,
+        // height: 50,
+        // textAlign: 'center',
     },
     sound: {
         padding: 30,
