@@ -1,7 +1,7 @@
 import React from 'react';
-import Story from '../../assets/s.png';
-import Report from '../../assets/lll.jpg';
-import Words from '../../assets/w.jpg';
+import Story from '../../assets/r1_n.png';
+import Report from '../../assets/r_n.jpg';
+import Words from '../../assets/w_n.png';
 import Profiler from '../../assets/profile.jpg';
 import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, ImageBackground } from 'react-native';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
@@ -74,7 +74,7 @@ export default MenuScreen;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: `#87cefa`,
+        backgroundColor: `white`,
     },
     story: {
         width: '100%',

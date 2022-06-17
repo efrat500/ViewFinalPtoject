@@ -21,23 +21,11 @@ import DictionaryScreen from '../screens/WordsOptions'
 
 const Stack = createNativeStackNavigator()
 
-function LogoTitle() {
-  return (
-    <Image
-      style={{ width: 50, height: 50 }}
-      source={require('../../assets/op1.jpg')}
-    />
-  );
-}
-
 const Navigation = () => {
   return (
     <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
-            headerRight: () => (
-              <Image style={{ width: 50, height: 50}} source={require("../../assets/logo.png")} />
-              ),
             headerTitleAlign: "center",
             headerTintColor:"black",
             headerStyle:{

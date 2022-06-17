@@ -77,7 +77,7 @@ const Story = () => {
 
     var [currentIndex , setCurrentIndex]=useState(0)
     return (
-        <ImageBackground source={require('../../assets/a4.jpg')} style={styles.root}> 
+        <ImageBackground source={require('../../assets/b1.jpg')} style={styles.root}> 
             <Text style={{fontSize:30, fontWeight: 'bold',alignItems: 'center',justifyContent: 'center',marginLeft: 105, marginTop: 40, color:'black',}}>A RED BERRY</Text>
             {stories.length == 0 ? null:
                     <View style={{padding: 20}}>

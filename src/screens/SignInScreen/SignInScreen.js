@@ -43,8 +43,8 @@ const SignInScreen = (props) => {
     }
     
     return (
-        <ImageBackground source={require('../../../assets/a4.jpg')} style={styles.root}> 
-            <Image source={require('../../../assets/logo.png')} style={styles.logo}/> 
+        <ImageBackground source={require('../../../assets/b1.jpg')} style={styles.root}> 
+            <Image source={require('../../../assets/Logon.png')} style={styles.logo}/> 
             <Text style={styles.title}>Welcome Back</Text> 
             <Formik 
                 initialValues={{username: '',password: ''}} 
@@ -109,8 +109,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     logo: {
-        maxWidth: 170,
-        maxHeight: 200,
+        maxWidth: 250,
+        maxHeight: 190,
     },
     title: {
         fontSize: 24,

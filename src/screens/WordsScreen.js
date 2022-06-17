@@ -1,7 +1,8 @@
 import React from 'react';
-import Write from '../../assets/translat.png';
-import Hear from '../../assets/h.jpg';
-import Read from '../../assets/s1.png';
+import Write from '../../assets/trans_n.png';
+import Hear from '../../assets/h_n.png';
+import Read from '../../assets/r_n.png';
+import Dict from '../../assets/dict_n.png';
 import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Card, Title } from 'react-native-paper';
 import { useNavigation, useRoute} from '@react-navigation/native'
@@ -67,7 +68,7 @@ const WordsScreen = () => {
                 <Card.Content>
                     <Title>Dictionary</Title>
                 </Card.Content>
-                <Card.Cover source={Read}
+                <Card.Cover source={Dict}
                     style={styles.words} />
                 <Card.Actions>
                 </Card.Actions>
