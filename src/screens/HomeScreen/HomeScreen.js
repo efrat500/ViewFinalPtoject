@@ -13,14 +13,6 @@ const HomeScreen = (props) => {
   const onExitPressed =() =>{
     navigation.navigate('SignIn')
   }
-  // return (
-  //   <ImageBackground source={require('../../../assets/op1.jpg')} style={styles.container}>
-  //     <Text style={{fontSize: 24, alignItems: 'center'}}>HomeScreen</Text>
-  //     <CustemButton 
-  //       text='Exit' 
-  //       onPress={onExitPressed}
-  //     />
-  //   </ImageBackground>
     return (
         <View style={{ flex: 1 }}>
             <Text style={styles.text3}>Welcome {props.name}!</Text>

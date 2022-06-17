@@ -42,35 +42,35 @@ const WordsScreen = () => {
             </Card>
         </TouchableOpacity>
         <TouchableOpacity onPress={onHearing}>
-            <Card>
-                <Card.Content>
+            <Card style={styles.container}>
+                <Card.Content style={styles.container}>
                     <Title>Hearing</Title>
-                </Card.Content>
+                </Card.Content >
                 <Card.Cover source={Hear}
                     style={styles.words} />
-                <Card.Actions>
+                <Card.Actions style={styles.container}>
                 </Card.Actions>
             </Card>
         </TouchableOpacity>
         <TouchableOpacity onPress={onReading}>
-            <Card>
-                <Card.Content>
+            <Card style={styles.container}>
+                <Card.Content style={styles.container}>
                     <Title>Reading</Title>
                 </Card.Content>
                 <Card.Cover source={Read}
                     style={styles.words} />
-                <Card.Actions>
+                <Card.Actions style={styles.container}>
                 </Card.Actions>
             </Card>
         </TouchableOpacity>
         <TouchableOpacity onPress={onDictionary}>
-            <Card>
-                <Card.Content>
+            <Card style={styles.container}>
+                <Card.Content style={styles.container}>
                     <Title>Dictionary</Title>
                 </Card.Content>
                 <Card.Cover source={Dict}
                     style={styles.words} />
-                <Card.Actions>
+                <Card.Actions style={styles.container}>
                 </Card.Actions>
             </Card>
         </TouchableOpacity>
@@ -80,48 +80,65 @@ const WordsScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        flexDirection: 'row',
+        backgroundColor: `#4d82bd`,
+    },
+    story: {
+        width: '100%',
+        maxWidth: 200,
+        maxHeight: 180,
+        paddingHorizontal: 70,
+        borderColor: 'black',
+        borderWidth: 5,
+        top: 100
     },
     report: {
-        width: '80%',
-        marginTop: 80,
-        maxWidth: 300,
-        maxHeight: 200,
-        paddingHorizontal: 230,
+        width: '100%',
+        maxWidth: 200,
+        maxHeight: 180,
+        paddingHorizontal: 70,
         borderColor: 'black',
-        borderWidth: 5
+        borderWidth: 5,
+        top: 100
+    },
+    words: {
+        backgroundColor: 'white',
+        width: '100%',
+        flex: 1,
+        flexDirection: 'column',
+        padding: 0,
+        paddingHorizontal: 80,
+        borderRadius: 50,
+        resizeMode: "contain",
+        borderColor: '#DDE1DF',
+        borderWidth: 5,
     },
     profiler: {
-        marginTop: 5,
-        width: '80%',
-        maxWidth: 100,
-        maxHeight: 200,
-        paddingHorizontal: 230,
+        width: '100%',
+        maxWidth: 200,
+        maxHeight: 180,
+        paddingHorizontal: 50,
         borderColor: 'black',
         borderWidth: 5
     },
     text: {
         alignItems: 'center',
-        marginTop: 0,
-        padding: 20,
-        left: 80,
+        marginTop: 45,
+        padding: 50,
         fontWeight: 'bold',
         fontSize: 30,
         flex: 1,
     },
     text2: {
         alignItems: 'center',
-        marginTop: 0,
-        padding: 20,
-        left: 80,
+        left: 50,
         fontWeight: 'bold',
         fontSize: 30,
         flex: 1,
     },
     text3: {
+        justifyContent: 'center',
         alignItems: 'center',
-        left: 110,
+        left: 20,
         fontWeight: 'bold',
         fontSize: 50,
         top: 10

@@ -32,7 +32,7 @@ const MenuScreen = ({}) => {
                     <Card
                         style={styles.container}>
                         <Card.Content style={styles.container}>
-                            <Title>Report</Title>
+                            <Title style= {styles.profiler}>Report</Title>
                         </Card.Content>
                         <Card.Cover source={Report}
                             style={styles.words} />
@@ -45,7 +45,7 @@ const MenuScreen = ({}) => {
                     <Card
                         style={styles.container}>
                         <Card.Content>
-                            <Title>Stories</Title>
+                            <Title style= {styles.profiler}>Stories</Title>
                         </Card.Content>
                         <Card.Cover source={Story}
                             style={styles.words} />
@@ -57,7 +57,7 @@ const MenuScreen = ({}) => {
                     <Card
                         style={styles.container}>
                         <Card.Content>
-                            <Title>Words</Title>
+                            <Title style= {styles.profiler}>Words</Title>
                         </Card.Content>
                         <Card.Cover source={Words}
                             style={styles.words} />
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         top: 100
     },
     words: {
-        backgroundColor: 'white',
+        backgroundColor: '#aed5ee',
         width: '100%',
         flex: 1,
         flexDirection: 'column',
@@ -103,16 +103,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: 80,
         borderRadius: 50,
         resizeMode: "contain",
-        borderColor: '#DDE1DF',
-        borderWidth: 5,
+        borderColor: 'black',
+        borderWidth: 2,
     },
     profiler: {
-        width: '100%',
-        maxWidth: 200,
-        maxHeight: 180,
-        paddingHorizontal: 50,
-        borderColor: 'black',
-        borderWidth: 5
+        color: 'black',
     },
     text: {
         alignItems: 'center',
