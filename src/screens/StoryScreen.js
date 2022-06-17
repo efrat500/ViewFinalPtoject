@@ -1,7 +1,7 @@
 import React from 'react';
-import Hear from '../../assets/h_n.png';
-import Read from '../../assets/r_n.png';
-import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
+import Hear from '../../assets/hearing.jpg';
+import Read from '../../assets/reading.jpg';
+import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, ImageBackground } from 'react-native';
 import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 import Appear from '../components/Appear';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
@@ -52,15 +52,15 @@ const StoryScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: `#4d82bd`,
+        //backgroundColor: `#4d82bd`,
     },
     story: {
         width: '100%',
         maxWidth: 200,
         maxHeight: 180,
         paddingHorizontal: 70,
-        borderColor: 'black',
-        borderWidth: 5,
+       // borderColor: 'black',
+        //borderWidth: 5,
         top: 100
     },
     report: {
@@ -68,12 +68,12 @@ const styles = StyleSheet.create({
         maxWidth: 200,
         maxHeight: 180,
         paddingHorizontal: 70,
-        borderColor: 'black',
-        borderWidth: 5,
+        //borderColor: 'black',
+       // borderWidth: 5,
         top: 100
     },
     words: {
-        backgroundColor: 'white',
+        backgroundColor: '#aed5ee',
         width: '100%',
         flex: 1,
         flexDirection: 'column',
@@ -81,16 +81,21 @@ const styles = StyleSheet.create({
         paddingHorizontal: 80,
         borderRadius: 50,
         resizeMode: "contain",
-        borderColor: '#DDE1DF',
-        borderWidth: 5,
+        shadowColor: 'black',
+        shadowOffset: {
+            width: 0,
+            height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.00,
+
+        elevation: 24,
     },
     profiler: {
         width: '100%',
         maxWidth: 200,
         maxHeight: 180,
         paddingHorizontal: 50,
-        borderColor: 'black',
-        borderWidth: 5
     },
     text: {
         alignItems: 'center',

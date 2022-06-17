@@ -26,6 +26,7 @@ const ReadScreen = () => {
         axiosWords()
     }, [])
     var read
+    var list_type
     const onReadPressed = (item) =>{
         list_type = "words_list_reading"
         console.log("sss")
@@ -54,62 +55,76 @@ const ReadScreen = () => {
         .finally(() => console.log("done"))
     }
     return (
-        <Container sytle={styles.view}>
-        <View sytle={styles.view}>
+        <View style={styles.input}>
+        <Container sytle={styles.dir}>
             {words.length == 0 ? null:
+            
                 <DeckSwiper
+                style={styles.dir}
                 dataSource={words}
                 renderItem={item =>
-                    <Card sytle={styles.view}>
+                    <Card style={styles.dir}>
                     <CardItem>
                         <Left>
-                        <Body sytle={styles.view}>
-                            <Text style={styles.text}>{item.word}</Text>
-                                <Button style={styles.button} color='green' mode="contained" onPress={() => onReadPressed(item.word)}>
-                                    Start Read
-                                </Button>
-                                <Button style={styles.button} color='pink' mode="contained" onPress={() => onTranslatePressed(item.word)}>
-                                    Translate
-                                </Button>
+                            <Body >
+                                <View>
+                                    <Text style={styles.text}>{item.word}</Text>
+                                </View>
+                                    <Button style={styles.button} color='green' mode="contained" onPress={() => onReadPressed(item.word)}>
+                                         Start Read
+                                    </Button>
+                                    <Button style={styles.button} color='pink' mode="contained" onPress={() => onTranslatePressed(item.word)}>
+                                        Translate
+                                    </Button>
                             </Body>
                         </Left>
                     </CardItem>
                     </Card>
                 }
                 />
+                
             }
-        </View>
         </Container >
+        </View>
     );
    
 }
 
 export default ReadScreen;
 const styles = StyleSheet.create({
-    view: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    text: {
-        flex: 1,
-        marginTop: 50,
-        marginLeft: 100,
-        fontSize: 70,
-        fontWeight: 'bold',
-        color: '#aaa',
+    dir:{
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.32,
+        shadowRadius: 5.46,
+        elevation: 9,
+        marginTop:20,
+        padding:30,
+        borderWidth: 2,
+        borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
     },
     input: {
-        marginTop: 30,
+        padding:30,
+    },
+    text: {
+        flex: 1,
+        marginTop: 20,
+        paddingBottom:10,
+        fontSize: 50,
+        fontWeight: 'bold',
+        color: '#aaa',
+        textAlign: 'center',
     },
     button: {
-        width: 300,
-        marginTop: 60,
-        marginLeft: 10,
-        height: 40,
-    }
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 30,
+    },
 });
 
 

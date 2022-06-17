@@ -1,8 +1,8 @@
 import React from 'react';
-import Write from '../../assets/trans_n.png';
-import Hear from '../../assets/h_n.png';
-import Read from '../../assets/r_n.png';
-import Dict from '../../assets/dict_n.png';
+import Write from '../../assets/wordTran.png';
+import Hear from '../../assets/hearing.jpg';
+import Read from '../../assets/reading.jpg';
+import Dict from '../../assets/dict.png';
 import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Card, Title } from 'react-native-paper';
 import { useNavigation, useRoute} from '@react-navigation/native'
@@ -69,7 +69,7 @@ const WordsScreen = () => {
                     <Title>Dictionary</Title>
                 </Card.Content>
                 <Card.Cover source={Dict}
-                    style={styles.words} />
+                   style={styles.words} />
                 <Card.Actions style={styles.container}>
                 </Card.Actions>
             </Card>
@@ -80,7 +80,7 @@ const WordsScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: `#4d82bd`,
+        //backgroundColor: `#4d82bd`,
     },
     story: {
         width: '100%',
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
         top: 100
     },
     words: {
-        backgroundColor: 'white',
+        backgroundColor: '#aed5ee',
         width: '100%',
         flex: 1,
         flexDirection: 'column',
@@ -109,8 +109,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 80,
         borderRadius: 50,
         resizeMode: "contain",
-        borderColor: '#DDE1DF',
-        borderWidth: 5,
+        shadowColor: 'black',
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.32,
+        shadowRadius: 5.46,
+        elevation: 9,
     },
     profiler: {
         width: '100%',

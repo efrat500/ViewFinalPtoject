@@ -96,11 +96,6 @@ const TranslateScreen = () => {
 export default TranslateScreen;
 
 const styles = StyleSheet.create({
-    view:{
-        borderColor: 'black',
-        borderWidth: 2,
-        borderRadius: 10,
-    },
     container: {
         shadowColor: "#000",
         shadowColor: "#000",
@@ -112,23 +107,16 @@ const styles = StyleSheet.create({
         shadowRadius: 1.41,
 
         elevation: 2,
-        //         flex:1,
-        // //flexDirection:'row',
-        // alignItems:'center',
-        // justifyContent:'center',
-        // marginTop: 0,
         marginLeft: 84,
     },
     text: {
         flex: 1,
-        marginTop: 50,
+        marginTop: 20,
         paddingBottom:10,
         fontSize: 50,
         fontWeight: 'bold',
         color: '#aaa',
         textAlign: 'center',
-        // justifyContent: 'center',
-        // alignItems: 'center',
     },
     dir:{
         shadowColor: "#000",
@@ -141,12 +129,10 @@ const styles = StyleSheet.create({
         elevation: 9,
         padding:30,
         marginTop:20,
-        // borderColor: 'black',
         borderWidth: 2,
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        //textAlign: 'center',
     },
     input: {
         padding:30,
@@ -155,11 +141,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 30,
-        // width: 250,
-        // marginTop: 30,
-        // marginLeft: 15,
-        // height: 50,
-        // textAlign: 'center',
     },
     sound: {
         padding: 30,
