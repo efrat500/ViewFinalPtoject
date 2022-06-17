@@ -15,7 +15,7 @@ const Story = () => {
     useEffect(() => {
         const axiosStories = async () => {
             console.log("getStory")
-            const response = await axios.post('http://192.168.1.21:5000/getstory', {title_story: route.params.title_Story})
+            const response = await axios.post('http://192.168.1.235:5000/getstory', {title_story: route.params.title_Story})
             setStories(response.data.story)
             console.log(stories)
            

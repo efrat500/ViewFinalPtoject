@@ -1,7 +1,7 @@
 import React from 'react';
 import Story from '../../assets/story.jpg';
 import Write from '../../assets/write.jpg';
-import Hear from '../../assets/hear.jpg';
+import Hear from '../../assets/h.jpg';
 import Read from '../../assets/read1.jpg';
 import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';

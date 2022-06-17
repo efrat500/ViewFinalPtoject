@@ -1,6 +1,6 @@
 import React from 'react';
-import Hear from '../../assets/hear.jpg';
-import Read from '../../assets/read.jpg';
+import Hear from '../../assets/h.jpg';
+import Read from '../../assets/s1.png';
 import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 import Appear from '../components/Appear';

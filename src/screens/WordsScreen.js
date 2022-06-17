@@ -1,7 +1,7 @@
 import React from 'react';
 import Write from '../../assets/translat.png';
-import Hear from '../../assets/hear.jpg';
-import Read from '../../assets/read1.jpg';
+import Hear from '../../assets/h.jpg';
+import Read from '../../assets/s1.png';
 import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Card, Title } from 'react-native-paper';
 import { useNavigation, useRoute} from '@react-navigation/native'
