@@ -112,7 +112,6 @@ const ItemView = ({ item }) => {
   const onSearch = () =>{
     setSearch("");
     setFilteredDataSource(masterDataSource);
-    //setMasterDataSource(masterDataSource);
   }
 
   return (
@@ -126,12 +125,10 @@ const ItemView = ({ item }) => {
                     onPress={() => onSearch()}
                     style={styles.iconStyle}
                 />
-                {/* <FontAwesome name="search" size={24} color="black"  style={styles.iconStyle}/> */}
                     <TextInput
                     style={styles.searchInputStyle}
                     onChangeText={(text) => searchFilterFunction(text)}
                     value={search}
-                    // underlineColorAndroid="transparent"
                     placeholder="Search Here..."
                     />
                 <IconButton
@@ -140,7 +137,6 @@ const ItemView = ({ item }) => {
                     onPress={() => onSearch()}
                     style={styles.iconStyle}
                 />
-                {/* <FontAwesome name="close" size={24} color="black" style={styles.iconStyle}/> */}
             </View>
             <FlatList
             style={styles.flat}
@@ -166,7 +162,6 @@ const styles = StyleSheet.create({
   itemStyle: {
     padding: 10,
     fontSize: 22,
-    //fontWeight: "bold",
   },
   textInputStyle: {
     height: 40,
@@ -208,8 +203,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 0,
         margin: 0,
         color: "blask",
-        // borderWidth: 1,
-        //borderColor: '#009688',
         backgroundColor: '#FFFFFF',
     }
 });
