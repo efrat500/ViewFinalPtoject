@@ -1,11 +1,12 @@
-import { View, Text, StyleSheet, Alert, FlatList, Pressable, TouchableOpacity} from 'react-native'
+import { Image,View, Text, StyleSheet, Alert, FlatList, Pressable, TouchableOpacity, ImageBackground} from 'react-native'
 import React, {useState, useEffect} from 'react'
 import axios from "axios"
 import CustemButton from '../components/CustemButton'
 import { ScrollView } from 'react-native-virtualized-view';
-import { Button } from 'react-native-paper';
+import { Card,Button } from 'react-native-paper';
 import Appear from '../components/Appear';
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native';
+import logo from '../../assets/men.png';
 
 
 const Story = () => {
@@ -55,11 +56,6 @@ const Story = () => {
         .finally(() => console.log("done"))
         
     }
-    const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
-        const paddingToBottom = 20;
-        return layoutMeasurement.height + contentOffset.y >=
-          contentSize.height - paddingToBottom;
-      };
     const onRepeatRead = () =>{
         onRepeatPress = 1
         setonRepeatPress(1)
@@ -90,51 +86,56 @@ const Story = () => {
     var [onRepeatPress , setonRepeatPress]=useState(0)
     var [currentIndex , setCurrentIndex]=useState(0)
     return (
-        <View>
-            <Text style={{fontSize:30, fontWeight: 'bold',alignItems: 'center',justifyContent: 'center',marginLeft: 105, marginTop: 40, color:'gray',}}>A RED BERRY</Text>
-            {stories.length == 0 ? null:
-                    <View style={{padding: 20}}>
+        <ImageBackground source={require('../../assets/b1.jpg')} style={{width: '100%', height: '100%'}}> 
+        {/* <ScrollView> */}
+            <View style={styles.view}>
+            <View style={{flexDirection: 'row'}}>
+            <Image style={styles.logo} source={logo}></Image>
+            <Text style={{marginLeft:-10,fontSize:30, fontWeight: 'bold',textAlign: 'center', marginTop: 50, color:'black',}}> {route.params.title_Story}</Text>
+            </View>    
+                {stories.length == 0 ? null:
+                    <Card style={{marginTop:-60,height:350, elavation: 3, backgroundColor : 'transparent',borderWidth:  4,  borderColor:  'black'}}>
+                    <ScrollView>
+                    <View style={{padding:20}}>
+                        {currentIndex > 0 ? 
+                            <Text  style={{fontSize:20}}> {stories.slice(0, currentIndex)} </Text> 
+                            : null
+                        }
+                            <TouchableOpacity>
+                                <Text style={{color:"red", fontSize:20}}> {stories[currentIndex]}</Text>
+                            </TouchableOpacity>
+                            <Text style={{fontSize:20}}> {stories.slice(currentIndex+1, - 1)} </Text>
+                            </View>
+                    </ScrollView>
+                    </Card>
                         
-                        <View scrollEnable={true} style={{fontSize:20, borderWidth:  5,borderRadius: 20,overflow : "hidden", flex: 1,height: 300,  borderColor:  'gray', padding: 10, marginTop: 20}}>
-                        <ScrollView   onScroll={({nativeEvent}) => {
-                            if (isCloseToBottom(nativeEvent)) {
-                                enableSomeButton();
-                            }
-                            }}
-                            scrollEventThrottle={400}
-                            contentContainerStyle={styles.scrollView}> 
-                                {currentIndex > 0 ? 
-                                    <Text style={{fontSize:20}}> {stories.slice(0, currentIndex)} </Text> 
-                                    : null
-                                }
-                                    <TouchableOpacity>
-                                        <Text style={{color:"red", fontSize:20}}> {stories[currentIndex]}</Text>
-                                    </TouchableOpacity>
-                                    <Text style={{fontSize:20}}> {stories.slice(currentIndex+1, - 1)} </Text>
-                                    </ScrollView>  
-                        </View>
-                        
-                    </View>
-
-                
-               
-            }
+                }
             <TouchableOpacity>
-                <Button style={styles.button} color='white' mode="contained" onPress={onStartRead}>
+                <Button style={styles.button} color='black'  onPress={onStartRead}>
                 next sentence
                 </Button>
             </TouchableOpacity>    
             <TouchableOpacity>
-                <Button style={styles.button} color='white' mode="contained" onPress={onRepeatRead}>
+                <Button style={styles.button} color='black'  onPress={onRepeatRead}>
                 previous sentence
                 </Button>
             </TouchableOpacity>   
-            
-        </View>
+            </View>
+            {/* </ScrollView> */}
+        </ImageBackground>
     )
    
 }
 const styles = StyleSheet.create({
+    logo:{
+        height: 200,
+        width: 100,
+        marginTop: -20,
+    },
+    view:{
+        padding:20,
+        flex: 1,
+    },
     container: {
         flex: 1,
         paddingTop: 22
@@ -145,15 +146,14 @@ const styles = StyleSheet.create({
         height: 44,
     },
     button: {
-        width: 300,
-        marginTop: 10,
-        marginLeft: 50,
+        width: 200,
+        marginTop: 20,
+        marginLeft:75,
         height: 40,
-        borderWidth:  1,  
-        borderColor:  'gray'
-    },
-    scrollView:{
-        height: 40,   
+        borderWidth:  2,  
+        borderColor:  'black',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 })
 

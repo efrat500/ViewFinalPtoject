@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, Alert} from 'react-native';
+import { ImageBackground,Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, Alert} from 'react-native';
 import React, {useState, useEffect} from 'react'
 import { List } from 'react-native-paper';
 import axios from "axios"
@@ -135,27 +135,28 @@ const LevelStoryRead = () => {
     }
     return (<ScrollView>
         <List.Section title="">
-            <List.Accordion
+            <List.Accordion  style={{backgroundColor : '#aed5ee'}}
+            
                 title="First Level">
                 {stories1.map((item)=>{
                     return(
-                        <List.Item onPress={() => onReadStory(item)} title={item.title} />);
+                        <List.Item key="{item}"onPress={() => onReadStory(item)} title={item.title} />);
                 })}
             </List.Accordion>
-            <List.Accordion
+            <List.Accordion style={{backgroundColor : '#aed5ee'}}
                 title="Second Level"
                 expanded={expanded2}
                 onPress={onPressFunction2}>
                 {stories2.map((item)=>{
-                    return(<TouchableOpacity  onPress={() => onReadStory(item)}><List.Item title={item.title} /></TouchableOpacity>);
+                    return(<TouchableOpacity  onPress={() => onReadStory(item)}><List.Item key="{item1}" title={item.title} /></TouchableOpacity>);
                 })}
             </List.Accordion>
-            <List.Accordion
+            <List.Accordion style={{backgroundColor : '#aed5ee'}}
                 title="Third Level"
                 expanded={expanded3}
                 onPress={onPressFunction3}>
                 {stories3.map((item)=>{
-                    return(<TouchableOpacity onPress={() => onReadStory(item)}><List.Item title={item.title} /></TouchableOpacity>);
+                    return(<TouchableOpacity onPress={() => onReadStory(item)}><List.Item key="{item2}" title={item.title} /></TouchableOpacity>);
                 })}
             </List.Accordion>
             <List.Accordion
@@ -167,6 +168,10 @@ const LevelStoryRead = () => {
                 })}
             </List.Accordion>
         </List.Section>
+<<<<<<< HEAD
+        </View>
+        </ImageBackground> );
+=======
         <CustemButton 
             text='Surprise' 
             // check befor press signin all the data is valid
@@ -176,6 +181,7 @@ const LevelStoryRead = () => {
     
     
     );
+>>>>>>> 8a82d2a059920199c05144075f890940f60bd94a
 }
 
 

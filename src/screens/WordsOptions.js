@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
         paddingVertical: 2,
         paddingHorizontal: 0,
         margin: 0,
-        color: "blask",
+        color: "black",
         backgroundColor: '#FFFFFF',
     }
 });
