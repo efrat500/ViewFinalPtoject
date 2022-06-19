@@ -32,7 +32,7 @@ const ReportScreen = () => {
     const [calc_translating , setcalc_translating]=useState('')
     useEffect(() => {
         const axiosStories = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getdatareport', {username: route.params.name})
+            const response = await axios.post('http://192.168.1.235:5000:5000/getdatareport', {username: route.params.name})
             setReportlevel(response.data.current_level)
             setNumStories(response.data.num_stories)
             setsize_list_general(response.data.size_list_general)
@@ -50,7 +50,7 @@ const ReportScreen = () => {
         data: [0.4,0.6]
     };
     const onCalc = () =>{
-        axios.post('http://192.168.1.21:5000/calcaverage', {username: route.params.name})
+        axios.post('http://192.168.1.235:5000:5000/calcaverage', {username: route.params.name})
         .then(resp => {
             console.log(resp.data.average)
             Alert.alert('Note','Your average is ' + resp.data.average,[{text: 'Understood'}])

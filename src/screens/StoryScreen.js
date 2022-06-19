@@ -1,7 +1,7 @@
 import React from 'react';
 import Hear from '../../assets/h_n.png';
 import Read from '../../assets/r_n.png';
-import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, ImageBackground } from 'react-native';
 import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 import Appear from '../components/Appear';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
