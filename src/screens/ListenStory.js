@@ -66,7 +66,7 @@ const Story = () => {
         console.log("onStartFunc")
         setCurrentIndex(currentIndex-1)
         currentIndex = currentIndex-1
-        axios.post('http://192.168.1.21:5000/listenStory', {title_story: route.params.title_Story, current_index: currentIndex})
+        axios.post('http://192.168.1.235:5000/listenStory', {title_story: route.params.title_Story, current_index: currentIndex})
         .then(resp => {
             console.log(resp.data)
             console.log("befor" + currentIndex)
