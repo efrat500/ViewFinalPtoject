@@ -1,7 +1,7 @@
 import React from 'react';
 import Story from '../../assets/r1_n.png';
-import Report from '../../assets/r_n.jpg';
-import Words from '../../assets/w_n.png';
+import Report from '../../assets/repo.png';
+import Words from '../../assets/words.jpg';
 import Profiler from '../../assets/profile.jpg';
 import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, ImageBackground } from 'react-native';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
@@ -103,8 +103,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 80,
         borderRadius: 50,
         resizeMode: "contain",
-        borderColor: 'black',
-        borderWidth: 2,
+        shadowColor: 'black',
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.32,
+        shadowRadius: 5.46,
+        elevation: 9,
     },
     profiler: {
         color: 'black',

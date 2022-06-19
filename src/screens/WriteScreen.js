@@ -43,38 +43,41 @@ const WriteScreen = () => {
       onChangetext('');
     }
     return (
-        <Container sytle={styles.view}>
-        <View sytle={styles.view}>
-            {words.length == 0 ? null:
-                <DeckSwiper
-                  dataSource={words}
-                  renderItem={item =>
-                      <Card sytle={styles.view}>
+      <View style={styles.input}>
+      <Container sytle={styles.dir}>
+          {words.length == 0 ? null:
+              <DeckSwiper
+                style={styles.dir}
+                dataSource={words}
+                renderItem={item =>
+                    <Card style={styles.dir}>
                       <CardItem>
                           <Left>
-                          <Body sytle={styles.view}>
-                              <Text style={styles.text}>{item.word}</Text>
-                              <TextInput
-                              style={styles.input}
-                              mode="outlined"
-                              label="Type the word in English"
-                              placeholder="Type the word in English"
-                              right={<TextInput.Affix text="/80" />}
-                              onChangeText={onChangetext}
-                              value = {textInput}
-                              />
+                            <Body >
+                              <View>
+                                <Text style={styles.text}>{item.word}</Text>
+                                <TextInput
+                                style={styles.testInp}
+                                mode="outlined"
+                                label="Type the word in English"
+                                placeholder="Type the word in English"
+                                // right={<TextInput.Affix text="/80" style={styles.input1}/>}
+                                onChangeText={onChangetext}
+                                value = {textInput}
+                                />
+                              </View>
                               <Button style={styles.button} color='pink' mode="contained" onPress={() => {onCheckPressed(item.word, textInput)}}>
-                              Check
+                                Check
                               </Button>
-                          </Body>
+                            </Body>
                           </Left>
                       </CardItem>
-                      </Card>
-                }
-                />
-            }
-        </View>
-        </Container >
+                    </Card>
+              }
+              />
+          }
+      </Container >
+      </View>
     );
    
 }
@@ -87,28 +90,45 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text: {
-    flex: 1,
-    marginTop: 50,
-    marginLeft: 100,
-    fontSize: 70,
-    fontWeight: 'bold',
-    color: '#aaa',
+  dir:{
+    shadowColor: "#000",
+    shadowOffset: {
+        width: 0,
+        height: 4,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+    elevation: 9,
+    padding:30,
+    marginTop:20,
+    borderWidth: 2,
+    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  input: {
-    flex: 1,
-    marginTop: 30,
-  },
-  button: {
-    flex: 1,
-    width: 200,
-    marginTop: 60,
-    marginLeft: 70,
-    height: 40,
-    alignItems: 'center',
-  }
+},
+input1:{
+  paddingButtom:60,
+},
+text: {
+  flex: 1,
+  marginTop: 20,
+  paddingBottom:10,
+  fontSize: 50,
+  fontWeight: 'bold',
+  color: '#aaa',
+  textAlign: 'center',
+},
+testInp:{
+  maxHeight:50,
+},
+input: {
+  padding:30,
+},
+button: {
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginTop: 30,
+}
 });
 
 
