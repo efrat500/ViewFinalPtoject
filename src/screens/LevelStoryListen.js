@@ -70,7 +70,7 @@ const LevelStoryListen = () => {
             console.log(resp.data.pass_level_hard)
             if (resp.data.pass_level_hard==1){
                 console.log("pass=1")
-                setExpanded2(!expanded3)
+                setExpanded3(!expanded3)
             }
             else{
                 Alert.alert('Note',"You must pass the previous level",[{text: 'Understood'}])
