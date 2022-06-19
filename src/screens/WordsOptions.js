@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native'
 import {
+  ImageBackground,
   SafeAreaView,
   Text,
   StyleSheet,
@@ -98,7 +99,7 @@ const ItemView = ({ item }) => {
         style={{
           height: 0.5,
           width: '100%',
-          backgroundColor: '#C8C8C8',
+          //backgroundColor: '#C8C8C8',
         }}
       />
     );
@@ -115,6 +116,7 @@ const ItemView = ({ item }) => {
   }
 
   return (
+    <ImageBackground source={require('../../assets/b1.jpg')} style={{width: '100%', height: '100%'}}> 
     <ScrollView>
         <SafeAreaView>
         <View style={styles.container}>
@@ -148,6 +150,7 @@ const ItemView = ({ item }) => {
         </View>
         </SafeAreaView>
     </ScrollView>
+    </ImageBackground> 
   );
 };
 
@@ -157,7 +160,7 @@ const styles = StyleSheet.create({
         paddingTop: 10,
     },
   container: {
-    backgroundColor: 'white',
+    //backgroundColor: 'white',
   },
   itemStyle: {
     padding: 10,
@@ -174,10 +177,13 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: "#64b5f6",
+    //backgroundColor: "#64b5f6",
     padding: 3,
     marginVertical: 5,
     marginHorizontal: 16,
+    borderRadius:2,
+    borderColor: 'black',
+    borderWidth:1,
     },
     iconStyle:{
         marginTop: 12,

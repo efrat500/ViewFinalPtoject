@@ -27,7 +27,7 @@ const Story = () => {
     var temp
     const onStartRead = () =>{
         console.log("onStartFunc")
-        axios.post('http://192.168.1.235:5000/speechToWriting', {title_story: route.params.title_Story, current_index: currentIndex, username: route.params.name })
+        axios.post('http://192.168.1.21:5000/speechToWriting', {title_story: route.params.title_Story, current_index: currentIndex, username: route.params.name })
         .then(resp => {
             console.log(resp.data)
             temp = resp.data.translated
@@ -39,7 +39,7 @@ const Story = () => {
                 console.log(stories.length)
                 if (currentIndex == stories.length){
                     var grade
-                    axios.post('http://192.168.1.235:5000/calculateGrade', {title_story: route.params.title_Story , username: route.params.name })
+                    axios.post('http://192.168.1.21:5000/calculateGrade', {title_story: route.params.title_Story , username: route.params.name })
                     .then(resp => {
                         console.log(resp.data.grade)
                         grade = resp.data.grade
@@ -65,7 +65,7 @@ const Story = () => {
 
     var trans
     const onPressFunction = () =>{
-        axios.post('http://192.168.1.235:5000:5000/translatWord', {word_required:stories[currentIndex]})
+        axios.post('http://192.168.1.21:5000:5000/translatWord', {word_required:stories[currentIndex]})
         .then(resp => {
             trans = resp.data.translated
             console.log(trans)

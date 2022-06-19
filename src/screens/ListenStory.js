@@ -16,7 +16,7 @@ const Story = () => {
     useEffect(() => {
         const axiosStories = async () => {
             console.log("getStory")
-            const response = await axios.post('http://192.168.1.235:5000/getstory', {title_story: route.params.title_Story})
+            const response = await axios.post('http://192.168.1.21:5000/getstory', {title_story: route.params.title_Story})
             setStories(response.data.story)
             console.log(stories)
            
@@ -32,7 +32,7 @@ const Story = () => {
             setonRepeatPress(0)
         }
         console.log("onStartFunc")
-        axios.post('http://192.168.1.235:5000/listenStory', {title_story: route.params.title_Story, current_index: currentIndex})
+        axios.post('http://192.168.1.21:5000/listenStory', {title_story: route.params.title_Story, current_index: currentIndex})
         .then(resp => {
             console.log(resp.data)
             console.log("befor" + currentIndex)

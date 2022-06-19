@@ -18,7 +18,7 @@ const LevelStoryRead = () => {
 
     useEffect(() => {
         const axiosStories1 = async () => {
-            const response = await axios.post('http://192.168.1.235:5000/getallstories',{current_level: 'easy'})
+            const response = await axios.post('http://192.168.1.21:5000/getallstories',{current_level: 'easy'})
             setStories1(response.data)
         }
         axiosStories1()
@@ -26,7 +26,7 @@ const LevelStoryRead = () => {
 
     useEffect(() => {
         const axiosStories2 = async () => {
-            const response = await axios.post('http://192.168.1.235:5000/getallstories',{current_level: 'medium'})
+            const response = await axios.post('http://192.168.1.21:5000/getallstories',{current_level: 'medium'})
             setStories2(response.data)
             console.log(stories2)
         }
@@ -34,7 +34,7 @@ const LevelStoryRead = () => {
     }, [])
     useEffect(() => {
         const axiosStories3 = async () => {
-            const response = await axios.post('http://192.168.1.235:5000/getallstories',{current_level: 'hard'})
+            const response = await axios.post('http://192.168.1.21:5000/getallstories',{current_level: 'hard'})
             setStories3(response.data)
             console.log(stories3)
         }
@@ -42,7 +42,7 @@ const LevelStoryRead = () => {
     }, [])
     useEffect(() => {
         const axiosStories4 = async () => {
-            const response = await axios.post('http://192.168.1.235:5000/getallstories',{current_level: 'advenc'})
+            const response = await axios.post('http://192.168.1.21:5000/getallstories',{current_level: 'advenc'})
             setStories4(response.data)
             console.log(stories4)
         }
@@ -56,7 +56,7 @@ const LevelStoryRead = () => {
 
     const onPressFunction2 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.235:5000/checkpasslevel', {username:route.params.name})
+        axios.post('http://192.168.1.21:5000/checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_medium)
             if (resp.data.pass_level_medium==1){
@@ -76,7 +76,7 @@ const LevelStoryRead = () => {
 
     const onPressFunction3 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.235:5000/checkpasslevel', {username:route.params.name})
+        axios.post('http://192.168.1.21:5000/checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_hard)
             if (resp.data.pass_level_hard==1){
@@ -96,7 +96,7 @@ const LevelStoryRead = () => {
 
     const onPressFunction4 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.235:5000/checkpasslevel', {username:route.params.name})
+        axios.post('http://192.168.1.21:5000/checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_advenc)
             if (resp.data.pass_level_advenc==1){
@@ -115,10 +115,10 @@ const LevelStoryRead = () => {
     }
 
     const getStort = () => {
-        axios.post('http://192.168.1.235:5000/getdatareport', {username:route.params.name})
+        axios.post('http://192.168.1.21:5000/getdatareport', {username:route.params.name})
         .then(resp => {
             if (resp.data.current_level == "advenc"){
-                axios.post('http://192.168.1.235:5000/addstoryadvenc')
+                axios.post('http://192.168.1.21:5000/addstoryadvenc')
                 .then(resp => {
                     if (resp.error == "The story already exists, press again"){
                         Alert.alert('Note',resp.error,[{text: 'Understood'}])
@@ -133,9 +133,10 @@ const LevelStoryRead = () => {
             }
         }) 
     }
-    return (<ScrollView>
+    return ( <ImageBackground source={require('../../assets/b1.jpg')} style={{width: '100%', height: '100%'}}> 
         <List.Section title="">
-            <List.Accordion  style={{backgroundColor : '#aed5ee'}}
+            <View style={{ padding:10}}>
+            <List.Accordion  style={{ borderWidth:0.7,borderRadius:3,backgroundColor : '#dcebf1'}}
             
                 title="First Level">
                 {stories1.map((item)=>{
@@ -143,7 +144,9 @@ const LevelStoryRead = () => {
                         <List.Item key="{item}"onPress={() => onReadStory(item)} title={item.title} />);
                 })}
             </List.Accordion>
-            <List.Accordion style={{backgroundColor : '#aed5ee'}}
+            </View>
+            <View style={{ padding:10}}>
+            <List.Accordion style={{borderWidth:0.7,borderRadius:3,backgroundColor : '#dcebf1'}}
                 title="Second Level"
                 expanded={expanded2}
                 onPress={onPressFunction2}>
@@ -151,7 +154,9 @@ const LevelStoryRead = () => {
                     return(<TouchableOpacity  onPress={() => onReadStory(item)}><List.Item key="{item1}" title={item.title} /></TouchableOpacity>);
                 })}
             </List.Accordion>
-            <List.Accordion style={{backgroundColor : '#aed5ee'}}
+            </View>
+            <View style={{ padding:10}}>
+            <List.Accordion style={{borderWidth:0.7,borderRadius:3, borderColor:'black',backgroundColor : '#dcebf1'}}
                 title="Third Level"
                 expanded={expanded3}
                 onPress={onPressFunction3}>
@@ -159,29 +164,27 @@ const LevelStoryRead = () => {
                     return(<TouchableOpacity onPress={() => onReadStory(item)}><List.Item key="{item2}" title={item.title} /></TouchableOpacity>);
                 })}
             </List.Accordion>
-            <List.Accordion
+            </View>
+            <View style={{ padding:10}}>
+            <List.Accordion style={{borderWidth:0.7,borderRadius:3, borderColor:'black',backgroundColor : '#dcebf1'}}
                 title="Advenc"
                 expanded={expanded4}
                 onPress={onPressFunction4}>
                 {stories4.map((item)=>{
-                    return(<TouchableOpacity onPress={() => onReadStory(item)}><List.Item title={item.title} /></TouchableOpacity>);
+                    return(<TouchableOpacity onPress={() => onReadStory(item)}><List.Item key="{item3}" title={item.title} /></TouchableOpacity>);
                 })}
             </List.Accordion>
+            </View>
         </List.Section>
-<<<<<<< HEAD
-        </View>
-        </ImageBackground> );
-=======
-        <CustemButton 
+        {expanded4 == true ? 
+         <CustemButton 
             text='Surprise' 
             // check befor press signin all the data is valid
             onPress={getStort}
-        />
-    </ScrollView >
-    
+        />  : null}
+    </ImageBackground>
     
     );
->>>>>>> 8a82d2a059920199c05144075f890940f60bd94a
 }
 
 

@@ -18,7 +18,7 @@ const validationSchema = Yup.object({
 
 const SignUpScreen = (props) => {
     const insertData = (values) => {
-        axios.post('http://192.168.1.235:5000/register', {username:values.username, password:values.password, email:values.email, question:values.question})
+        axios.post('http://192.168.1.21:5000/register', {username:values.username, password:values.password, email:values.email, question:values.question})
         .then(resp => {
             console.log(resp.data)
             // if (resp.status == 200){
@@ -50,7 +50,7 @@ const SignUpScreen = (props) => {
     }
 
     return (
-        <ImageBackground source={require('../../../assets/Logon.png')} style={styles.root} resizeMode={"cover"}>
+        <ImageBackground source={require('../../../assets/b1.jpg')} style={styles.root}>
             <Text style={styles.title}>Create a new account</Text> 
             <Formik
                 initialValues={{username: '', email:'',password: '', passwordRepeat: '', question:''}} 

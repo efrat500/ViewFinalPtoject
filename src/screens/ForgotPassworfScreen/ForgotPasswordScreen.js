@@ -49,7 +49,7 @@ const ForgotPasswordScreen = () => {
     }
 
     return (
-        <ImageBackground source={require('../../../assets/op1.jpg')} style={styles.root}>
+        <ImageBackground source={require('../../../assets/b1.jpg')} style={styles.root}> 
             <Text style={styles.title1}>Enter Verification</Text> 
             <Text style={styles.title2}>Details</Text> 
             <Formik 
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
         maxHeight: 200,
     },
     title1: {
+        marginTop:-10,
         paddingTop:20,
         fontSize: 24,
         fontWeight: 'bold',
