@@ -55,7 +55,11 @@ const Story = () => {
         .finally(() => console.log("done"))
         
     }
-    
+    const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
+        const paddingToBottom = 20;
+        return layoutMeasurement.height + contentOffset.y >=
+          contentSize.height - paddingToBottom;
+      };
     const onRepeatRead = () =>{
         onRepeatPress = 1
         setonRepeatPress(1)
@@ -90,9 +94,15 @@ const Story = () => {
             <Text style={{fontSize:30, fontWeight: 'bold',alignItems: 'center',justifyContent: 'center',marginLeft: 105, marginTop: 40, color:'gray',}}>A RED BERRY</Text>
             {stories.length == 0 ? null:
                     <View style={{padding: 20}}>
-                    <ScrollView>
-                        <View style={{fontSize:20, borderWidth:  5,borderRadius: 20, flex: 1,height: 300,  borderColor:  'gray', padding: 10, marginTop: 20}}>
-                            <ScrollView>
+                        
+                        <View scrollEnable={true} style={{fontSize:20, borderWidth:  5,borderRadius: 20,overflow : "hidden", flex: 1,height: 300,  borderColor:  'gray', padding: 10, marginTop: 20}}>
+                        <ScrollView   onScroll={({nativeEvent}) => {
+                            if (isCloseToBottom(nativeEvent)) {
+                                enableSomeButton();
+                            }
+                            }}
+                            scrollEventThrottle={400}
+                            contentContainerStyle={styles.scrollView}> 
                                 {currentIndex > 0 ? 
                                     <Text style={{fontSize:20}}> {stories.slice(0, currentIndex)} </Text> 
                                     : null
@@ -101,9 +111,9 @@ const Story = () => {
                                         <Text style={{color:"red", fontSize:20}}> {stories[currentIndex]}</Text>
                                     </TouchableOpacity>
                                     <Text style={{fontSize:20}}> {stories.slice(currentIndex+1, - 1)} </Text>
-                            </ScrollView>
+                                    </ScrollView>  
                         </View>
-                    </ScrollView>
+                        
                     </View>
 
                 
@@ -141,6 +151,9 @@ const styles = StyleSheet.create({
         height: 40,
         borderWidth:  1,  
         borderColor:  'gray'
+    },
+    scrollView:{
+        height: 40,   
     },
 })
 

@@ -8,6 +8,7 @@ import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import { useNavigation, useRoute } from '@react-navigation/native'
 
 
+
 const StoryScreen = () => {
     const route = useRoute()
     const navigation = useNavigation()
