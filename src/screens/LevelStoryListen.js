@@ -89,7 +89,7 @@ const LevelStoryListen = () => {
                 title="First Level">
                 {stories1.map((item)=>{
                     return(
-                        <List.Item onPress={() => onReadStory(item)} title={item.title} />);
+                        <List.Item key="{item}" onPress={() => onReadStory(item)} title={item.title} />);
                 })}
             </List.Accordion>
             <List.Accordion
@@ -97,7 +97,7 @@ const LevelStoryListen = () => {
                 expanded={expanded2}
                 onPress={onPressFunction2}>
                 {stories2.map((item)=>{
-                    return(<TouchableOpacity  onPress={() => onReadStory(item)}><List.Item title={item.title} /></TouchableOpacity>);
+                    return(<TouchableOpacity  onPress={() => onReadStory(item)}><List.Item  key="{item1}" title={item.title} /></TouchableOpacity>);
                 })}
             </List.Accordion>
             <List.Accordion
@@ -105,7 +105,7 @@ const LevelStoryListen = () => {
                 expanded={expanded3}
                 onPress={onPressFunction3}>
                 {stories3.map((item)=>{
-                    return(<TouchableOpacity onPress={() => onReadStory(item)}><List.Item title={item.title} /></TouchableOpacity>);
+                    return(<TouchableOpacity onPress={() => onReadStory(item)}><List.Item key="{item2}" title={item.title} /></TouchableOpacity>);
                 })}
             </List.Accordion>
         </List.Section>

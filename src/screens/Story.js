@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import axios from "axios"
 import CustemButton from '../components/CustemButton'
 import { ScrollView } from 'react-native-virtualized-view';
-import { Button } from 'react-native-paper';
+import {Card, Button } from 'react-native-paper';
 import Appear from '../components/Appear';
 import { useNavigation, useRoute } from '@react-navigation/native'
 import logo from '../../assets/men.png';
@@ -36,7 +36,7 @@ const Story = () => {
                 currentIndex = currentIndex+1
                 console.log("after" + currentIndex)
                 console.log(stories.length)
-                if (currentIndex == stories.length-1){
+                if (currentIndex == stories.length){
                     var grade
                     axios.post('http://192.168.1.21:5000/calculateGrade', {title_story: route.params.title_Story , username: route.params.name })
                     .then(resp => {
@@ -86,9 +86,9 @@ const Story = () => {
             <Text style={{marginLeft:-10,fontSize:30, fontWeight: 'bold',textAlign: 'center', marginTop: 50, color:'black',}}> {route.params.title_Story}</Text>
             </View>
             {stories.length == 0 ? null:
-                    <View  scrollEnabled={true} style={{padding: 20}}>
-                    <View scrollEnabled={true} style={{fontSize:20, borderWidth:  5,  borderColor:  'black', padding: 10, marginTop: -50, borderRadius: 10}}>
+                        <Card style={{marginTop:-60,height:350, elavation: 3, backgroundColor : 'transparent',borderWidth:  4,  borderColor:  'black'}}>
                         <ScrollView>
+                        <View style={{padding:20}}>
                             {currentIndex > 0 ? 
                                 <Text  style={{fontSize:20}}> {stories.slice(0, currentIndex)} </Text> 
                                 : null
@@ -97,9 +97,9 @@ const Story = () => {
                                     <Text style={{color:"red", fontSize:20}}> {stories[currentIndex]}</Text>
                                 </TouchableOpacity>
                                 <Text style={{fontSize:20}}> {stories.slice(currentIndex+1, - 1)} </Text>
+                                </View>
                         </ScrollView>
-                    </View>
-                    </View>    
+                        </Card>
             }
             <TouchableOpacity>
                 <Button style={styles.button} color='black' onPress={onStartRead}>
@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
     },
     view:{
         padding:20,
+        flex: 1,
     },
     container: {
         flex: 1,
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 200,
-        marginTop: 10,
+        marginTop: 20,
         marginLeft:75,
         height: 40,
         borderWidth:  2,  
