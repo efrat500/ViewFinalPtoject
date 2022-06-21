@@ -15,7 +15,7 @@ const validationSchema = Yup.object({
 
 const SignInScreen = (props) => {
     const insertData = (values) => {
-        axios.post('http://192.168.1.235:5000/login', {username: values.username ,password: values.password})
+        axios.post('http://192.168.1.21:5000/login', {username: values.username ,password: values.password})
         .then(resp => {
             console.log(resp.data)
             console.log("s1")

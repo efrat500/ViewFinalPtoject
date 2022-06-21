@@ -15,7 +15,7 @@ const LevelStoryListen = () => {
 
     useEffect(() => {
         const axiosStories1 = async () => {
-            const response = await axios.post('http://192.168.1.235:5000/getallstories',{current_level: 'easy'})
+            const response = await axios.post('http://192.168.1.21:5000/getallstories',{current_level: 'easy'})
             setStories1(response.data)
         }
         axiosStories1()
@@ -23,7 +23,7 @@ const LevelStoryListen = () => {
 
     useEffect(() => {
         const axiosStories2 = async () => {
-            const response = await axios.post('http://192.168.1.235:5000/getallstories',{current_level: 'medium'})
+            const response = await axios.post('http://192.168.1.21:5000/getallstories',{current_level: 'medium'})
             setStories2(response.data)
             console.log(stories2)
         }
@@ -31,7 +31,7 @@ const LevelStoryListen = () => {
     }, [])
     useEffect(() => {
         const axiosStories = async () => {
-            const response = await axios.post('http://192.168.1.235:5000/getallstories',{current_level: 'hard'})
+            const response = await axios.post('http://192.168.1.21:5000/getallstories',{current_level: 'hard'})
             setStories3(response.data)
             console.log(stories3)
         }

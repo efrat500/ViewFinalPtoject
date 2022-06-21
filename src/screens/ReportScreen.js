@@ -1,4 +1,4 @@
-import {LineChart, ProgressChart} from 'react-native-chart-kit';
+import {BarChart,LineChart, ProgressChart} from 'react-native-chart-kit';
 import { Image, FlatList, Text, ScrollView, View, Dimensions, StyleSheet, Alert } from 'react-native';
 // import { TextInput } from 'react-native-paper';
 import { Button } from 'react-native-paper';
@@ -24,8 +24,8 @@ const ReportScreen = () => {
     const route = useRoute()
     const [reportlevel , setReportlevel]=useState('')
     const [numStories , setNumStories]=useState('')
-    const [list_titles_vec , setlist_titles]=useState([])
-    const [list_grades_vec , setlist_grades]=useState([])
+    const [list_titles_vec , setlist_titles]=useState(["a"])
+    const [list_grades_vec , setlist_grades]=useState([1])
     const [size_list_general , setsize_list_general]=useState(1)
     const [calc_reading , setcalc_reading]=useState(0)
     const [calc_translating , setcalc_translating]=useState(0)
@@ -39,6 +39,8 @@ const ReportScreen = () => {
             setcalc_translating(response.data.size_list_general-response.data.size_list_translating)
             setlist_titles(response.data.list_titles.alltitles)
             setlist_grades(response.data.list_grades.allgrades)
+            console.log(list_titles_vec)
+            console.log(list_grades_vec)
         }
         axiosStories()
     }, [])
@@ -47,17 +49,9 @@ const ReportScreen = () => {
         labels: ["Read", "Write"], // optional
         data: [(calc_reading/size_list_general), (calc_translating/size_list_general)],
 
-    }: []}
-    var data1={
-        labels: [],
-        datasets: [
-            {
-                data: []
-            }
-        ]
-    }
+    }: []}    
     const onCalc = () =>{
-        axios.post('http://192.168.1.21:5000:5000/calcaverage', {username: route.params.name})
+        axios.post('http://192.168.1.21:5000/calcaverage', {username: route.params.name})
         .then(resp => {
             console.log(resp.data.average)
             Alert.alert('Note','Your average is ' + resp.data.average,[{text: 'Understood'}])
@@ -67,7 +61,7 @@ const ReportScreen = () => {
         })
         .finally(() => console.log("done"))
     }
-
+    if(list_grades_vec.length != 0 || list_titles_vec.length != 0) {
     return (
         
         <ScrollView>
@@ -91,30 +85,41 @@ const ReportScreen = () => {
             <Text style={styles.text3}>Stories:</Text>
             <View style={styles.view1}>
                 <Image style={styles.logo2} source={logo2}></Image>
-                <LineChart
+                
+                    <LineChart
                     
-                    data={data1}
-                    width={Dimensions.get("window").width} // from react-native
-                    height={220}
-                    yAxisLabel=""
-                    yAxisSuffix=""
-                    yAxisInterval={1} // optional, defaults to 1
-                    chartConfig={chartConfig}
-                    bezier
-                    style={{
-                        marginLeft:-400,
-                        //marginVertical: 8,
-                        borderRadius: 16,
-                        marginTop: 20
-                    }}
-                    hideLegend={false}
-                />
+                        data={{
+                            labels: list_titles_vec,
+                            datasets: [
+                                {
+                                data: list_grades_vec,
+                                }
+                            ],
+                        }}
+                        width={Dimensions.get("window").width} // from react-native
+                        height={220}
+                        yAxisLabel=""
+                        yAxisSuffix=""
+                        yAxisInterval={1} // optional, defaults to 1
+                        chartConfig={chartConfig}
+                        bezier
+                        style={{
+                            marginLeft:-400,
+                            //marginVertical: 8,
+                            borderRadius: 16,
+                            marginTop: 20
+                        }}
+                        hideLegend={false}
+                    />
             
             </View>
             <Button icon="camera" color='#f93e30' mode="contained" style={{marginTop:20}} onPress={onCalc}>
                 Calculate average
             </Button>
         </ScrollView>)
+    } else{
+        return(<View></View>);
+    }
 }
 
 
