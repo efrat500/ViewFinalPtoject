@@ -29,6 +29,7 @@ const LevelStoryListen = () => {
         }
         axiosStories2()
     }, [])
+    
     useEffect(() => {
         const axiosStories = async () => {
             const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'hard'})
