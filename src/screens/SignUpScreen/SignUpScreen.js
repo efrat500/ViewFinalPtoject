@@ -50,7 +50,7 @@ const SignUpScreen = (props) => {
     }
 
     return (
-        <ImageBackground source={require('../../../assets/Logon.png')} style={styles.root} resizeMode={"cover"}>
+        <ImageBackground source={require('../../../assets/b1.jpg')} style={styles.root}>
             <Text style={styles.title}>Create a new account</Text> 
             <Formik
                 initialValues={{username: '', email:'',password: '', passwordRepeat: '', question:''}} 

@@ -37,7 +37,7 @@ const NewPasswordScreen = (props) => {
     }
 
     return (
-        <ImageBackground source={require('../../../assets/op1.jpg')} style={styles.root}>
+        <ImageBackground source={require('../../../assets/b1.jpg')} style={styles.root}> 
             <Text style={styles.title}>Reset your password</Text> 
             <Formik
                 initialValues={{password: '', passwordRepeat: ''}} 

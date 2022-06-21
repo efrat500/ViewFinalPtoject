@@ -44,40 +44,40 @@ const WriteScreen = () => {
     }
     return (
       <View style={styles.input}>
-      <Container sytle={styles.dir}>
-          {words.length == 0 ? null:
-              <DeckSwiper
-                style={styles.dir}
-                dataSource={words}
-                renderItem={item =>
-                    <Card style={styles.dir}>
-                      <CardItem>
-                          <Left>
-                            <Body >
-                              <View>
-                                <Text style={styles.text}>{item.word}</Text>
-                                <TextInput
-                                style={styles.testInp}
-                                mode="outlined"
-                                label="Type the word in English"
-                                placeholder="Type the word in English"
-                                // right={<TextInput.Affix text="/80" style={styles.input1}/>}
-                                onChangeText={onChangetext}
-                                value = {textInput}
-                                />
-                              </View>
-                              <Button style={styles.button} color='pink' mode="contained" onPress={() => {onCheckPressed(item.word, textInput)}}>
-                                Check
-                              </Button>
-                            </Body>
-                          </Left>
-                      </CardItem>
-                    </Card>
-              }
-              />
-          }
-      </Container >
-      </View>
+        <Container sytle={styles.dir}>
+            {words.length == 0 ? null:
+                <DeckSwiper
+                  style={styles.dir}
+                  dataSource={words}
+                  renderItem={item =>
+                      <Card style={styles.dir}>
+                        <CardItem>
+                            <Left>
+                              <Body >
+                                <View>
+                                  <Text style={styles.text}>{item.word}</Text>
+                                  <TextInput
+                                  style={styles.testInp}
+                                  mode="outlined"
+                                  label="Type the word in English"
+                                  placeholder="Type the word in English"
+                                  // right={<TextInput.Affix text="/80" style={styles.input1}/>}
+                                  onChangeText={onChangetext}
+                                  value = {textInput}
+                                  />
+                                </View>
+                                <Button style={styles.button} color='pink' mode="contained" onPress={() => {onCheckPressed(item.word, textInput)}}>
+                                  Check
+                                </Button>
+                              </Body>
+                            </Left>
+                        </CardItem>
+                      </Card>
+                }
+                />
+            }
+        </Container >
+        </View>
     );
    
 }

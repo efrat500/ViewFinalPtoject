@@ -1,4 +1,4 @@
-import {LineChart, ProgressChart} from 'react-native-chart-kit';
+import {BarChart,LineChart, ProgressChart} from 'react-native-chart-kit';
 import { Image, FlatList, Text, ScrollView, View, Dimensions, StyleSheet, Alert } from 'react-native';
 // import { TextInput } from 'react-native-paper';
 import { Button } from 'react-native-paper';
@@ -22,37 +22,36 @@ const chartConfig = {
 
 const ReportScreen = () => {
     const route = useRoute()
-    const navigation = useNavigation()
     const [reportlevel , setReportlevel]=useState('')
     const [numStories , setNumStories]=useState('')
-    const [list_titles , setlist_titles]=useState([])
-    const [list_grades , setlist_grades]=useState([])
-    const [size_list_general , setsize_list_general]=useState('')
-    const [size_list_reading , setsize_list_reading]=useState('')
-    const [calc_reading , setcalc_reading]=useState('')
-    const [size_list_translating , setsize_list_translating]=useState('')
-    const [calc_translating , setcalc_translating]=useState('')
+    const [list_titles_vec , setlist_titles]=useState(["a"])
+    const [list_grades_vec , setlist_grades]=useState([1])
+    const [size_list_general , setsize_list_general]=useState(1)
+    const [calc_reading , setcalc_reading]=useState(0)
+    const [calc_translating , setcalc_translating]=useState(0)
     useEffect(() => {
         const axiosStories = async () => {
-            const response = await axios.post('http://192.168.1.235:5000:5000/getdatareport', {username: route.params.name})
+            const response = await axios.post('http://192.168.1.21:5000/getdatareport', {username: route.params.name})
             setReportlevel(response.data.current_level)
             setNumStories(response.data.num_stories)
             setsize_list_general(response.data.size_list_general)
-            setsize_list_reading(response.data.size_list_reading)
             setcalc_reading(response.data.size_list_general-response.data.size_list_reading)
-            setsize_list_translating(size_list_translating)
             setcalc_translating(response.data.size_list_general-response.data.size_list_translating)
             setlist_titles(response.data.list_titles.alltitles)
-            console.log(list_titles)
+            setlist_grades(response.data.list_grades.allgrades)
+            console.log(list_titles_vec)
+            console.log(list_grades_vec)
         }
         axiosStories()
     }, [])
-    const data = {
+    var data;
+    {(size_list_general != 0) ? data = {
         labels: ["Read", "Write"], // optional
-        data: [0.4,0.6]
-    };
+        data: [(calc_reading/size_list_general), (calc_translating/size_list_general)],
+
+    }: []}    
     const onCalc = () =>{
-        axios.post('http://192.168.1.235:5000:5000/calcaverage', {username: route.params.name})
+        axios.post('http://192.168.1.21:5000/calcaverage', {username: route.params.name})
         .then(resp => {
             console.log(resp.data.average)
             Alert.alert('Note','Your average is ' + resp.data.average,[{text: 'Understood'}])
@@ -62,8 +61,9 @@ const ReportScreen = () => {
         })
         .finally(() => console.log("done"))
     }
-
+    if(list_grades_vec.length != 0 || list_titles_vec.length != 0) {
     return (
+        
         <ScrollView>
             <Text style={styles.text}>Current Level: {reportlevel} </Text>
             <Text style={styles.text2}>Number Of Stories: {numStories}</Text>
@@ -85,38 +85,41 @@ const ReportScreen = () => {
             <Text style={styles.text3}>Stories:</Text>
             <View style={styles.view1}>
                 <Image style={styles.logo2} source={logo2}></Image>
-                <LineChart
-                    data={{
-                        labels: ["Kipa Adoma", "Zeev", "Kaka", "Pipi", "Shilshol"],
-                        datasets: [
-                            {
-                                data: [5,10,30,40,60]
-                                // {console.log(data)}
-                            }
-                        ]
-                    }}
+                
+                    <LineChart
                     
-                    width={Dimensions.get("window").width} // from react-native
-                    height={220}
-                    yAxisLabel=""
-                    yAxisSuffix=""
-                    yAxisInterval={1} // optional, defaults to 1
-                    chartConfig={chartConfig}
-                    bezier
-                    style={{
-                        marginLeft:-400,
-                        //marginVertical: 8,
-                        borderRadius: 16,
-                        marginTop: 20
-                    }}
-                    hideLegend={false}
-                />
+                        data={{
+                            labels: list_titles_vec,
+                            datasets: [
+                                {
+                                data: list_grades_vec,
+                                }
+                            ],
+                        }}
+                        width={Dimensions.get("window").width} // from react-native
+                        height={220}
+                        yAxisLabel=""
+                        yAxisSuffix=""
+                        yAxisInterval={1} // optional, defaults to 1
+                        chartConfig={chartConfig}
+                        bezier
+                        style={{
+                            marginLeft:-400,
+                            //marginVertical: 8,
+                            borderRadius: 16,
+                            marginTop: 20
+                        }}
+                        hideLegend={false}
+                    />
             
             </View>
             <Button icon="camera" color='#f93e30' mode="contained" style={{marginTop:20}} onPress={onCalc}>
                 Calculate average
             </Button>
         </ScrollView>)
+    } else{
+        return(<View></View>);
+    }
 }
 
 
