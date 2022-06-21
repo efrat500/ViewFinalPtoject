@@ -1,4 +1,4 @@
-import { ImageBackground,Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, Alert} from 'react-native';
+import { DevSettings,ImageBackground,Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, Alert} from 'react-native';
 import React, {useState, useEffect} from 'react'
 import { List } from 'react-native-paper';
 import axios from "axios"
@@ -125,6 +125,8 @@ const LevelStoryRead = () => {
                     }
                     console.log(resp.data.title)
                     console.log(resp.data.story)
+                    stories4.push(resp.data)
+                    setStories4(stories4)
                     Alert.alert('Note',"You add a new story for your advence list",[{text: 'Understood'}])
                 })
             }
@@ -134,14 +136,14 @@ const LevelStoryRead = () => {
         }) 
     }
     return ( <ImageBackground source={require('../../assets/b1.jpg')} style={{width: '100%', height: '100%'}}> 
+        <ScrollView>
         <List.Section title="">
             <View style={{ padding:10}}>
             <List.Accordion  style={{ borderWidth:0.7,borderRadius:3,backgroundColor : '#dcebf1'}}
-            
                 title="First Level">
-                {stories1.map((item)=>{
+                {stories1.map((item, index)=>{
                     return(
-                        <List.Item key="{item}"onPress={() => onReadStory(item)} title={item.title} />);
+                        <List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
                 })}
             </List.Accordion>
             </View>
@@ -150,8 +152,8 @@ const LevelStoryRead = () => {
                 title="Second Level"
                 expanded={expanded2}
                 onPress={onPressFunction2}>
-                {stories2.map((item)=>{
-                    return(<TouchableOpacity  onPress={() => onReadStory(item)}><List.Item key="{item1}" title={item.title} /></TouchableOpacity>);
+                {stories2.map((item, index)=>{
+                    return(<List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
                 })}
             </List.Accordion>
             </View>
@@ -160,8 +162,8 @@ const LevelStoryRead = () => {
                 title="Third Level"
                 expanded={expanded3}
                 onPress={onPressFunction3}>
-                {stories3.map((item)=>{
-                    return(<TouchableOpacity onPress={() => onReadStory(item)}><List.Item key="{item2}" title={item.title} /></TouchableOpacity>);
+                {stories3.map((item, index)=>{
+                    return(<List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
                 })}
             </List.Accordion>
             </View>
@@ -170,8 +172,8 @@ const LevelStoryRead = () => {
                 title="Advenc"
                 expanded={expanded4}
                 onPress={onPressFunction4}>
-                {stories4.map((item)=>{
-                    return(<TouchableOpacity onPress={() => onReadStory(item)}><List.Item key="{item3}" title={item.title} /></TouchableOpacity>);
+                {stories4.map((item, index)=>{
+                    return(<List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
                 })}
             </List.Accordion>
             </View>
@@ -182,6 +184,7 @@ const LevelStoryRead = () => {
             // check befor press signin all the data is valid
             onPress={getStort}
         />  : null}
+    </ScrollView>
     </ImageBackground>
     
     );
