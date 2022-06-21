@@ -12,13 +12,16 @@ import logo from '../../assets/men.png';
 const Story = () => {
     const route = useRoute()
     const [stories , setStories]=useState([])
+    var [counterWorng , setCounterWorng]=useState(0)
+    const [buttonStart, setButtonStart] = useState('Start reading');
+    const [buttonColorStart, setButtonColorStart] = useState('black');
 
     useEffect(() => {
         const axiosStories = async () => {
             console.log("getStory")
-            const response = await axios.post('http://192.168.1.235:5000/getstory', {title_story: route.params.title_Story})
+            const response = await axios.post('http://192.168.1.233:5000/getstory', {title_story: route.params.title_Story})
             setStories(response.data.story)
-            console.log(stories)
+            console.log(response.data.story)
            
         }
         axiosStories()
@@ -26,12 +29,26 @@ const Story = () => {
 
     var temp
     const onStartRead = () =>{
+        console.log("counterWorng= " + counterWorng)
+        setButtonColorStart('black')
+        setButtonStart("Continue reading")
         console.log("onStartFunc")
-        axios.post('http://192.168.1.235:5000/speechToText', {title_story: route.params.title_Story, current_index: currentIndex, username: route.params.name })
+        axios.post('http://192.168.1.233:5000/speechToText', {title_story: route.params.title_Story, current_index: currentIndex, username: route.params.name, counterWorng:counterWorng })
         .then(resp => {
             console.log(resp.data)
             temp = resp.data.translated
             if (resp.data.translated == "good"){
+                console.log("counterWorng= " + counterWorng)
+                setCounterWorng(0)
+                console.log("counterWorng= " + counterWorng)
+                counterWorng = 0
+                if (counterWorng == 1){
+                    console.log("in iffffff")
+                    counterWorng = counterWorng - 1
+                    console.log(counterWorng)
+                }
+                setCounterWorng(0)
+                console.log("in good")
                 console.log("befor" + currentIndex)
                 setCurrentIndex(currentIndex+1)
                 currentIndex = currentIndex+1
@@ -39,7 +56,7 @@ const Story = () => {
                 console.log(stories.length)
                 if (currentIndex == stories.length){
                     var grade
-                    axios.post('http://192.168.1.235:5000/calculateGrade', {title_story: route.params.title_Story , username: route.params.name })
+                    axios.post('http://192.168.1.233:5000/calculateGrade', {title_story: route.params.title_Story , username: route.params.name })
                     .then(resp => {
                         console.log(resp.data.grade)
                         grade = resp.data.grade
@@ -52,12 +69,54 @@ const Story = () => {
                 }
                 else{
                     onStartRead()
+                    // setCounterWorng(0)
                     console.log('check')
+                }
+                // setCounterWorng(0)
+            }
+            if (resp.data.translated == "worng"){
+                console.log("in worng")
+                if (counterWorng==0) {
+                    console.log("if: counter= " + counterWorng)
+                    setCounterWorng(1)
+                    console.log("if: counter= " + counterWorng)
+                    Alert.alert('Wrongs', resp.data.list_worng + ".\n",[{text: 'Understood'}])
+                    setButtonStart("Try again")
+                    setButtonColorStart('red')
+                }
+                else {
+                    console.log("else: counter= " + counterWorng)
+                    Alert.alert('Wrongs', resp.data.list_worng + ".\n",[{text: 'Understood'}])
+                    setCounterWorng(0)
+                    console.log("after counter= " + counterWorng)
+                    console.log("befor" + currentIndex)
+                    setCurrentIndex(currentIndex+1)
+                    currentIndex = currentIndex+1
+                    console.log("after" + currentIndex)
+                    console.log(stories.length)
+                    if (currentIndex == stories.length){
+                        var grade
+                        axios.post('http://192.168.1.235:5000/calculateGrade', {title_story: route.params.title_Story , username: route.params.name })
+                        .then(resp => {
+                            console.log(resp.data.grade)
+                            grade = resp.data.grade
+                            Alert.alert('Congratulations',"You have finished reading the story, your score is" +  grade ,[{text: 'Understood'}])
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                        .finally(() => console.log("done"))
+                    }
+                    setButtonStart("Continue reading")
+                    setButtonColorStart('red')
                 }
             }
         })
         .catch(error => {
-            console.log(error)
+            Alert.alert('Note',"Please repeat the sentence aloud and clearly",[{text: 'Understood'}])
+            setButtonStart("Continue reading")
+            setButtonColorStart('red')
+            
         })
         .finally(() => console.log("done"))
         
@@ -65,11 +124,11 @@ const Story = () => {
 
     var trans
     const onPressFunction = () =>{
-        axios.post('http://192.168.1.235:5000:5000/translatWord', {word_required:stories[currentIndex]})
+        axios.post('http://192.168.1.235:5000/convertWriting', {word_required:stories[currentIndex]})
         .then(resp => {
-            trans = resp.data.translated
+            trans = resp.data.Playback
             console.log(trans)
-            Alert.alert('Translate',trans,[{text: 'Understood'}])
+            // Alert.alert('Translate',trans,[{text: 'Understood'}])
         })
         .catch(error => {
             console.log(error)
@@ -80,7 +139,6 @@ const Story = () => {
     var [currentIndex , setCurrentIndex]=useState(0)
     return (
         <ImageBackground source={require('../../assets/b1.jpg')} style={{width: '100%', height: '100%'}}> 
-            
             <View style={styles.view}>
             <View style={{flexDirection: 'row'}}>
             <Image style={styles.logo} source={logo}></Image>
@@ -91,20 +149,20 @@ const Story = () => {
                         <ScrollView>
                         <View style={{padding:20}}>
                             {currentIndex > 0 ? 
-                                <Text  style={{fontSize:20}}> {stories.slice(0, currentIndex)} </Text> 
+                                <Text  style={{fontSize:20, opacity:0.3}}> {stories.slice(0, currentIndex)} </Text> 
                                 : null
                             }
                                 <TouchableOpacity onPress={onPressFunction}>
-                                    <Text style={{color:"red", fontSize:20}}> {stories[currentIndex]}</Text>
+                                    <Text style={{color:'black', fontSize:20}}> {stories[currentIndex]}</Text>
                                 </TouchableOpacity>
-                                <Text style={{fontSize:20}}> {stories.slice(currentIndex+1, - 1)} </Text>
+                                <Text style={{fontSize:20, opacity:0.3}}> {stories.slice(currentIndex+1, stories.length)} </Text>
                                 </View>
                         </ScrollView>
                         </Card>
             }
             <TouchableOpacity>
-                <Button style={styles.button} color='black' onPress={onStartRead}>
-                    Start Reading
+                <Button style={styles.button} color={buttonColorStart}  onPress={onStartRead}>
+                    {buttonStart}
                 </Button>
             </TouchableOpacity>    
             </View>

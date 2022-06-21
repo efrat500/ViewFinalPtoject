@@ -82,7 +82,19 @@ const Story = () => {
         })
         .finally(() => console.log("done")) 
     }
-
+    var trans
+    const onPressFunction = () =>{
+        axios.post('http://192.168.1.235:5000/translatWord', {word_required:stories[currentIndex]})
+        .then(resp => {
+            trans = resp.data.translated
+            console.log(trans)
+            Alert.alert('Translate',trans,[{text: 'Understood'}])
+        })
+        .catch(error => {
+            console.log(error)
+        })
+        .finally(() => console.log("done"))
+    }
     var [onRepeatPress , setonRepeatPress]=useState(0)
     var [currentIndex , setCurrentIndex]=useState(0)
     return (
@@ -101,7 +113,7 @@ const Story = () => {
                             <Text  style={{fontSize:20}}> {stories.slice(0, currentIndex)} </Text> 
                             : null
                         }
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={onPressFunction}>
                                 <Text style={{color:"red", fontSize:20}}> {stories[currentIndex]}</Text>
                             </TouchableOpacity>
                             <Text style={{fontSize:20}}> {stories.slice(currentIndex+1, - 1)} </Text>

@@ -18,7 +18,7 @@ const LevelStoryRead = () => {
 
     useEffect(() => {
         const axiosStories1 = async () => {
-            const response = await axios.post('http://192.168.1.235:5000/getallstories',{current_level: 'easy'})
+            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'easy'})
             setStories1(response.data)
         }
         axiosStories1()
@@ -42,7 +42,7 @@ const LevelStoryRead = () => {
     }, [])
     useEffect(() => {
         const axiosStories4 = async () => {
-            const response = await axios.post('http://192.168.1.235:5000/getallstories',{current_level: 'advenc'})
+            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'advenc'})
             setStories4(response.data)
             console.log(stories4)
         }
@@ -133,10 +133,12 @@ const LevelStoryRead = () => {
             }
         }) 
     }
-    return (<ScrollView>
+    return (
+    <ImageBackground source={require('../../assets/b1.jpg')} style={{width: '100%', height: '100%'}}> 
+    <ScrollView>
         <List.Section title="">
             <List.Accordion  style={{backgroundColor : '#aed5ee'}}
-            
+
                 title="First Level">
                 {stories1.map((item)=>{
                     return(
@@ -168,20 +170,13 @@ const LevelStoryRead = () => {
                 })}
             </List.Accordion>
         </List.Section>
-<<<<<<< HEAD
-        </View>
-        </ImageBackground> );
-=======
-        <CustemButton 
+        {/* <CustemButton 
             text='Surprise' 
             // check befor press signin all the data is valid
             onPress={getStort}
-        />
-    </ScrollView >
-    
-    
-    );
->>>>>>> 8a82d2a059920199c05144075f890940f60bd94a
+        /> */}
+        </ScrollView>
+        </ImageBackground> );
 }
 
 

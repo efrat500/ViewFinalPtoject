@@ -56,7 +56,7 @@ const WordsOptions = () => {
   };
   var trans
   const onTranslatePressed = (item) =>{
-    axios.post('http://192.168.1.21:5000/translatWord', {word_required:item.word})
+    axios.post('http://192.168.1.235:5000/translatWord', {word_required:item.word})
     .then(resp => {
         trans = resp.data.translated
         Alert.alert('Translate',trans,[{text: 'Understood'}])

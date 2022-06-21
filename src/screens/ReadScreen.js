@@ -19,7 +19,7 @@ const ReadScreen = () => {
     const [buttonColorTranslate, setButtonColorTranslate] = useState('gray');
     useEffect(() => {
         const axiosWords = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getwordsreading', {username: route.params.name})
+            const response = await axios.post('http://192.168.1.233:5000/getwordsreading', {username: route.params.name})
             setWords(response.data.allwords)
             console.log("sss")
         }
@@ -31,7 +31,7 @@ const ReadScreen = () => {
         list_type = "words_list_reading"
         console.log("sss")
         console.log(route.params.name)
-        axios.post('http://192.168.1.21:5000/speechWordToWriting', {speech_word: item, username: route.params.name, which_list: list_type})
+        axios.post('http://192.168.1.233:5000/speechWordToWriting', {speech_word: item, username: route.params.name, which_list: list_type})
         .then(resp => {
             console.log(resp.data.feedback)
             read = resp.data.feedback
@@ -44,7 +44,7 @@ const ReadScreen = () => {
     }
     var trans 
     const onTranslatePressed = (item) =>{
-        axios.post('http://192.168.1.21:5000/translatWord', {word_required:item})
+        axios.post('http://192.168.1.233:5000/translatWord', {word_required:item})
         .then(resp => {
             trans = resp.data.translated
             Alert.alert('Translate',trans,[{text: 'Understood'}])
@@ -58,7 +58,6 @@ const ReadScreen = () => {
         <View style={styles.input}>
         <Container sytle={styles.dir}>
             {words.length == 0 ? null:
-            
                 <DeckSwiper
                 style={styles.dir}
                 dataSource={words}
