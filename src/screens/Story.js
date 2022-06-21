@@ -142,7 +142,7 @@ const Story = () => {
             <View style={styles.view}>
             <View style={{flexDirection: 'row'}}>
             <Image style={styles.logo} source={logo}></Image>
-            <Text style={{marginLeft:-10,fontSize:30, fontWeight: 'bold',textAlign: 'center', marginTop: 50, color:'black',}}> {route.params.title_Story}</Text>
+            <Text style={{marginLeft:-10,fontSize:30, fontWeight: 'bold',textAlign: 'center',justifyContent: 'center',alignItems: 'center', marginTop: 50, color:'black',}}> {route.params.title_Story}</Text>
             </View>
             {stories.length == 0 ? null:
                         <Card style={{marginTop:-60,height:350, elavation: 3, backgroundColor : 'transparent',borderWidth:  4,  borderColor:  'black'}}>

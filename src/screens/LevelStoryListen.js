@@ -68,7 +68,7 @@ const LevelStoryListen = () => {
 
     const onPressFunction3 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.21:5000/checkpasslevel', {username:route.params.name})
+        axios.post('http://192.168.1.233:5000/checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_hard)
             if (resp.data.pass_level_hard==1){
@@ -132,7 +132,7 @@ const LevelStoryListen = () => {
         <List.Section title="">
         <View style={{ padding:10}}>
             <List.Accordion style={{ borderWidth:0.7,borderRadius:3,backgroundColor : '#dcebf1'}}
-                title="First Level">
+                title="Easy">
                 {stories1.map((item, index)=>{
                     return(
                         <List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
@@ -142,7 +142,7 @@ const LevelStoryListen = () => {
             
             <View style={{ padding:10}}>
             <List.Accordion style={{ borderWidth:0.7,borderRadius:3,backgroundColor : '#dcebf1'}}
-                title="Second Level"
+                title="Medium"
                 expanded={expanded2}
                 onPress={onPressFunction2}>
                 {stories2.map((item, index)=>{
@@ -152,7 +152,7 @@ const LevelStoryListen = () => {
             </View>
             <View style={{ padding:10}}>
             <List.Accordion style={{ borderWidth:0.7,borderRadius:3,backgroundColor : '#dcebf1'}}
-                title="Third Level"
+                title="Hard"
                 expanded={expanded3}
                 onPress={onPressFunction3}>
                 {stories3.map((item, index)=>{
@@ -162,7 +162,7 @@ const LevelStoryListen = () => {
             </View>
             <View style={{ padding:10}}>
             <List.Accordion style={{borderWidth:0.7,borderRadius:3, borderColor:'black',backgroundColor : '#dcebf1'}}
-                title="Advenc"
+                title="Advence"
                 expanded={expanded4}
                 onPress={onPressFunction4}>
                 {stories4.map((item, index)=>{

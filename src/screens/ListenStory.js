@@ -16,7 +16,7 @@ const Story = () => {
     useEffect(() => {
         const axiosStories = async () => {
             console.log("getStory")
-            const response = await axios.post('http://192.168.1.21:5000/getstory', {title_story: route.params.title_Story})
+            const response = await axios.post('http://192.168.1.233:5000/getstory', {title_story: route.params.title_Story})
             setStories(response.data.story)
             console.log(stories)
            
@@ -32,7 +32,7 @@ const Story = () => {
             setonRepeatPress(0)
         }
         console.log("onStartFunc")
-        axios.post('http://192.168.1.21:5000/listenStory', {title_story: route.params.title_Story, current_index: currentIndex})
+        axios.post('http://192.168.1.233:5000/listenStory', {title_story: route.params.title_Story, current_index: currentIndex})
         .then(resp => {
             console.log(resp.data)
             console.log("befor" + currentIndex)
@@ -62,7 +62,7 @@ const Story = () => {
         console.log("onStartFunc")
         setCurrentIndex(currentIndex-1)
         currentIndex = currentIndex-1
-        axios.post('http://192.168.1.21:5000/listenStory', {title_story: route.params.title_Story, current_index: currentIndex})
+        axios.post('http://192.168.1.233:5000/listenStory', {title_story: route.params.title_Story, current_index: currentIndex})
         .then(resp => {
             console.log(resp.data)
             console.log("befor" + currentIndex)
@@ -84,7 +84,7 @@ const Story = () => {
     }
     var trans
     const onPressFunction = () =>{
-        axios.post('http://192.168.1.235:5000/translatWord', {word_required:stories[currentIndex]})
+        axios.post('http://192.168.1.233:5000/translatWord', {word_required:stories[currentIndex]})
         .then(resp => {
             trans = resp.data.translated
             console.log(trans)
@@ -110,13 +110,13 @@ const Story = () => {
                     <ScrollView>
                     <View style={{padding:20}}>
                         {currentIndex > 0 ? 
-                            <Text  style={{fontSize:20}}> {stories.slice(0, currentIndex)} </Text> 
+                            <Text  style={{fontSize:20, opacity:0.3}}> {stories.slice(0, currentIndex)} </Text> 
                             : null
                         }
                             <TouchableOpacity onPress={onPressFunction}>
-                                <Text style={{color:"red", fontSize:20}}> {stories[currentIndex]}</Text>
+                                <Text style={{color:'black', fontSize:20}}> {stories[currentIndex]}</Text>
                             </TouchableOpacity>
-                            <Text style={{fontSize:20}}> {stories.slice(currentIndex+1, - 1)} </Text>
+                            <Text style={{fontSize:20, opacity:0.3}}> {stories.slice(currentIndex+1, stories.length)} </Text>
                             </View>
                     </ScrollView>
                     </Card>
