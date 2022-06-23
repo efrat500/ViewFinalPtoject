@@ -13,16 +13,16 @@ const WordsScreen = () => {
     console.log(route.params.name)
     const navigation = useNavigation()
     const onWriting = () =>{
-        navigation.navigate('Write Screen', {name: route.params.name})
+        navigation.navigate('Translate Words', {name: route.params.name})
         console.log(route.params.name)
     }
 
     const onHearing = () =>{
-        navigation.navigate('Translate Screen', {name: route.params.name})
+        navigation.navigate('Hearing Words', {name: route.params.name})
     }
 
     const onReading = () =>{
-        navigation.navigate('Read Screen', {name: route.params.name})
+        navigation.navigate('Reading Words', {name: route.params.name})
     }
     const onDictionary = () =>{
         navigation.navigate('Dictionary Screen', {name: route.params.name})
@@ -32,7 +32,7 @@ const WordsScreen = () => {
             <Card
                 style={styles.container}>
                 <Card.Content style={styles.container}>
-                    <Title>Writing</Title>
+                    <Title>Translating</Title>
                 </Card.Content>
                 <Card.Cover source={Write}
                     style={styles.words} />

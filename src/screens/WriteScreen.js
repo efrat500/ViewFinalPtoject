@@ -59,8 +59,8 @@ const WriteScreen = () => {
                                   <TextInput
                                   style={styles.testInp}
                                   mode="outlined"
-                                  label="Type the word in English"
-                                  placeholder="Type the word in English"
+                                  // label="Type the meaning of the word"
+                                  // placeholder="Type the meaning of the word"
                                   // right={<TextInput.Affix text="/80" style={styles.input1}/>}
                                   onChangeText={onChangetext}
                                   value = {textInput}

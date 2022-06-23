@@ -42,9 +42,9 @@ const Navigation = () => {
         <Stack.Screen name="Stories Menu" component={StoriesMenu}/>
         <Stack.Screen name="Words Menu" component={WordsMenu}/>
         <Stack.Screen name="Level Story Read" component={LevelStoryRead}/>
-        <Stack.Screen name="Write Screen" component={WriteScreen}/>
-        <Stack.Screen name="Translate Screen" component={TranslateScreen}/>
-        <Stack.Screen name="Read Screen" component={ReadScreen}/>
+        <Stack.Screen name="Translate Words" component={WriteScreen}/>
+        <Stack.Screen name="Hearing Words" component={TranslateScreen}/>
+        <Stack.Screen name="Reading Words" component={ReadScreen}/>
         <Stack.Screen name="Listen Story" component={ListenStory}/>
         <Stack.Screen name="Read Story" component={Story}/>
         <Stack.Screen name="Level Story Listen" component={LevelStoryListen}/>

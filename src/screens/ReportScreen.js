@@ -46,7 +46,7 @@ const ReportScreen = () => {
     }, [])
     var data;
     {(size_list_general != 0) ? data = {
-        labels: ["Read", "Write"], // optional
+        labels: ["Read", "Translate"], // optional
         data: [(calc_reading/size_list_general), (calc_translating/size_list_general)],
 
     }: []}    

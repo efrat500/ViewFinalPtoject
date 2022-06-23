@@ -56,7 +56,7 @@ const LevelStoryRead = () => {
 
     const onPressFunction2 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.233:5000/checkpasslevel', {username:route.params.name})
+        axios.post('http://192.168.1.21:5000/checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_medium)
             if (resp.data.pass_level_medium==1){
