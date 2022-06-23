@@ -146,7 +146,7 @@ const LevelStoryListen = () => {
                 expanded={expanded2}
                 onPress={onPressFunction2}>
                 {stories2.map((item, index)=>{
-                    return(<TouchableOpacity  onPress={() => onReadStory(item)}><List.Item key={index} title={item.title} /></TouchableOpacity>);
+                    return(<List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
                 })}
             </List.Accordion>
             </View>
@@ -156,7 +156,7 @@ const LevelStoryListen = () => {
                 expanded={expanded3}
                 onPress={onPressFunction3}>
                 {stories3.map((item, index)=>{
-                    return(<TouchableOpacity onPress={() => onReadStory(item)}><List.Item key={index} title={item.title} /></TouchableOpacity>);
+                    return(<List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
                 })}
             </List.Accordion>
             </View>

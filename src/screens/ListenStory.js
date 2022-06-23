@@ -106,17 +106,17 @@ const Story = () => {
             <Text style={{marginLeft:-10,fontSize:30, fontWeight: 'bold',textAlign: 'center', marginTop: 50, color:'black',}}> {route.params.title_Story}</Text>
             </View>    
                 {stories.length == 0 ? null:
-                    <Card style={{marginTop:-60,height:350, elavation: 3, backgroundColor : 'transparent',borderWidth:  4,  borderColor:  'black'}}>
+                    <Card style={{marginTop:-60,height:300, elavation: 3, backgroundColor : 'transparent', borderRadius: 7,borderWidth:  3,  borderColor:  'black'}}>
                     <ScrollView>
                     <View style={{padding:20}}>
                         {currentIndex > 0 ? 
-                            <Text  style={{fontSize:20}}> {stories.slice(0, currentIndex)} </Text> 
+                            <Text  style={{fontSize:20, opacity:0.3}}> {stories.slice(0, currentIndex)} </Text> 
                             : null
                         }
                             <TouchableOpacity onPress={onPressFunction}>
-                                <Text style={{color:"red", fontSize:20}}> {stories[currentIndex]}</Text>
+                                <Text style={{color:"black", fontSize:20}}> {stories[currentIndex]}</Text>
                             </TouchableOpacity>
-                            <Text style={{fontSize:20}}> {stories.slice(currentIndex+1, - 1)} </Text>
+                            <Text style={{fontSize:20, opacity:0.3}}> {stories.slice(currentIndex+1, - 1)} </Text>
                             </View>
                     </ScrollView>
                     </Card>
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 200,
-        marginTop: 20,
+        marginTop: 25,
         marginLeft:75,
         height: 40,
         borderWidth:  2,  
