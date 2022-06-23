@@ -26,7 +26,7 @@ const LevelStoryRead = () => {
 
     useEffect(() => {
         const axiosStories2 = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getallstories',{current_level: 'medium'})
+            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'medium'})
             setStories2(response.data)
             console.log(stories2)
         }
@@ -34,7 +34,7 @@ const LevelStoryRead = () => {
     }, [])
     useEffect(() => {
         const axiosStories3 = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getallstories',{current_level: 'hard'})
+            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'hard'})
             setStories3(response.data)
             console.log(stories3)
         }
@@ -56,7 +56,7 @@ const LevelStoryRead = () => {
 
     const onPressFunction2 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.21:5000/checkpasslevel', {username:route.params.name})
+        axios.post('http://192.168.1.233:5000/checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_medium)
             if (resp.data.pass_level_medium==1){
@@ -76,7 +76,7 @@ const LevelStoryRead = () => {
 
     const onPressFunction3 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.21:5000/checkpasslevel', {username:route.params.name})
+        axios.post('http://192.168.1.233:5000/checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_hard)
             if (resp.data.pass_level_hard==1){
@@ -96,7 +96,7 @@ const LevelStoryRead = () => {
 
     const onPressFunction4 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.21:5000/checkpasslevel', {username:route.params.name})
+        axios.post('http://192.168.1.233:5000/checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_advenc)
             if (resp.data.pass_level_advenc==1){
@@ -115,10 +115,10 @@ const LevelStoryRead = () => {
     }
 
     const getStort = () => {
-        axios.post('http://192.168.1.21:5000/getdatareport', {username:route.params.name})
+        axios.post('http://192.168.1.233:5000/getdatareport', {username:route.params.name})
         .then(resp => {
             if (resp.data.current_level == "advenc"){
-                axios.post('http://192.168.1.21:5000/addstoryadvenc')
+                axios.post('http://192.168.1.233:5000/addstoryadvenc')
                 .then(resp => {
                     if (resp.error == "The story already exists, press again"){
                         Alert.alert('Note',resp.error,[{text: 'Understood'}])
@@ -140,7 +140,7 @@ const LevelStoryRead = () => {
         <List.Section title="">
             <View style={{ padding:10}}>
             <List.Accordion  style={{ borderWidth:0.7,borderRadius:3,backgroundColor : '#dcebf1'}}
-                title="First Level">
+                title="Easy">
                 {stories1.map((item, index)=>{
                     return(
                         <List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
@@ -149,7 +149,7 @@ const LevelStoryRead = () => {
             </View>
             <View style={{ padding:10}}>
             <List.Accordion style={{borderWidth:0.7,borderRadius:3,backgroundColor : '#dcebf1'}}
-                title="Second Level"
+                title="Medium"
                 expanded={expanded2}
                 onPress={onPressFunction2}>
                 {stories2.map((item, index)=>{
@@ -159,7 +159,7 @@ const LevelStoryRead = () => {
             </View>
             <View style={{ padding:10}}>
             <List.Accordion style={{borderWidth:0.7,borderRadius:3, borderColor:'black',backgroundColor : '#dcebf1'}}
-                title="Third Level"
+                title="Hard"
                 expanded={expanded3}
                 onPress={onPressFunction3}>
                 {stories3.map((item, index)=>{
@@ -169,7 +169,7 @@ const LevelStoryRead = () => {
             </View>
             <View style={{ padding:10}}>
             <List.Accordion style={{borderWidth:0.7,borderRadius:3, borderColor:'black',backgroundColor : '#dcebf1'}}
-                title="Advenc"
+                title="Advence"
                 expanded={expanded4}
                 onPress={onPressFunction4}>
                 {stories4.map((item, index)=>{
