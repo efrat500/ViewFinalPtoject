@@ -19,7 +19,7 @@ const Story = () => {
     useEffect(() => {
         const axiosStories = async () => {
             console.log("getStory")
-            const response = await axios.post('http://192.168.1.233:5000/getstory', {title_story: route.params.title_Story})
+            const response = await axios.post('http://192.168.1.21:5000/getstory', {title_story: route.params.title_Story})
             setStories(response.data.story)
             console.log(response.data.story)
            
@@ -33,7 +33,7 @@ const Story = () => {
         setButtonColorStart('black')
         setButtonStart("Continue reading")
         console.log("onStartFunc")
-        axios.post('http://192.168.1.233:5000/speechToText', {title_story: route.params.title_Story, current_index: currentIndex, username: route.params.name, counterWorng:counterWorng })
+        axios.post('http://192.168.1.21:5000/speechToText', {title_story: route.params.title_Story, current_index: currentIndex, username: route.params.name, counterWorng:counterWorng })
         .then(resp => {
             console.log(resp.data)
             temp = resp.data.translated
@@ -56,7 +56,7 @@ const Story = () => {
                 console.log(stories.length)
                 if (currentIndex == stories.length){
                     var grade
-                    axios.post('http://192.168.1.233:5000/calculateGrade', {title_story: route.params.title_Story , username: route.params.name })
+                    axios.post('http://192.168.1.21:5000/calculateGrade', {title_story: route.params.title_Story , username: route.params.name })
                     .then(resp => {
                         console.log(resp.data.grade)
                         grade = resp.data.grade

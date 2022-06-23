@@ -28,19 +28,7 @@ const MenuScreen = ({}) => {
     return (
         <ImageBackground source={require('../../assets/a5.jpg')} style={styles.container}>
             <ScrollView>
-                <TouchableOpacity onPress={onReport}>
-                    <Card
-                        style={styles.container}>
-                        <Card.Content style={styles.container}>
-                            <Title style= {styles.profiler}>Report</Title>
-                        </Card.Content>
-                        <Card.Cover source={Report}
-                            style={styles.words} />
-                        <Card.Actions
-                            style={styles.container}>
-                        </Card.Actions>
-                    </Card>
-                </TouchableOpacity>
+                
                 <TouchableOpacity onPress={onStories}>
                     <Card
                         style={styles.container}>
@@ -62,6 +50,19 @@ const MenuScreen = ({}) => {
                         <Card.Cover source={Words}
                             style={styles.words} />
                         <Card.Actions>
+                        </Card.Actions>
+                    </Card>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={onReport}>
+                    <Card
+                        style={styles.container}>
+                        <Card.Content style={styles.container}>
+                            <Title style= {styles.profiler}>Report</Title>
+                        </Card.Content>
+                        <Card.Cover source={Report}
+                            style={styles.words} />
+                        <Card.Actions
+                            style={styles.container}>
                         </Card.Actions>
                     </Card>
                 </TouchableOpacity>
