@@ -1,10 +1,11 @@
-import {ImageBackground, Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, Alert} from 'react-native';
+import { DevSettings,ImageBackground,Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, Alert} from 'react-native';
 import React, {useState, useEffect} from 'react'
 import { List } from 'react-native-paper';
 import axios from "axios"
+import CustemButton from '../components/CustemButton'
 import { useNavigation, useRoute } from '@react-navigation/native'
 
-const LevelStoryListen = () => {
+const LevelStoryRead = () => {
     const route = useRoute()
     const navigation = useNavigation()
     const [stories1 , setStories1]=useState([])
@@ -17,7 +18,7 @@ const LevelStoryListen = () => {
 
     useEffect(() => {
         const axiosStories1 = async () => {
-            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'easy'})
+            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'easy', username:route.params.name})
             setStories1(response.data)
         }
         axiosStories1()
@@ -25,20 +26,27 @@ const LevelStoryListen = () => {
 
     useEffect(() => {
         const axiosStories2 = async () => {
-            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'medium'})
+            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'medium',username:route.params.name})
             setStories2(response.data)
             console.log(stories2)
         }
         axiosStories2()
     }, [])
-    
     useEffect(() => {
-        const axiosStories = async () => {
-            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'hard'})
+        const axiosStories3 = async () => {
+            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'hard',username:route.params.name})
             setStories3(response.data)
             console.log(stories3)
         }
-        axiosStories()
+        axiosStories3()
+    }, [])
+    useEffect(() => {
+        const axiosStories4 = async () => {
+            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'advenc',username:route.params.name})
+            setStories4(response.data)
+            console.log(stories4)
+        }
+        axiosStories4()
     }, [])
 
     const onReadStory = (item) =>{
@@ -88,7 +96,7 @@ const LevelStoryListen = () => {
 
     const onPressFunction4 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.21:5000/checkpasslevel', {username:route.params.name})
+        axios.post('http://192.168.1.233:5000/checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_advenc)
             if (resp.data.pass_level_advenc==1){
@@ -107,10 +115,10 @@ const LevelStoryListen = () => {
     }
 
     const getStort = () => {
-        axios.post('http://192.168.1.21:5000/getdatareport', {username:route.params.name})
+        axios.post('http://192.168.1.233:5000/getdatareport', {username:route.params.name})
         .then(resp => {
             if (resp.data.current_level == "advenc"){
-                axios.post('http://192.168.1.21:5000/addstoryadvenc')
+                axios.post('http://192.168.1.233:5000/addstoryadvenc', {username:route.params.name})
                 .then(resp => {
                     if (resp.error == "The story already exists, press again"){
                         Alert.alert('Note',resp.error,[{text: 'Understood'}])
@@ -130,8 +138,8 @@ const LevelStoryListen = () => {
     return ( <ImageBackground source={require('../../assets/b1.jpg')} style={{width: '100%', height: '100%'}}> 
         <ScrollView>
         <List.Section title="">
-        <View style={{ padding:10}}>
-            <List.Accordion style={{ borderWidth:0.7,borderRadius:3,backgroundColor : '#dcebf1'}}
+            <View style={{ padding:10}}>
+            <List.Accordion  style={{ borderWidth:0.7,borderRadius:3,backgroundColor : '#dcebf1'}}
                 title="Easy">
                 {stories1.map((item, index)=>{
                     return(
@@ -139,24 +147,23 @@ const LevelStoryListen = () => {
                 })}
             </List.Accordion>
             </View>
-            
             <View style={{ padding:10}}>
-            <List.Accordion style={{ borderWidth:0.7,borderRadius:3,backgroundColor : '#dcebf1'}}
+            <List.Accordion style={{borderWidth:0.7,borderRadius:3,backgroundColor : '#dcebf1'}}
                 title="Medium"
                 expanded={expanded2}
                 onPress={onPressFunction2}>
                 {stories2.map((item, index)=>{
-                    return(<TouchableOpacity  onPress={() => onReadStory(item)}><List.Item key={index} title={item.title} /></TouchableOpacity>);
+                    return(<List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
                 })}
             </List.Accordion>
             </View>
             <View style={{ padding:10}}>
-            <List.Accordion style={{ borderWidth:0.7,borderRadius:3,backgroundColor : '#dcebf1'}}
+            <List.Accordion style={{borderWidth:0.7,borderRadius:3, borderColor:'black',backgroundColor : '#dcebf1'}}
                 title="Hard"
                 expanded={expanded3}
                 onPress={onPressFunction3}>
                 {stories3.map((item, index)=>{
-                    return(<TouchableOpacity onPress={() => onReadStory(item)}><List.Item key={index} title={item.title} /></TouchableOpacity>);
+                    return(<List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
                 })}
             </List.Accordion>
             </View>
@@ -178,7 +185,10 @@ const LevelStoryListen = () => {
             onPress={getStort}
         />  : null}
     </ScrollView>
-    </ImageBackground>);
+    </ImageBackground>
+    
+    );
 }
 
-export default LevelStoryListen;
+
+export default LevelStoryRead;
