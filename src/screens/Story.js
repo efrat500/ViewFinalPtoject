@@ -19,7 +19,7 @@ const Story = () => {
     useEffect(() => {
         const axiosStories = async () => {
             console.log("getStory")
-            const response = await axios.post('http://192.168.1.21:5000/getstory', {title_story: route.params.title_Story})
+            const response = await axios.post('http://192.168.1.233:5000/getstory', {title_story: route.params.title_Story, username:route.params.name})
             setStories(response.data.story)
             console.log(response.data.story)
            
@@ -86,7 +86,7 @@ const Story = () => {
                 }
                 else {
                     console.log("else: counter= " + counterWorng)
-                    Alert.alert('Wrongs', resp.data.list_worng + ".\n",[{text: 'Understood'}])
+                    Alert.alert('Learn this words:', resp.data.list_worng + ".\n",[{text: 'Understood'}])
                     setCounterWorng(0)
                     console.log("after counter= " + counterWorng)
                     console.log("befor" + currentIndex)
