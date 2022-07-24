@@ -2,6 +2,7 @@ import {ImageBackground, Text, View, StyleSheet, TouchableOpacity, Image, Scroll
 import React, {useState, useEffect} from 'react'
 import { List } from 'react-native-paper';
 import axios from "axios"
+import CustemButton from '../components/CustemButton'
 import { useNavigation, useRoute } from '@react-navigation/native'
 
 const LevelStoryListen = () => {
@@ -68,7 +69,7 @@ const LevelStoryListen = () => {
 
     const onPressFunction3 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.233:5000/checkpasslevel', {username:route.params.name})
+        axios.post('http://192.168.1.21:5000/checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_hard)
             if (resp.data.pass_level_hard==1){

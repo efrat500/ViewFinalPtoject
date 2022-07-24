@@ -26,7 +26,7 @@ const LevelStoryRead = () => {
 
     useEffect(() => {
         const axiosStories2 = async () => {
-            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'medium'})
+            const response = await axios.post('http://192.168.1.21:5000/getallstories',{current_level: 'medium'})
             setStories2(response.data)
             console.log(stories2)
         }
@@ -34,7 +34,7 @@ const LevelStoryRead = () => {
     }, [])
     useEffect(() => {
         const axiosStories3 = async () => {
-            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'hard'})
+            const response = await axios.post('http://192.168.1.21:5000/getallstories',{current_level: 'hard'})
             setStories3(response.data)
             console.log(stories3)
         }
@@ -56,7 +56,7 @@ const LevelStoryRead = () => {
 
     const onPressFunction2 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.233:5000/checkpasslevel', {username:route.params.name})
+        axios.post('http://192.168.1.21:5000/checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_medium)
             if (resp.data.pass_level_medium==1){
@@ -76,7 +76,7 @@ const LevelStoryRead = () => {
 
     const onPressFunction3 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.233:5000/checkpasslevel', {username:route.params.name})
+        axios.post('http://192.168.1.21:5000/checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_hard)
             if (resp.data.pass_level_hard==1){
@@ -96,7 +96,7 @@ const LevelStoryRead = () => {
 
     const onPressFunction4 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.233:5000/checkpasslevel', {username:route.params.name})
+        axios.post('http://192.168.1.21:5000/checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_advenc)
             if (resp.data.pass_level_advenc==1){
@@ -115,10 +115,10 @@ const LevelStoryRead = () => {
     }
 
     const getStort = () => {
-        axios.post('http://192.168.1.233:5000/getdatareport', {username:route.params.name})
+        axios.post('http://192.168.1.21:5000/getdatareport', {username:route.params.name})
         .then(resp => {
             if (resp.data.current_level == "advenc"){
-                axios.post('http://192.168.1.233:5000/addstoryadvenc')
+                axios.post('http://192.168.1.21:5000/addstoryadvenc')
                 .then(resp => {
                     if (resp.error == "The story already exists, press again"){
                         Alert.alert('Note',resp.error,[{text: 'Understood'}])
