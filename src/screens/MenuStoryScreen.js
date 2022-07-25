@@ -1,99 +1,126 @@
 import React from 'react';
-import Story from '../../assets/story.jpg';
-import Write from '../../assets/write.jpg';
-import Hear from '../../assets/h.jpg';
-import Read from '../../assets/read1.jpg';
-import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import Hear from '../../assets/hearing.jpg';
+import Read from '../../assets/reading.jpg';
+import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, ImageBackground } from 'react-native';
 import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
-import CustemButton from '../components/CustemButton'
-import MyCard from '../components/Card';
 import Appear from '../components/Appear';
-import CardStory from '../components/CardStory';
+import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { useNavigation, useRoute } from '@react-navigation/native'
 
-const onResendPressed = () => {
-    console.warn("onResendPressed")
-}
 
-const MenuStoryScreen = () => {
-    return (<ScrollView>
-        <Appear />
-        <Card>
-            <Card.Content>
-                <Title>Hearing</Title>
-            </Card.Content>
-            <Card.Cover source={Hear} />
-            <Card.Actions>
-            </Card.Actions>
-        </Card>
-        <Card>
-            <Card.Content>
-                <Title>Writing</Title>
-            </Card.Content>
-            <Card.Cover source={Write} />
-            <Card.Actions>
-            </Card.Actions>
-        </Card>
-        <Card>
-            <Card.Content>
-                <Title>Reading</Title>
-            </Card.Content>
-            <Card.Cover source={Read} />
-            <Card.Actions>
-            </Card.Actions>
-        </Card>
-    </ScrollView >);
+
+const StoryScreen = () => {
+    const route = useRoute()
+    const navigation = useNavigation()
+
+    const onHearing = () =>{
+        navigation.navigate('Level Story Listen', {name:route.params.name})
+    }
+    const onReading = () =>{
+        navigation.navigate('Level Story Read', {name:route.params.name})
+    }
+    return (<ImageBackground style={styles.container}>
+    <ScrollView>
+        {console.log(route.params.name)}
+        <TouchableOpacity onPress={onReading}>
+            <Card
+                style={styles.container}>
+                <Card.Content style={styles.container}>
+                    <Title>Reading</Title>
+                </Card.Content>
+                <Card.Cover source={Read}
+                    style={styles.words} />
+                <Card.Actions
+                    style={styles.container}>
+                </Card.Actions>
+            </Card>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={onHearing}>
+            <Card style={styles.container}>
+                <Card.Content style={styles.container}>
+                    <Title>Listening</Title>
+                </Card.Content>
+                <Card.Cover source={Hear}
+                    style={styles.words} />
+                <Card.Actions style={styles.container}>
+                </Card.Actions>
+            </Card>
+        </TouchableOpacity>
+    </ScrollView >
+    </ImageBackground>);
 }
 
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        flexDirection: 'row',
+        //backgroundColor: `#4d82bd`,
+    },
+    story: {
+        width: '100%',
+        maxWidth: 200,
+        maxHeight: 180,
+        paddingHorizontal: 70,
+       // borderColor: 'black',
+        //borderWidth: 5,
+        top: 100
     },
     report: {
-        width: '80%',
-        marginTop: 80,
-        maxWidth: 300,
-        maxHeight: 200,
-        paddingHorizontal: 230,
-        borderColor: 'black',
-        borderWidth: 5
+        width: '100%',
+        maxWidth: 200,
+        maxHeight: 180,
+        paddingHorizontal: 70,
+        //borderColor: 'black',
+       // borderWidth: 5,
+        top: 100
+    },
+    words: {
+        backgroundColor: '#aed5ee',
+        width: '100%',
+        flex: 1,
+        flexDirection: 'column',
+        padding: 0,
+        paddingHorizontal: 80,
+        borderRadius: 50,
+        resizeMode: "contain",
+        shadowColor: 'black',
+        shadowOffset: {
+            width: 0,
+            height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.00,
+
+        elevation: 24,
     },
     profiler: {
-        marginTop: 5,
-        width: '80%',
-        maxWidth: 100,
-        maxHeight: 200,
-        paddingHorizontal: 120,
-        borderColor: 'black',
-        borderWidth: 5
+        width: '100%',
+        maxWidth: 200,
+        maxHeight: 180,
+        paddingHorizontal: 50,
     },
     text: {
         alignItems: 'center',
-        marginTop: 0,
-        padding: 20,
-        left: 80,
+        marginTop: 45,
+        padding: 50,
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 30,
         flex: 1,
     },
     text2: {
-        marginTop: 0,
-        padding: 20,
-        left: 250,
+        alignItems: 'center',
+        left: 50,
         fontWeight: 'bold',
         fontSize: 30,
-        top: -150,
+        flex: 1,
     },
     text3: {
+        justifyContent: 'center',
         alignItems: 'center',
-        left: 120,
+        left: 20,
         fontWeight: 'bold',
-        fontSize: 45,
-        top: 10,
-        flex: 0.3,
+        fontSize: 50,
+        top: 10
     },
 })
 
-export default MenuStoryScreen;
+export default StoryScreen;

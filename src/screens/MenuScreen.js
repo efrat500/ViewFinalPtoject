@@ -2,7 +2,6 @@ import React from 'react';
 import Story from '../../assets/r1_n.png';
 import Report from '../../assets/repo.png';
 import Words from '../../assets/words.jpg';
-import Profiler from '../../assets/profile.jpg';
 import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, ImageBackground } from 'react-native';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import Appear from '../components/Appear';
@@ -26,48 +25,46 @@ const MenuScreen = ({}) => {
     }
 
     return (
-        <ImageBackground source={require('../../assets/a5.jpg')} style={styles.container}>
-            <ScrollView>
-                
-                <TouchableOpacity onPress={onStories}>
-                    <Card
+        <ScrollView>
+            
+            <TouchableOpacity onPress={onStories}>
+                <Card
+                    style={styles.container}>
+                    <Card.Content>
+                        <Title style= {styles.profiler}>Stories</Title>
+                    </Card.Content>
+                    <Card.Cover source={Story}
+                        style={styles.words} />
+                    <Card.Actions>
+                    </Card.Actions>
+                </Card>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={onWords}>
+                <Card
+                    style={styles.container}>
+                    <Card.Content>
+                        <Title style= {styles.profiler}>Words</Title>
+                    </Card.Content>
+                    <Card.Cover source={Words}
+                        style={styles.words} />
+                    <Card.Actions>
+                    </Card.Actions>
+                </Card>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={onReport}>
+                <Card
+                    style={styles.container}>
+                    <Card.Content style={styles.container}>
+                        <Title style= {styles.profiler}>Report</Title>
+                    </Card.Content>
+                    <Card.Cover source={Report}
+                        style={styles.words} />
+                    <Card.Actions
                         style={styles.container}>
-                        <Card.Content>
-                            <Title style= {styles.profiler}>Stories</Title>
-                        </Card.Content>
-                        <Card.Cover source={Story}
-                            style={styles.words} />
-                        <Card.Actions>
-                        </Card.Actions>
-                    </Card>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={onWords}>
-                    <Card
-                        style={styles.container}>
-                        <Card.Content>
-                            <Title style= {styles.profiler}>Words</Title>
-                        </Card.Content>
-                        <Card.Cover source={Words}
-                            style={styles.words} />
-                        <Card.Actions>
-                        </Card.Actions>
-                    </Card>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={onReport}>
-                    <Card
-                        style={styles.container}>
-                        <Card.Content style={styles.container}>
-                            <Title style= {styles.profiler}>Report</Title>
-                        </Card.Content>
-                        <Card.Cover source={Report}
-                            style={styles.words} />
-                        <Card.Actions
-                            style={styles.container}>
-                        </Card.Actions>
-                    </Card>
-                </TouchableOpacity>
-            </ScrollView >
-        </ImageBackground>
+                    </Card.Actions>
+                </Card>
+            </TouchableOpacity>
+        </ScrollView >
     );
 }
 export default MenuScreen;
