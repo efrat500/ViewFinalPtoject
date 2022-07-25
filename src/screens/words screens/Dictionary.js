@@ -26,7 +26,7 @@ const Dictionary = () => {
     const [masterDataSource, setMasterDataSource] = useState([]);
     useEffect(() => {
         const axiosStories = async () => {
-            const response = await axios.post('http://192.168.1.233:5000/getwordsgeneral', {username: route.params.name})
+            const response = await axios.post('http://192.168.1.21:5000/getwordsgeneral', {username: route.params.name})
             setFilteredDataSource(response.data.allwords)
             setMasterDataSource(response.data.allwords)
         }
