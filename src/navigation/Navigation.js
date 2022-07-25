@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Image } from 'react-native'
+import { View, Text, SafeAreaView, Image,Button } from 'react-native'
 import React, {useRoute} from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -18,6 +18,7 @@ import ListenStory from '../screens/ListenStory'
 import Story from '../screens/Story'
 import LevelStoryListen from '../screens/LevelStoryListen'
 import DictionaryScreen from '../screens/WordsOptions'
+import InstructionScreen from '../screens/InstructionScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -34,6 +35,7 @@ const Navigation = () => {
           }}
         >
         <Stack.Screen name="SignIn" component={SignInScreen} />
+        <Stack.Screen name="Instruction" component={InstructionScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
         <Stack.Screen name="NewPassword" component={NewPasswordScreen} />

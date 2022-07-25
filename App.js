@@ -13,6 +13,7 @@ import StoriesOption from './src/screens/StoriesOption'
 import WordsScreen from './src/screens/WordsScreen'
 import WriteScreen from './src/screens/WriteScreen'
 import LevelStoryRead from './src/screens/LevelStoryRead'
+import InstructionScreen from './src/screens/InstructionScreen'
 import './src/ignoreWarnings'
 
 
@@ -25,18 +26,6 @@ export default function App() {
     // }}>
       <SafeAreaView style={styles.container}>
         <Navigation/>
-        {/* <ReportScreen /> */}
-        {/* <Story /> */}
-        {/* <MenuScreen /> */}
-        {/* <LevelStoryRead /> */}
-        {/* <ReportScreen></ReportScreen> */}
-        {/* <WordsOptions></WordsOptions> */}
-        {/* <StoriesOption></StoriesOption> */}
-        {/* <WriteScreen /> */}
-        {/* <WordsScreen /> */}
-        {/* <ReadScreen /> */}
-        {/* <TranslateScreen /> */}
-        {/* <StoriesOptionScreen /> */}
       </SafeAreaView>
     // </TouchableWithoutFeedback>
 

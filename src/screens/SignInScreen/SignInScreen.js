@@ -41,6 +41,10 @@ const SignInScreen = (props) => {
     const onSignUpPressed =() =>{
         navigation.navigate('SignUp')
     }
+    const onInstructionScreenPressed =() =>{
+        navigation.navigate('Instruction')
+    }
+    
     
     return (
         <ImageBackground source={require('../../../assets/b1.jpg')} style={styles.root}> 
@@ -80,6 +84,7 @@ const SignInScreen = (props) => {
                                 // check befor press signin all the data is valid
                                 onPress={handleSubmit}
                             />
+                           
                             <CustemButton 
                                 text='Forget Password?' 
                                 onPress={onForgotPassworPressed} 
@@ -90,6 +95,13 @@ const SignInScreen = (props) => {
                                 onPress={onSignUpPressed} 
                                 type="TERTIARY"
                             />
+                            <View style={{marginTop:70,}}>
+                            <CustemButton 
+                                text="Instruction" 
+                                onPress={onInstructionScreenPressed} 
+                                type="TERTIARY"
+                            />
+                            </View>
                         </>
                     )
                 }}

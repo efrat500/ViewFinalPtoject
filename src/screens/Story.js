@@ -19,7 +19,7 @@ const Story = () => {
     useEffect(() => {
         const axiosStories = async () => {
             console.log("getStory")
-            const response = await axios.post('http://192.168.1.233:5000/getstory', {title_story: route.params.title_Story, username:route.params.name})
+            const response = await axios.post('http://192.168.1.21:5000/getstory', {title_story: route.params.title_Story, username:route.params.name})
             setStories(response.data.story)
             console.log(response.data.story)
            
@@ -142,10 +142,10 @@ const Story = () => {
             <View style={styles.view}>
             <View style={{flexDirection: 'row'}}>
             <Image style={styles.logo} source={logo}></Image>
-            <Text style={{marginLeft:-10,fontSize:30, fontWeight: 'bold',textAlign: 'center',justifyContent: 'center',alignItems: 'center', marginTop: 50, color:'black',}}> {route.params.title_Story}</Text>
+            <Text style={{left: -20,flex: 1,marginLeft:-10,fontSize:30, fontWeight: 'bold',textAlign: 'center', marginTop: 50, color:'black',}}> {route.params.title_Story}</Text>
             </View>
             {stories.length == 0 ? null:
-                        <Card style={{marginTop:-60,height:350, elavation: 3, backgroundColor : 'transparent',borderRadius: 7,borderWidth:  3,  borderColor:  'black'}}>
+                        <Card style={{marginTop:-30,height:350, elavation: 3, backgroundColor : 'transparent',borderRadius: 7,borderWidth:  3,  borderColor:  'black'}}>
                         <ScrollView>
                         <View style={{padding:20}}>
                             {currentIndex > 0 ? 
