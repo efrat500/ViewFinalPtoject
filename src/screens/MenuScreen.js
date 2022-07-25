@@ -1,10 +1,9 @@
 import React from 'react';
-import Story from '../../assets/r1_n.png';
+import Story from '../../assets/books.png';
 import Report from '../../assets/repo.png';
 import Words from '../../assets/words.jpg';
 import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, ImageBackground } from 'react-native';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
-import Appear from '../components/Appear';
 import MyCard from '../components/Card/Card';
 import { useNavigation, useRoute } from '@react-navigation/native'
 

@@ -4,7 +4,6 @@ import { Container, Header, View, DeckSwiper, CardItem, Thumbnail, Text, Left, B
 import MyCard from '../../components/Card/Card';
 import InputText from '../../components/InputText'
 import { Button } from 'react-native-paper';
-import Appear from '../../components/Appear';
 import { TextInput } from 'react-native-paper';
 import axios from "axios"
 import { useNavigation, useRoute } from '@react-navigation/native'
@@ -59,9 +58,6 @@ const WriteScreen = () => {
                                   <TextInput
                                   style={styles.testInp}
                                   mode="outlined"
-                                  // label="Type the meaning of the word"
-                                  // placeholder="Type the meaning of the word"
-                                  // right={<TextInput.Affix text="/80" style={styles.input1}/>}
                                   onChangeText={onChangetext}
                                   value = {textInput}
                                   />

@@ -3,7 +3,6 @@ import Hear from '../../assets/hearing.jpg';
 import Read from '../../assets/reading.jpg';
 import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, ImageBackground } from 'react-native';
 import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
-import Appear from '../components/Appear';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import { useNavigation, useRoute } from '@react-navigation/native'
 
@@ -52,16 +51,11 @@ const StoryScreen = () => {
 
 
 const styles = StyleSheet.create({
-    container: {
-        //backgroundColor: `#4d82bd`,
-    },
     story: {
         width: '100%',
         maxWidth: 200,
         maxHeight: 180,
         paddingHorizontal: 70,
-       // borderColor: 'black',
-        //borderWidth: 5,
         top: 100
     },
     report: {
@@ -69,8 +63,6 @@ const styles = StyleSheet.create({
         maxWidth: 200,
         maxHeight: 180,
         paddingHorizontal: 70,
-        //borderColor: 'black',
-       // borderWidth: 5,
         top: 100
     },
     words: {

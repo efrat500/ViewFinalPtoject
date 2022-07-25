@@ -1,6 +1,5 @@
 import {BarChart,LineChart, ProgressChart} from 'react-native-chart-kit';
 import { Image, FlatList, Text, ScrollView, View, Dimensions, StyleSheet, Alert } from 'react-native';
-// import { TextInput } from 'react-native-paper';
 import { Button } from 'react-native-paper';
 import React, {useState, useEffect} from 'react'
 import axios from "axios"
@@ -85,9 +84,7 @@ const ReportScreen = () => {
             <Text style={styles.text3}>Stories:</Text>
             <View style={styles.view1}>
                 <Image style={styles.logo2} source={logo2}></Image>
-                
                     <LineChart
-                    
                         data={{
                             labels: list_titles_vec,
                             datasets: [
@@ -96,19 +93,14 @@ const ReportScreen = () => {
                                 }
                             ],
                         }}
-                        width={Dimensions.get("window").width} // from react-native
+                        width={Dimensions.get("window").width} 
                         height={220}
                         yAxisLabel=""
                         yAxisSuffix=""
-                        yAxisInterval={1} // optional, defaults to 1
+                        yAxisInterval={1}
                         chartConfig={chartConfig}
                         bezier
-                        style={{
-                            marginLeft:-400,
-                            //marginVertical: 8,
-                            borderRadius: 16,
-                            marginTop: 20
-                        }}
+                        style={styles.lineChart}
                         hideLegend={false}
                     />
             
@@ -126,6 +118,11 @@ const ReportScreen = () => {
 export default ReportScreen;
 
 const styles = StyleSheet.create({
+    lineChart:{
+        marginLeft:-400,
+        borderRadius: 16,
+        marginTop: 20,
+    },
     view1:{
         flexDirection: 'row',
     },
@@ -146,7 +143,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'black',
         textAlign: 'center',
-        // marginLeft: 65,
     },
     text2: {
         textAlign: 'center',

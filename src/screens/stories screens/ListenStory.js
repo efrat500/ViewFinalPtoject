@@ -4,7 +4,6 @@ import axios from "axios"
 import CustemButton from '../../components/CustemButton'
 import { ScrollView } from 'react-native-virtualized-view';
 import { Card,Button } from 'react-native-paper';
-import Appear from '../../components/Appear';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import logo from '../../../assets/men.png';
 
@@ -45,7 +44,6 @@ const Story = () => {
                 currentIndex = 0
             }
             else{
-                //onStartRead()
                 console.log('check')
             }
 
@@ -62,7 +60,7 @@ const Story = () => {
         console.log("onStartFunc")
         setCurrentIndex(currentIndex-1)
         currentIndex = currentIndex-1
-        axios.post('http://192.168.1.233:5000/listenStory', {title_story: route.params.title_Story, current_index: currentIndex, username:route.params.name})
+        axios.post('http://192.168.1.21:5000/listenStory', {title_story: route.params.title_Story, current_index: currentIndex, username:route.params.name})
         .then(resp => {
             console.log(resp.data)
             console.log("befor" + currentIndex)
@@ -73,7 +71,6 @@ const Story = () => {
                 currentIndex = 0
             }
             else{
-                //onStartRead()
                 console.log('check')
             }
         })
@@ -98,25 +95,24 @@ const Story = () => {
     var [onRepeatPress , setonRepeatPress]=useState(0)
     var [currentIndex , setCurrentIndex]=useState(0)
     return (
-        <ImageBackground source={require('../../../assets/b1.jpg')} style={{width: '100%', height: '100%'}}> 
-        {/* <ScrollView> */}
+        <ImageBackground source={require('../../../assets/background.jpg')} style={{width: '100%', height: '100%'}}> 
             <View style={styles.view}>
             <View style={{flexDirection: 'row'}}>
             <Image style={styles.logo} source={logo}></Image>
-            <Text style={{marginLeft:-10,fontSize:30, fontWeight: 'bold',textAlign: 'center', marginTop: 50, color:'black',}}> {route.params.title_Story}</Text>
+            <Text style={styles.text}> {route.params.title_Story}</Text>
             </View>    
                 {stories.length == 0 ? null:
-                    <Card style={{marginTop:-60,height:300, elavation: 3, backgroundColor : 'transparent', borderRadius: 7,borderWidth:  3,  borderColor:  'black'}}>
+                    <Card style={styles.card}>
                     <ScrollView>
-                    <View style={{padding:20}}>
+                    <View style={styles.view1}>
                         {currentIndex > 0 ? 
-                            <Text  style={{fontSize:20, opacity:0.3}}> {stories.slice(0, currentIndex)} </Text> 
+                            <Text  style={styles.textOpacity}> {stories.slice(0, currentIndex)} </Text> 
                             : null
                         }
                             <TouchableOpacity onPress={onPressFunction}>
-                                <Text style={{color:'black', fontSize:20}}> {stories[currentIndex]}</Text>
+                                <Text style={styles.textStory}> {stories[currentIndex]}</Text>
                             </TouchableOpacity>
-                            <Text style={{fontSize:20, opacity:0.3}}> {stories.slice(currentIndex+1, stories.length)} </Text>
+                            <Text style={styles.textOpacity}> {stories.slice(currentIndex+1, stories.length)} </Text>
                             </View>
                     </ScrollView>
                     </Card>
@@ -133,7 +129,6 @@ const Story = () => {
                 </Button>
             </TouchableOpacity>   
             </View>
-            {/* </ScrollView> */}
         </ImageBackground>
     )
    
@@ -145,6 +140,10 @@ const styles = StyleSheet.create({
         marginTop: -20,
     },
     view:{
+        padding:20,
+        flex: 1,
+    },
+    view1:{
         padding:20,
         flex: 1,
     },
@@ -166,6 +165,31 @@ const styles = StyleSheet.create({
         borderColor:  'black',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    text:{
+        marginLeft:-10,
+        fontSize:30, 
+        fontWeight: 'bold',
+        textAlign: 'center', 
+        marginTop: 50, 
+        color:'black',
+    },
+    card:{
+        marginTop:-60,
+        height:300, 
+        elavation: 3, 
+        backgroundColor : 'transparent', 
+        borderRadius: 7,
+        borderWidth:  3,  
+        borderColor:  'black'
+    },
+    textOpacity:{
+        fontSize:20, 
+        opacity:0.3,
+    },
+    textStory:{
+        color:'black', 
+        fontSize:20,
     },
 })
 

@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-virtualized-view';
 
 const InstructionScreen = () => {
     return(
-        <ImageBackground source={require('../../assets/b1.jpg')} style={styles.root}>
+        <ImageBackground source={require('../../assets/background.jpg')} style={styles.root}>
             <ScrollView>
             <View style={{padding:20,}}>
             <Text style={styles.text}>הוראות</Text>
