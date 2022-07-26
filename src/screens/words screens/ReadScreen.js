@@ -5,8 +5,8 @@ import MyCard from '../../components/Card/Card';
 import InputText from '../../components/InputText'
 import { Button } from 'react-native-paper';
 import { TextInput } from 'react-native-paper';
-import axios from "axios"
 import { useNavigation, useRoute } from '@react-navigation/native'
+import API from '../../axiosAPI'
 
 
 const ReadScreen = () => {
@@ -18,9 +18,8 @@ const ReadScreen = () => {
     const [buttonColorTranslate, setButtonColorTranslate] = useState('gray');
     useEffect(() => {
         const axiosWords = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getwordsreading', {username: route.params.name})
+            const response = await API.post('getwordsreading', {username: route.params.name})
             setWords(response.data.allwords)
-            console.log("sss")
         }
         axiosWords()
     }, [])
@@ -28,11 +27,8 @@ const ReadScreen = () => {
     var list_type
     const onReadPressed = (item) =>{
         list_type = "words_list_reading"
-        console.log("sss")
-        console.log(route.params.name)
-        axios.post('http://192.168.1.21:5000/speechWordToWriting', {speech_word: item, username: route.params.name, which_list: list_type})
+        API.post('speechWordToWriting', {speech_word: item, username: route.params.name, which_list: list_type})
         .then(resp => {
-            console.log(resp.data.feedback)
             read = resp.data.feedback
             Alert.alert('Note',read,[{text: 'Understood'}])
         })
@@ -43,7 +39,7 @@ const ReadScreen = () => {
     }
     var trans 
     const onTranslatePressed = (item) =>{
-        axios.post('http://192.168.1.21:5000/translatWord', {word_required:item})
+        API.post('translatWord', {word_required:item})
         .then(resp => {
             trans = resp.data.translated
             Alert.alert('Translate',trans,[{text: 'Understood'}])

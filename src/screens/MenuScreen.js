@@ -6,7 +6,7 @@ import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, ImageBackg
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import MyCard from '../components/Card/Card';
 import { useNavigation, useRoute } from '@react-navigation/native'
-import axios from "axios"
+import API from '../axiosAPI'
 
 
 const MenuScreen = ({}) => {
@@ -15,7 +15,7 @@ const MenuScreen = ({}) => {
 
     const onReport = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.233:5000/getdatareport', {username: route.params.name})
+        API.post('getdatareport', {username: route.params.name})
         .then(resp => {
             if (resp.data.num_stories < 1){
                 Alert.alert('Note','Read at least 1 story to get a report on your progress',[{text: 'Understood'}])

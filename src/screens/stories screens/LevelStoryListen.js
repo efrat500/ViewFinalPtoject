@@ -2,7 +2,7 @@
 import { DevSettings,ImageBackground,Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, Alert} from 'react-native';
 import React, {useState, useEffect} from 'react'
 import { List } from 'react-native-paper';
-import axios from "axios"
+import API from '../../axiosAPI'
 import CustemButton from '../../components/CustemButton'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { combine } from 'qs/lib/utils';
@@ -20,7 +20,7 @@ const LevelStoryListen = () => {
 
     useEffect(() => {
         const axiosStories1 = async () => {
-            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'easy', username:route.params.name})
+            const response = await API.post('getallstories',{current_level: 'easy', username:route.params.name})
             setStories1(response.data)
         }
         axiosStories1()
@@ -28,7 +28,7 @@ const LevelStoryListen = () => {
 
     useEffect(() => {
         const axiosStories2 = async () => {
-            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'medium', username:route.params.name})
+            const response = await API.post('getallstories',{current_level: 'medium', username:route.params.name})
             setStories2(response.data)
             console.log(stories2)
         }
@@ -36,7 +36,7 @@ const LevelStoryListen = () => {
     }, [])
     useEffect(() => {
         const axiosStories3 = async () => {
-            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'hard', username:route.params.name})
+            const response = await API.post('getallstories',{current_level: 'hard', username:route.params.name})
             setStories3(response.data)
             console.log(stories3)
         }
@@ -44,7 +44,7 @@ const LevelStoryListen = () => {
     }, [])
     useEffect(() => {
         const axiosStories4 = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getallstories',{current_level: 'advanced',username:route.params.name})
+            const response = await API.post('getallstories',{current_level: 'advanced',username:route.params.name})
             setStories4(response.data)
             console.log(stories4)
         }
@@ -58,7 +58,7 @@ const LevelStoryListen = () => {
 
     const onPressFunction2 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.21:5000/checkpasslevel', {username:route.params.name})
+        API.post('checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_medium)
             if (resp.data.pass_level_medium==1){
@@ -78,11 +78,10 @@ const LevelStoryListen = () => {
 
     const onPressFunction3 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.233:5000/checkpasslevel', {username:route.params.name})
+        API.post('checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_hard)
             if (resp.data.pass_level_hard==1){
-                console.log("pass=1")
                 setExpanded3(!expanded3)
             }
             else{
@@ -98,7 +97,7 @@ const LevelStoryListen = () => {
 
     const onPressFunction4 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.233:5000/checkpasslevel', {username:route.params.name})
+        API.post('checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_advenc)
             if (resp.data.pass_level_advenc==1){
@@ -117,10 +116,10 @@ const LevelStoryListen = () => {
     }
 
     const getStorty = () => {
-        axios.post('http://192.168.1.233:5000/getdatareport', {username:route.params.name})
+        API.post('getdatareport', {username:route.params.name})
         .then(resp => {
             if (resp.data.current_level == "advanced"){
-                axios.post('http://192.168.1.233:5000/addstoryadvenc', {username:route.params.name})
+                API.post('addstoryadvenc', {username:route.params.name})
                 .then(resp => {
                     if (resp.error == "The story already exists, press again"){
                         Alert.alert('Note',resp.error,[{text: 'Understood'}])
@@ -138,54 +137,39 @@ const LevelStoryListen = () => {
             }
         }) 
     }
-    return ( <ImageBackground source={require('../../../assets/background.jpg')} style={styles.background}> 
+    const Accordion = (mapStory, level, expanded = false, pressFunc = null) => (
+        <List.Accordion  style={styles.accordion1}
+                title={level}
+                expanded={expanded}
+                onPress={pressFunc}>
+                {mapStory.map((item, index)=>{
+                    return(
+                        <List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
+                })}
+        </List.Accordion>
+    );
+
+    return ( <ImageBackground source={require('../../../assets/background.jpg')} style={{width: '100%', height: '100%'}}> 
         <ScrollView>
         <List.Section title="">
             <View style={styles.view}>
-            <List.Accordion  style={styles.accordion1}
-                title="Easy">
-                {stories1.map((item, index)=>{
-                    return(
-                        <List.Item key={index} onPress={() => onListenStory(item)} title={item.title} />);
-                })}
-            </List.Accordion>
+            {Accordion(stories1, "Easy")}
             </View>
             <View style={styles.view}>
-            <List.Accordion style={styles.accordion1}
-                title="Medium"
-                expanded={expanded2}
-                onPress={onPressFunction2}>
-                {stories2.map((item, index)=>{
-                    return(<List.Item key={index} onPress={() => onListenStory(item)} title={item.title} />);
-                })}
-            </List.Accordion>
+            {Accordion(stories2, "Medium", expanded2, onPressFunction2)}
             </View>
             <View style={styles.view}>
-            <List.Accordion style={styles.accordion}
-                title="Hard"
-                expanded={expanded3}
-                onPress={onPressFunction3}>
-                {stories3.map((item, index)=>{
-                    return(<List.Item key={index} onPress={() => onListenStory(item)} title={item.title} />);
-                })}
-            </List.Accordion>
+            {Accordion(stories3, "Hard", expanded3, onPressFunction3)}
             </View>
             <View style={styles.view}>
-            <List.Accordion style={styles.accordion}
-                title="Advanced"
-                expanded={expanded4}
-                onPress={onPressFunction4}>
-                {stories4.map((item, index)=>{
-                    return(<List.Item key={index} onPress={() => onListenStory(item)} title={item.title} />);
-                })}
-            </List.Accordion>
+            {Accordion(stories4, "Advanced", expanded4, onPressFunction4)}
             </View>
         </List.Section>
         {expanded4 == true ? 
-            <CustemButton 
+         <CustemButton 
             text='Surprise' 
             // check befor press signin all the data is valid
-            onPress={getStorty}
+            onPress={getStort}
         />  : null}
     </ScrollView>
     </ImageBackground>

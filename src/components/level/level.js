@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import { List } from 'react-native-paper';
 import axios from "axios"
+import API from '../../axiosAPI'
 
 const Level = () => {
     const [stories , setStories]=useState([])
     useEffect(() => {
         const axiosStories = async () => {
-            const response = await axios.get('http://192.168.1.233:5000/getallstories')
+            const response = await API.get('http://192.168.1.233:5000/getallstories')
             setStories(response.data)
             console.log(stories)
         }

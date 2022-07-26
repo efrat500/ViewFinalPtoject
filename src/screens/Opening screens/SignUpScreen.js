@@ -5,7 +5,7 @@ import CustemButton from '../../components/CustemButton'
 import { useNavigation } from '@react-navigation/native'
 import {Formik} from 'formik'
 import * as Yup from 'yup'
-import axios from "axios"
+import API from '../../axiosAPI'
 
 const validationSchema = Yup.object({
     username: Yup.string().trim(). min(3,'Invalid name').required('Username is required'),
@@ -18,7 +18,7 @@ const validationSchema = Yup.object({
 
 const SignUpScreen = (props) => {
     const insertData = (values) => {
-        axios.post('http://192.168.1.21:5000/register', {username:values.username, password:values.password, email:values.email, question:values.question})
+        API.post('http://192.168.1.233:5000/register', {username:values.username, password:values.password, email:values.email, question:values.question})
         .then(resp => {
             console.log(resp.data)
             if (resp.status != 200){

@@ -6,6 +6,7 @@ import { ScrollView } from 'react-native-virtualized-view';
 import { Card,Button } from 'react-native-paper';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import logo from '../../../assets/men.png';
+import API from '../../axiosAPI'
 
 
 const Story = () => {
@@ -14,8 +15,7 @@ const Story = () => {
     var isStop = 0
     useEffect(() => {
         const axiosStories = async () => {
-            console.log("getStory")
-            const response = await axios.post('http://192.168.1.233:5000/getstory', {title_story: route.params.title_Story, username: route.params.name})
+            const response = await API.post('getstory', {title_story: route.params.title_Story, username: route.params.name})
             setStories(response.data.story)
             console.log(stories)
            
@@ -31,7 +31,7 @@ const Story = () => {
             setonRepeatPress(0)
         }
         console.log("onStartFunc")
-        axios.post('http://192.168.1.233:5000/listenStory', {title_story: route.params.title_Story, current_index: currentIndex, username: route.params.name })
+        API.post('listenStory', {title_story: route.params.title_Story, current_index: currentIndex, username: route.params.name })
         .then(resp => {
             console.log(resp.data)
             console.log("befor" + currentIndex)
@@ -60,7 +60,7 @@ const Story = () => {
         console.log("onStartFunc")
         setCurrentIndex(currentIndex-1)
         currentIndex = currentIndex-1
-        axios.post('http://192.168.1.21:5000/listenStory', {title_story: route.params.title_Story, current_index: currentIndex, username:route.params.name})
+        API.post('listenStory', {title_story: route.params.title_Story, current_index: currentIndex, username:route.params.name})
         .then(resp => {
             console.log(resp.data)
             console.log("befor" + currentIndex)
@@ -81,7 +81,7 @@ const Story = () => {
     }
     var trans
     const onPressFunction = () =>{
-        axios.post('http://192.168.1.233:5000/translatWord', {word_required:stories[currentIndex]})
+        API.post('translatWord', {word_required:stories[currentIndex]})
         .then(resp => {
             trans = resp.data.translated
             console.log(trans)

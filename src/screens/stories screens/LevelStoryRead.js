@@ -5,6 +5,7 @@ import axios from "axios"
 import CustemButton from '../../components/CustemButton'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { combine } from 'qs/lib/utils';
+import API from '../../axiosAPI'
 
 const LevelStoryRead = () => {
     const route = useRoute()
@@ -19,7 +20,7 @@ const LevelStoryRead = () => {
 
     useEffect(() => {
         const axiosStories1 = async () => {
-            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'easy', username:route.params.name})
+            const response = await API.post('getallstories',{current_level: 'easy', username:route.params.name})
             setStories1(response.data)
         }
         axiosStories1()
@@ -27,7 +28,7 @@ const LevelStoryRead = () => {
 
     useEffect(() => {
         const axiosStories2 = async () => {
-            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'medium', username:route.params.name})
+            const response = await API.post('getallstories',{current_level: 'medium', username:route.params.name})
             setStories2(response.data)
             console.log(stories2)
         }
@@ -35,7 +36,7 @@ const LevelStoryRead = () => {
     }, [])
     useEffect(() => {
         const axiosStories3 = async () => {
-            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'hard', username:route.params.name})
+            const response = await API.post('getallstories',{current_level: 'hard', username:route.params.name})
             setStories3(response.data)
             console.log(stories3)
         }
@@ -43,7 +44,7 @@ const LevelStoryRead = () => {
     }, [])
     useEffect(() => {
         const axiosStories4 = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getallstories',{current_level: 'advanced',username:route.params.name})
+            const response = await API.post('getallstories',{current_level: 'advanced',username:route.params.name})
             setStories4(response.data)
             console.log(stories4)
         }
@@ -57,7 +58,7 @@ const LevelStoryRead = () => {
 
     const onPressFunction2 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.233:5000/checkpasslevel', {username:route.params.name})
+        API.post('checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_medium)
             if (resp.data.pass_level_medium==1){
@@ -77,7 +78,7 @@ const LevelStoryRead = () => {
 
     const onPressFunction3 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.233:5000/checkpasslevel', {username:route.params.name})
+        API.post('checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_hard)
             if (resp.data.pass_level_hard==1){
@@ -97,7 +98,7 @@ const LevelStoryRead = () => {
 
     const onPressFunction4 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.233:5000/checkpasslevel', {username:route.params.name})
+        API.post('checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_advenc)
             if (resp.data.pass_level_advenc==1){
@@ -115,18 +116,15 @@ const LevelStoryRead = () => {
         .finally(() => console.log("done"))
     }
 
-    const getStorty = () => {
-        axios.post('http://192.168.1.233:5000/getdatareport', {username:route.params.name})
+    const getStory = () => {
+        API.post('getdatareport', {username:route.params.name})
         .then(resp => {
             if (resp.data.current_level == "advanced"){
-                console.log("pppp")
-                axios.post('http://192.168.1.21:5000/addstoryadvenc', {username:route.params.name})
+                API.post('addstoryadvenc', {username:route.params.name})
                 .then(resp => {
                     if (resp.error == "The story already exists, press again"){
                         Alert.alert('Note',resp.error,[{text: 'Understood'}])
                     }
-                    console.log(resp.data.title)
-                    console.log(resp.data.story)
                     stories4.pop()
                     stories4.push(resp.data)
                     setStories4(stories4)
@@ -185,7 +183,7 @@ const LevelStoryRead = () => {
          <CustemButton 
             text='Surprise' 
             // check befor press signin all the data is valid
-            onPress={getStorty}
+            onPress={getStory}
         />  : null}
     </ScrollView>
     </ImageBackground>
