@@ -1,11 +1,13 @@
+
 import { DevSettings,ImageBackground,Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, Alert} from 'react-native';
 import React, {useState, useEffect} from 'react'
 import { List } from 'react-native-paper';
 import axios from "axios"
 import CustemButton from '../../components/CustemButton'
 import { useNavigation, useRoute } from '@react-navigation/native'
+import { combine } from 'qs/lib/utils';
 
-const LevelStoryRead = () => {
+const LevelStoryListen = () => {
     const route = useRoute()
     const navigation = useNavigation()
     const [stories1 , setStories1]=useState([])
@@ -18,7 +20,7 @@ const LevelStoryRead = () => {
 
     useEffect(() => {
         const axiosStories1 = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getallstories',{current_level: 'easy', username:route.params.name})
+            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'easy', username:route.params.name})
             setStories1(response.data)
         }
         axiosStories1()
@@ -26,7 +28,7 @@ const LevelStoryRead = () => {
 
     useEffect(() => {
         const axiosStories2 = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getallstories',{current_level: 'medium',username:route.params.name})
+            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'medium', username:route.params.name})
             setStories2(response.data)
             console.log(stories2)
         }
@@ -34,7 +36,7 @@ const LevelStoryRead = () => {
     }, [])
     useEffect(() => {
         const axiosStories3 = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getallstories',{current_level: 'hard',username:route.params.name})
+            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'hard', username:route.params.name})
             setStories3(response.data)
             console.log(stories3)
         }
@@ -49,7 +51,7 @@ const LevelStoryRead = () => {
         axiosStories4()
     }, [])
 
-    const onReadStory = (item) =>{
+    const onListenStory = (item) =>{
         navigation.navigate('Listen Story', {name:route.params.name, title_Story: item.title})
         console.log(item.title)
     }
@@ -76,7 +78,7 @@ const LevelStoryRead = () => {
 
     const onPressFunction3 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.21:5000/checkpasslevel', {username:route.params.name})
+        axios.post('http://192.168.1.233:5000/checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_hard)
             if (resp.data.pass_level_hard==1){
@@ -96,7 +98,7 @@ const LevelStoryRead = () => {
 
     const onPressFunction4 = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.21:5000/checkpasslevel', {username:route.params.name})
+        axios.post('http://192.168.1.233:5000/checkpasslevel', {username:route.params.name})
         .then(resp => {
             console.log(resp.data.pass_level_advenc)
             if (resp.data.pass_level_advenc==1){
@@ -114,10 +116,10 @@ const LevelStoryRead = () => {
         .finally(() => console.log("done"))
     }
 
-    const getStort = () => {
-        axios.post('http://192.168.1.21:5000/getdatareport', {username:route.params.name})
+    const getStorty = () => {
+        axios.post('http://192.168.1.233:5000/getdatareport', {username:route.params.name})
         .then(resp => {
-            if (resp.data.current_level == "advence"){
+            if (resp.data.current_level == "advanced"){
                 axios.post('http://192.168.1.233:5000/addstoryadvenc', {username:route.params.name})
                 .then(resp => {
                     if (resp.error == "The story already exists, press again"){
@@ -125,6 +127,7 @@ const LevelStoryRead = () => {
                     }
                     console.log(resp.data.title)
                     console.log(resp.data.story)
+                    stories4.pop()
                     stories4.push(resp.data)
                     setStories4(stories4)
                     Alert.alert('Note',"You add a new story for your advence list",[{text: 'Understood'}])
@@ -143,7 +146,7 @@ const LevelStoryRead = () => {
                 title="Easy">
                 {stories1.map((item, index)=>{
                     return(
-                        <List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
+                        <List.Item key={index} onPress={() => onListenStory(item)} title={item.title} />);
                 })}
             </List.Accordion>
             </View>
@@ -153,7 +156,7 @@ const LevelStoryRead = () => {
                 expanded={expanded2}
                 onPress={onPressFunction2}>
                 {stories2.map((item, index)=>{
-                    return(<List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
+                    return(<List.Item key={index} onPress={() => onListenStory(item)} title={item.title} />);
                 })}
             </List.Accordion>
             </View>
@@ -163,7 +166,7 @@ const LevelStoryRead = () => {
                 expanded={expanded3}
                 onPress={onPressFunction3}>
                 {stories3.map((item, index)=>{
-                    return(<List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
+                    return(<List.Item key={index} onPress={() => onListenStory(item)} title={item.title} />);
                 })}
             </List.Accordion>
             </View>
@@ -173,16 +176,16 @@ const LevelStoryRead = () => {
                 expanded={expanded4}
                 onPress={onPressFunction4}>
                 {stories4.map((item, index)=>{
-                    return(<List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
+                    return(<List.Item key={index} onPress={() => onListenStory(item)} title={item.title} />);
                 })}
             </List.Accordion>
             </View>
         </List.Section>
         {expanded4 == true ? 
-         <CustemButton 
+            <CustemButton 
             text='Surprise' 
             // check befor press signin all the data is valid
-            onPress={getStort}
+            onPress={getStorty}
         />  : null}
     </ScrollView>
     </ImageBackground>
@@ -191,4 +194,4 @@ const LevelStoryRead = () => {
 }
 
 
-export default LevelStoryRead;
+export default LevelStoryListen;
