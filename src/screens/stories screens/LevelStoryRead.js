@@ -138,47 +138,33 @@ const LevelStoryRead = () => {
             }
         }) 
     }
+
+    const Accordion = (mapStory, level, expanded = false, pressFunc = null) => (
+        <List.Accordion  style={styles.accordion1}
+                title={level}
+                expanded={expanded}
+                onPress={pressFunc}>
+                {mapStory.map((item, index)=>{
+                    return(
+                        <List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
+                })}
+        </List.Accordion>
+    );
+
     return ( <ImageBackground source={require('../../../assets/background.jpg')} style={{width: '100%', height: '100%'}}> 
         <ScrollView>
         <List.Section title="">
             <View style={styles.view}>
-            <List.Accordion  style={styles.accordion1}
-                title="Easy">
-                {stories1.map((item, index)=>{
-                    return(
-                        <List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
-                })}
-            </List.Accordion>
+            {Accordion(stories1, "Easy")}
             </View>
             <View style={styles.view}>
-            <List.Accordion style={styles.accordion1}
-                title="Medium"
-                expanded={expanded2}
-                onPress={onPressFunction2}>
-                {stories2.map((item, index)=>{
-                    return(<List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
-                })}
-            </List.Accordion>
+            {Accordion(stories2, "Medium", expanded2, onPressFunction2)}
             </View>
             <View style={styles.view}>
-            <List.Accordion style={styles.accordion}
-                title="Hard"
-                expanded={expanded3}
-                onPress={onPressFunction3}>
-                {stories3.map((item, index)=>{
-                    return(<List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
-                })}
-            </List.Accordion>
+            {Accordion(stories3, "Hard", expanded3, onPressFunction3)}
             </View>
             <View style={styles.view}>
-            <List.Accordion style={styles.accordion}
-                title="Advanced"
-                expanded={expanded4}
-                onPress={onPressFunction4}>
-                {stories4.map((item, index)=>{
-                    return(<List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
-                })}
-            </List.Accordion>
+            {Accordion(stories4, "Advanced", expanded4, onPressFunction4)}
             </View>
         </List.Section>
         {expanded4 == true ? 

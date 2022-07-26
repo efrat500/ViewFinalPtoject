@@ -32,12 +32,14 @@ const ReportScreen = () => {
         const axiosStories = async () => {
             const response = await axios.post('http://192.168.1.21:5000/getdatareport', {username: route.params.name})
             setReportlevel(response.data.current_level)
+            console.log(response.data.current_level)
             setNumStories(response.data.num_stories)
             setsize_list_general(response.data.size_list_general)
             setcalc_reading(response.data.size_list_general-response.data.size_list_reading)
             setcalc_translating(response.data.size_list_general-response.data.size_list_translating)
             setlist_titles(response.data.list_titles.alltitles)
             setlist_grades(response.data.list_grades.allgrades)
+            console.log("title")
             console.log(list_titles_vec)
             console.log(list_grades_vec)
         }
@@ -110,6 +112,7 @@ const ReportScreen = () => {
             </Button>
         </ScrollView>)
     } else{
+        console.log("non")
         return(<View></View>);
     }
 }
