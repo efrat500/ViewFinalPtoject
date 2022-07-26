@@ -111,7 +111,6 @@ const Story = () => {
         .then(resp => {
             trans = resp.data.Playback
             console.log(trans)
-            // Alert.alert('Translate',trans,[{text: 'Understood'}])
         })
         .catch(error => {
             console.log(error)
