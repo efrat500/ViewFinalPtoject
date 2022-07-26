@@ -15,7 +15,7 @@ const Story = () => {
     useEffect(() => {
         const axiosStories = async () => {
             console.log("getStory")
-            const response = await axios.post('http://192.168.1.233:5000/getstory', {title_story: route.params.title_Story, username: route.params.name})
+            const response = await axios.post('http://192.168.1.21:5000/getstory', {title_story: route.params.title_Story, username: route.params.name})
             setStories(response.data.story)
             console.log(stories)
            
@@ -31,7 +31,7 @@ const Story = () => {
             setonRepeatPress(0)
         }
         console.log("onStartFunc")
-        axios.post('http://192.168.1.233:5000/listenStory', {title_story: route.params.title_Story, current_index: currentIndex, username: route.params.name })
+        axios.post('http://192.168.1.21:5000/listenStory', {title_story: route.params.title_Story, current_index: currentIndex, username: route.params.name })
         .then(resp => {
             console.log(resp.data)
             console.log("befor" + currentIndex)
@@ -81,7 +81,7 @@ const Story = () => {
     }
     var trans
     const onPressFunction = () =>{
-        axios.post('http://192.168.1.233:5000/translatWord', {word_required:stories[currentIndex]})
+        axios.post('http://192.168.1.21:5000/translatWord', {word_required:stories[currentIndex]})
         .then(resp => {
             trans = resp.data.translated
             console.log(trans)
@@ -99,10 +99,10 @@ const Story = () => {
             <View style={styles.view}>
             <View style={{flexDirection: 'row'}}>
             <Image style={styles.logo} source={logo}></Image>
-            <Text style={styles.text}> {route.params.title_Story}</Text>
+            <Text style={{left: -20,flex: 1,marginLeft:-10,fontSize:30, fontWeight: 'bold',textAlign: 'center', marginTop: 50, color:'black',}}> {route.params.title_Story}</Text>
             </View>    
                 {stories.length == 0 ? null:
-                    <Card style={styles.card}>
+                    <Card style={{marginTop:-30,height:350, elavation: 3, backgroundColor : 'transparent',borderRadius: 7,borderWidth:  3,  borderColor:  'black'}}>
                     <ScrollView>
                     <View style={styles.view1}>
                         {currentIndex > 0 ? 

@@ -15,7 +15,7 @@ const MenuScreen = ({}) => {
 
     const onReport = () =>{
         console.log(route.params.name)
-        axios.post('http://192.168.1.233:5000/getdatareport', {username: route.params.name})
+        axios.post('http://192.168.1.21:5000/getdatareport', {username: route.params.name})
         .then(resp => {
             if (resp.data.num_stories < 1){
                 Alert.alert('Note','Read at least 1 story to get a report on your progress',[{text: 'Understood'}])

@@ -10,13 +10,12 @@ import MenuScreen from '../screens/MenuScreen'
 import ReportScreen from '../screens/report screen/ReportScreen'
 import StoriesMenu from '../screens/MenuStoryScreen'
 import WordsMenu from '../screens/MenuWordsScreen'
-import LevelStoryRead from '../screens/stories screens/LevelStoryRead'
+import LevelStoryRead from '../screens/stories screens/LevelStory'
 import WriteScreen from '../screens/words screens/WriteScreen'
 import TranslateScreen from '../screens/words screens/TranslateScreen'
 import ReadScreen from '../screens/words screens/ReadScreen'
 import ListenStory from '../screens/stories screens/ListenStory'
 import Story from '../screens/stories screens/ReadStory'
-import LevelStoryListen from '../screens/stories screens/LevelStoryListen'
 import DictionaryScreen from '../screens/words screens/Dictionary'
 import InstructionScreen from '../screens/InstructionScreen'
 
@@ -43,13 +42,12 @@ const Navigation = () => {
         <Stack.Screen name="Report" component={ReportScreen}/>
         <Stack.Screen name="Stories Menu" component={StoriesMenu}/>
         <Stack.Screen name="Words Menu" component={WordsMenu}/>
-        <Stack.Screen name="Level Story Read" component={LevelStoryRead}/>
+        <Stack.Screen name="Level Story" component={LevelStoryRead}/>
         <Stack.Screen name="Translate Words" component={WriteScreen}/>
         <Stack.Screen name="Listening Words" component={TranslateScreen}/>
         <Stack.Screen name="Reading Words" component={ReadScreen}/>
         <Stack.Screen name="Listen Story" component={ListenStory}/>
         <Stack.Screen name="Read Story" component={Story}/>
-        <Stack.Screen name="Level Story Listen" component={LevelStoryListen}/>
         <Stack.Screen name="Dictionary Screen" component={DictionaryScreen}/>
         
        

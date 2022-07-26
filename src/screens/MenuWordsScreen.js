@@ -15,7 +15,7 @@ const WordsScreen = () => {
     const navigation = useNavigation()
     
     const onWriting = () =>{
-        axios.post('http://192.168.1.233:5000/getdatareport', {username: route.params.name})
+        axios.post('http://192.168.1.21:5000/getdatareport', {username: route.params.name})
         .then(resp => {
             if (resp.data.size_list_translating < 1){
                 Alert.alert('Note','You dont have words to practice',[{text: 'Understood'}])
@@ -31,7 +31,7 @@ const WordsScreen = () => {
     }
 
     const onHearing = () =>{
-        axios.post('http://192.168.1.233:5000/getdatareport', {username: route.params.name})
+        axios.post('http://192.168.1.21:5000/getdatareport', {username: route.params.name})
         .then(resp => {
             if (resp.data.size_list_general < 1){
                 Alert.alert('Note','You dont have words to practice',[{text: 'Understood'}])
@@ -47,7 +47,7 @@ const WordsScreen = () => {
     }
 
     const onReading = () =>{
-        axios.post('http://192.168.1.233:5000/getdatareport', {username: route.params.name})
+        axios.post('http://192.168.1.21:5000/getdatareport', {username: route.params.name})
         .then(resp => {
             if (resp.data.size_list_reading < 1){
                 Alert.alert('Note','You dont have words to practice',[{text: 'Understood'}])
