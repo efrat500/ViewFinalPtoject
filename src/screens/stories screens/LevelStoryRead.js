@@ -43,7 +43,7 @@ const LevelStoryRead = () => {
     }, [])
     useEffect(() => {
         const axiosStories4 = async () => {
-            const response = await axios.post('http://192.168.1.233:5000/getallstories',{current_level: 'advanced',username:route.params.name})
+            const response = await axios.post('http://192.168.1.21:5000/getallstories',{current_level: 'advanced',username:route.params.name})
             setStories4(response.data)
             console.log(stories4)
         }
@@ -120,7 +120,7 @@ const LevelStoryRead = () => {
         .then(resp => {
             if (resp.data.current_level == "advanced"){
                 console.log("pppp")
-                axios.post('http://192.168.1.233:5000/addstoryadvenc', {username:route.params.name})
+                axios.post('http://192.168.1.21:5000/addstoryadvenc', {username:route.params.name})
                 .then(resp => {
                     if (resp.error == "The story already exists, press again"){
                         Alert.alert('Note',resp.error,[{text: 'Understood'}])
@@ -138,11 +138,11 @@ const LevelStoryRead = () => {
             }
         }) 
     }
-    return ( <ImageBackground source={require('../../../assets/b1.jpg')} style={{width: '100%', height: '100%'}}> 
+    return ( <ImageBackground source={require('../../../assets/background.jpg')} style={{width: '100%', height: '100%'}}> 
         <ScrollView>
         <List.Section title="">
-            <View style={{ padding:10}}>
-            <List.Accordion  style={{ borderWidth:0.7,borderRadius:3,backgroundColor : '#dcebf1'}}
+            <View style={styles.view}>
+            <List.Accordion  style={styles.accordion1}
                 title="Easy">
                 {stories1.map((item, index)=>{
                     return(
@@ -150,8 +150,8 @@ const LevelStoryRead = () => {
                 })}
             </List.Accordion>
             </View>
-            <View style={{ padding:10}}>
-            <List.Accordion style={{borderWidth:0.7,borderRadius:3,backgroundColor : '#dcebf1'}}
+            <View style={styles.view}>
+            <List.Accordion style={styles.accordion1}
                 title="Medium"
                 expanded={expanded2}
                 onPress={onPressFunction2}>
@@ -160,8 +160,8 @@ const LevelStoryRead = () => {
                 })}
             </List.Accordion>
             </View>
-            <View style={{ padding:10}}>
-            <List.Accordion style={{borderWidth:0.7,borderRadius:3, borderColor:'black',backgroundColor : '#dcebf1'}}
+            <View style={styles.view}>
+            <List.Accordion style={styles.accordion}
                 title="Hard"
                 expanded={expanded3}
                 onPress={onPressFunction3}>
@@ -170,8 +170,8 @@ const LevelStoryRead = () => {
                 })}
             </List.Accordion>
             </View>
-            <View style={{ padding:10}}>
-            <List.Accordion style={{borderWidth:0.7,borderRadius:3, borderColor:'black',backgroundColor : '#dcebf1'}}
+            <View style={styles.view}>
+            <List.Accordion style={styles.accordion}
                 title="Advanced"
                 expanded={expanded4}
                 onPress={onPressFunction4}>
@@ -195,3 +195,23 @@ const LevelStoryRead = () => {
 
 
 export default LevelStoryRead;
+const styles = StyleSheet.create({
+    background:{
+        width: '100%', 
+        height: '100%',
+    },
+    view:{
+        padding:10,
+    },
+    accordion:{
+        borderWidth:0.7,
+        borderRadius:3, 
+        borderColor:'black',
+        backgroundColor : '#dcebf1',
+    },
+    accordion1:{
+        borderWidth:0.7,
+        borderRadius:3,
+        backgroundColor : '#dcebf1',
+    },
+})

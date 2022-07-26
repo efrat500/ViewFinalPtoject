@@ -57,7 +57,7 @@ const Dictionary = () => {
   };
   var trans
   const onTranslatePressed = (item) =>{
-    axios.post('http://192.168.1.233:5000/translatWord', {word_required:item.word})
+    axios.post('http://192.168.1.21:5000/translatWord', {word_required:item.word})
     .then(resp => {
         trans = resp.data.translated
         Alert.alert('Translate',trans,[{text: 'Understood'}])
@@ -68,7 +68,7 @@ const Dictionary = () => {
     .finally(() => console.log("done"))
 }
 const onSoundPressed = (item) =>{
-    axios.post('http://192.168.1.233:5000/convertWriting', {word_required:item.word})
+    axios.post('http://192.168.1.21:5000/convertWriting', {word_required:item.word})
     .then(resp => {
         console.log(resp.data)
     })
@@ -94,19 +94,16 @@ const ItemView = ({ item }) => {
 
   const ItemSeparatorView = () => {
     return (
-      // Flat List Item Separator
       <View
         style={{
           height: 0.5,
           width: '100%',
-          //backgroundColor: '#C8C8C8',
         }}
       />
     );
   };
 
   const getItem = (item) => {
-    // Function for click on an item
     alert('Id : ' + item.word);
   };
 
@@ -116,7 +113,7 @@ const ItemView = ({ item }) => {
   }
 
   return (
-    <ImageBackground source={require('../../../assets/b1.jpg')} style={{width: '100%', height: '100%'}}> 
+    <ImageBackground source={require('../../../assets/background.jpg')} style={{width: '100%', height: '100%'}}> 
     <ScrollView>
         <SafeAreaView>
         <View style={styles.container}>
@@ -159,58 +156,54 @@ const styles = StyleSheet.create({
         narginTop: 15,
         paddingTop: 10,
     },
-  container: {
-    //backgroundColor: 'white',
-  },
-  itemStyle: {
-    padding: 10,
-    fontSize: 22,
-  },
-  textInputStyle: {
-    height: 40,
-    borderWidth: 1,
-    paddingLeft: 20,
-    margin: 5,
-    borderColor: '#009688',
-    backgroundColor: '#FFFFFF',
-  },
-  item: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    //backgroundColor: "#64b5f6",
-    padding: 3,
-    marginVertical: 5,
-    marginHorizontal: 16,
-    borderRadius:2,
-    borderColor: 'black',
-    borderWidth:1,
+    itemStyle: {
+      padding: 10,
+      fontSize: 22,
     },
-    iconStyle:{
-        marginTop: 12,
-        marginHorizontal: 8
+    textInputStyle: {
+      height: 40,
+      borderWidth: 1,
+      paddingLeft: 20,
+      margin: 5,
+      borderColor: '#009688',
+      backgroundColor: '#FFFFFF',
     },
-    cardStyle:{
-        marginTop: 12,
-        marginHorizontal: 8
-    },
-    searchWrapperStyle: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        borderWidth: 1,
-        borderColor: 'gray',
-    },
-    iconStyle: {
-        marginTop: 5,
-        marginHorizontal: 8,
-    },
-    searchInputStyle:{
-        flex: 1,
-        paddingVertical: 2,
-        paddingHorizontal: 0,
-        margin: 0,
-        color: "black",
-        backgroundColor: '#FFFFFF',
-    }
+    item: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      padding: 3,
+      marginVertical: 5,
+      marginHorizontal: 16,
+      borderRadius:2,
+      borderColor: 'black',
+      borderWidth:1,
+      },
+      iconStyle:{
+          marginTop: 12,
+          marginHorizontal: 8
+      },
+      cardStyle:{
+          marginTop: 12,
+          marginHorizontal: 8
+      },
+      searchWrapperStyle: {
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          borderWidth: 1,
+          borderColor: 'gray',
+      },
+      iconStyle: {
+          marginTop: 5,
+          marginHorizontal: 8,
+      },
+      searchInputStyle:{
+          flex: 1,
+          paddingVertical: 2,
+          paddingHorizontal: 0,
+          margin: 0,
+          color: "black",
+          backgroundColor: '#FFFFFF',
+      }
 });
 
 export default Dictionary;

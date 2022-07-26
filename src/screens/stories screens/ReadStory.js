@@ -4,7 +4,6 @@ import axios from "axios"
 import CustemButton from '../../components/CustemButton'
 import { ScrollView } from 'react-native-virtualized-view';
 import {Card, Button } from 'react-native-paper';
-import Appear from '../../components/Appear';
 import { useNavigation, useRoute } from '@react-navigation/native'
 import logo from '../../../assets/men.png';
 
@@ -33,7 +32,7 @@ const Story = () => {
         setButtonColorStart('black')
         setButtonStart("Continue reading")
         console.log("onStartFunc")
-        axios.post('http://192.168.1.233:5000/speechToText', {title_story: route.params.title_Story, current_index: currentIndex, username: route.params.name, counterWorng:counterWorng })
+        axios.post('http://192.168.1.21:5000/speechToText', {title_story: route.params.title_Story, current_index: currentIndex, username: route.params.name, counterWorng:counterWorng })
         .then(resp => {
             console.log(resp.data)
             temp = resp.data.translated
@@ -54,7 +53,7 @@ const Story = () => {
                 console.log(stories.length)
                 if (currentIndex == stories.length){
                     var grade
-                    axios.post('http://192.168.1.233:5000/calculateGrade', {title_story: route.params.title_Story , username: route.params.name })
+                    axios.post('http://192.168.1.21:5000/calculateGrade', {title_story: route.params.title_Story , username: route.params.name })
                     .then(resp => {
                         console.log(resp.data.grade)
                         grade = resp.data.grade
@@ -67,10 +66,8 @@ const Story = () => {
                 }
                 else{
                     onStartRead()
-                    // setCounterWorng(0)
                     console.log('check')
                 }
-                // setCounterWorng(0)
             }
             if (resp.data.translated == "worng"){
                 console.log("in worng")
@@ -94,7 +91,7 @@ const Story = () => {
                     console.log(stories.length)
                     if (currentIndex == stories.length){
                         var grade
-                        axios.post('http://192.168.1.233:5000/calculateGrade', {title_story: route.params.title_Story , username: route.params.name })
+                        axios.post('http://192.168.1.21:5000/calculateGrade', {title_story: route.params.title_Story , username: route.params.name })
                         .then(resp => {
                             console.log(resp.data.grade)
                             grade = resp.data.grade
@@ -122,7 +119,7 @@ const Story = () => {
 
     var trans
     const onPressFunction = () =>{
-        axios.post('http://192.168.1.233:5000/convertWriting', {word_required:stories[currentIndex]})
+        axios.post('http://192.168.1.21:5000/convertWriting', {word_required:stories[currentIndex]})
         .then(resp => {
             trans = resp.data.Playback
             console.log(trans)
@@ -136,7 +133,7 @@ const Story = () => {
 
     var [currentIndex , setCurrentIndex]=useState(0)
     return (
-        <ImageBackground source={require('../../../assets/b1.jpg')} style={{width: '100%', height: '100%'}}> 
+        <ImageBackground source={require('../../../assets/background.jpg')} style={{width: '100%', height: '100%'}}> 
             <View style={styles.view}>
             <View style={{flexDirection: 'row'}}>
             <Image style={styles.logo} source={logo}></Image>

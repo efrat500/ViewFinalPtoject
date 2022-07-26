@@ -4,7 +4,6 @@ import { Container, Header, View, DeckSwiper, CardItem, Thumbnail, Text, Left, B
 import MyCard from '../../components/Card/Card';
 import InputText from '../../components/InputText'
 import { Button } from 'react-native-paper';
-import Appear from '../../components/Appear';
 import { TextInput } from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'
 import axios from "axios"
@@ -27,14 +26,14 @@ const TranslateScreen = () => {
     const [buttonColorTranslate, setButtonColorTranslate] = useState('gray');
     useEffect(() => {
         const axiosWords = async () => {
-            const response = await axios.post('http://192.168.1.233:5000/getwordsgeneral', {username: route.params.name})
+            const response = await axios.post('http://192.168.1.21:5000/getwordsgeneral', {username: route.params.name})
             setWords(response.data.allwords)
         }
         axiosWords()
     }, [])
     var trans 
     const onTranslatePressed = (item) =>{
-        axios.post('http://192.168.1.233:5000/translatWord', {word_required:item})
+        axios.post('http://192.168.1.21:5000/translatWord', {word_required:item})
         .then(resp => {
             trans = resp.data.translated
             Alert.alert('Translate',trans,[{text: 'Understood'}])
@@ -45,7 +44,7 @@ const TranslateScreen = () => {
         .finally(() => console.log("done"))
     }
     const onSoundPressed = (item) =>{
-        axios.post('http://192.168.1.233:5000/convertWriting', {word_required:item.word})
+        axios.post('http://192.168.1.21:5000/convertWriting', {word_required:item.word})
         .then(resp => {
             console.log(resp.data)
         })

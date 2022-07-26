@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Image, useWindowDimensions, Alert, ImageBackground, Linking } from 'react-native'
 import React, {useState} from 'react'
-import CustomInput from '../../../components/CustomInput'
-import CustemButton from '../../../components/CustemButton'
+import CustomInput from '../../components/CustomInput'
+import CustemButton from '../../components/CustemButton'
 import { useNavigation } from '@react-navigation/native'
 import {Formik} from 'formik'
 import * as Yup from 'yup'
@@ -49,7 +49,7 @@ const ForgotPasswordScreen = () => {
     }
 
     return (
-        <ImageBackground source={require('../../../../assets/b1.jpg')} style={styles.root}> 
+        <ImageBackground source={require('../../../assets/background.jpg')} style={styles.root}> 
             <Text style={styles.title1}>Enter Verification</Text> 
             <Text style={styles.title2}>Details</Text> 
             <Formik 

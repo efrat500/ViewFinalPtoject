@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Image, useWindowDimensions, Alert, ImageBackground} from 'react-native'
 import React, {useState, useEffect} from 'react'
-import CustomInput from '../../../components/CustomInput'
-import CustemButton from '../../../components/CustemButton'
+import CustomInput from '../../components/CustomInput'
+import CustemButton from '../../components/CustemButton'
 import { useNavigation } from '@react-navigation/native'
 import {Formik} from 'formik'
 import * as Yup from 'yup'
@@ -15,7 +15,7 @@ const validationSchema = Yup.object({
 
 const SignInScreen = (props) => {
     const insertData = (values) => {
-        axios.post('http://192.168.1.233:5000/login', {username: values.username ,password: values.password})
+        axios.post('http://192.168.1.21:5000/login', {username: values.username ,password: values.password})
         .then(resp => {
             console.log(resp.data)
             console.log("s1")
@@ -47,8 +47,8 @@ const SignInScreen = (props) => {
     
     
     return (
-        <ImageBackground source={require('../../../../assets/b1.jpg')} style={styles.root}> 
-            <Image source={require('../../../../assets/Logon.png')} style={styles.logo}/> 
+        <ImageBackground source={require('../../../assets/background.jpg')} style={styles.root}> 
+            <Image source={require('../../../assets/Logon.png')} style={styles.logo}/> 
             <Text style={styles.title}>Welcome Back</Text> 
             <Formik 
                 initialValues={{username: '',password: ''}} 

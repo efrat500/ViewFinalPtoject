@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Image, useWindowDimensions, ImageBackground, Alert } from 'react-native';
 import React, {useState, useEffect} from 'react'
-import CustomInput from '../../../components/CustomInput'
-import CustemButton from '../../../components/CustemButton'
+import CustomInput from '../../components/CustomInput'
+import CustemButton from '../../components/CustemButton'
 import { useNavigation } from '@react-navigation/native'
 import {Formik} from 'formik'
 import * as Yup from 'yup'
@@ -18,7 +18,7 @@ const validationSchema = Yup.object({
 
 const SignUpScreen = (props) => {
     const insertData = (values) => {
-        axios.post('http://192.168.1.233:5000/register', {username:values.username, password:values.password, email:values.email, question:values.question})
+        axios.post('http://192.168.1.21:5000/register', {username:values.username, password:values.password, email:values.email, question:values.question})
         .then(resp => {
             console.log(resp.data)
             if (resp.status != 200){
@@ -46,7 +46,7 @@ const SignUpScreen = (props) => {
     }
 
     return (
-        <ImageBackground source={require('../../../../assets/b1.jpg')} style={styles.root}>
+        <ImageBackground source={require('../../../assets/background.jpg')} style={styles.root}>
             <Text style={styles.title}>Create a new account</Text> 
             <Formik
                 initialValues={{username: '', email:'',password: '', passwordRepeat: '', question:''}} 

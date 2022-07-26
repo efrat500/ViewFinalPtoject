@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Image, useWindowDimensions, ImageBackground, Alert } from 'react-native';
 import React, {useState} from 'react'
-import CustomInput from '../../../components/CustomInput'
-import CustemButton from '../../../components/CustemButton'
+import CustomInput from '../../components/CustomInput'
+import CustemButton from '../../components/CustemButton'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import {Form, Formik} from 'formik'
 import * as Yup from 'yup'
@@ -37,7 +37,7 @@ const NewPasswordScreen = (props) => {
     }
 
     return (
-        <ImageBackground source={require('../../../../assets/b1.jpg')} style={styles.root}> 
+        <ImageBackground source={require('../../../assets/background.jpg')} style={styles.root}> 
             <Text style={styles.title}>Reset your password</Text> 
             <Formik
                 initialValues={{password: '', passwordRepeat: ''}} 
