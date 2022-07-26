@@ -2,10 +2,10 @@ import {BarChart,LineChart, ProgressChart} from 'react-native-chart-kit';
 import { Image, FlatList, Text, ScrollView, View, Dimensions, StyleSheet, Alert } from 'react-native';
 import { Button } from 'react-native-paper';
 import React, {useState, useEffect} from 'react'
-import axios from "axios"
 import logo from '../../../assets/men.png';
 import logo2 from '../../../assets/girl.png';
 import { useNavigation, useRoute } from '@react-navigation/native'
+import API from '../../axiosAPI'
 
 const screenWidth = Dimensions.get("window").width;
 const chartConfig = {
@@ -30,7 +30,7 @@ const ReportScreen = () => {
     const [calc_translating , setcalc_translating]=useState(0)
     useEffect(() => {
         const axiosStories = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getdatareport', {username: route.params.name})
+            const response = await API.post('datareport', {username: route.params.name})
             setReportlevel(response.data.current_level)
             console.log(response.data.current_level)
             setNumStories(response.data.num_stories)
@@ -52,7 +52,7 @@ const ReportScreen = () => {
 
     }: []}    
     const onCalc = () =>{
-        axios.post('http://192.168.1.21:5000/calcaverage', {username: route.params.name})
+        API.post('calcaverage', {username: route.params.name})
         .then(resp => {
             console.log(resp.data.average)
             Alert.alert('Note','Your average is ' + resp.data.average,[{text: 'Understood'}])

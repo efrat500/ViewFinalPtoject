@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import {Formik} from 'formik'
 import * as Yup from 'yup'
 import axios from "axios"
+import API from '../../axiosAPI'
 
 const validationSchema = Yup.object({
     username: Yup.string().trim().required('Username is required'),
@@ -15,7 +16,7 @@ const validationSchema = Yup.object({
 
 const SignInScreen = (props) => {
     const insertData = (values) => {
-        axios.post('http://192.168.1.21:5000/login', {username: values.username ,password: values.password})
+        API.post('login', {username: values.username ,password: values.password})
         .then(resp => {
             console.log(resp.data)
             console.log("s1")

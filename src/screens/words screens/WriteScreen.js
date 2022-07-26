@@ -7,6 +7,7 @@ import { Button } from 'react-native-paper';
 import { TextInput } from 'react-native-paper';
 import axios from "axios"
 import { useNavigation, useRoute } from '@react-navigation/native'
+import API from '../../axiosAPI'
 
 
 const WriteScreen = () => {
@@ -15,9 +16,8 @@ const WriteScreen = () => {
     const [textInput , onChangetext]=useState(' ')
     useEffect(() => {
         const axiosWords = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getwordstranslating', {username: route.params.name})
+            const response = await API.post('getwordstranslating', {username: route.params.name})
             setWords(response.data.allwords)
-            // console.log("my data") 
             console.log(response.data.allwords)
         }
         axiosWords()
@@ -25,7 +25,7 @@ const WriteScreen = () => {
     var check
     const onCheckPressed = (item, value) =>{
         var type_list = "words_list_translating"       
-        axios.post('http://192.168.1.21:5000/comperTransletetWord', {word_english:item, translate:value, username: route.params.name, which_list: type_list})
+        API.post('comperTransletetWord', {word_english:item, translate:value, username: route.params.name, which_list: type_list})
         .then(resp => {
             check = resp.data.feedback
             console.log(resp.data.feedback)

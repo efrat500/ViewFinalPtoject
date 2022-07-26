@@ -11,12 +11,12 @@ import {
   Alert,
   Pressable,
 } from 'react-native';
-import axios from "axios"
 import { ScrollView } from 'react-native-virtualized-view';
 import { AntDesign } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons'; 
 import { Button, TouchableHighlight, TouchableOpacity } from 'react-native-web';
 import { IconButton,MD3Colors  } from 'react-native-paper';
+import API from '../../axiosAPI'
 
 
 const Dictionary = () => {
@@ -26,7 +26,7 @@ const Dictionary = () => {
     const [masterDataSource, setMasterDataSource] = useState([]);
     useEffect(() => {
         const axiosStories = async () => {
-            const response = await axios.post('http://192.168.1.21:5000/getwordsgeneral', {username: route.params.name})
+            const response = await API.post('getwordsgeneral', {username: route.params.name})
             setFilteredDataSource(response.data.allwords)
             setMasterDataSource(response.data.allwords)
         }
@@ -57,7 +57,7 @@ const Dictionary = () => {
   };
   var trans
   const onTranslatePressed = (item) =>{
-    axios.post('http://192.168.1.21:5000/translatWord', {word_required:item.word})
+    API.post('translatWord', {word_required:item.word})
     .then(resp => {
         trans = resp.data.translated
         Alert.alert('Translate',trans,[{text: 'Understood'}])
@@ -68,7 +68,7 @@ const Dictionary = () => {
     .finally(() => console.log("done"))
 }
 const onSoundPressed = (item) =>{
-    axios.post('http://192.168.1.21:5000/convertWriting', {word_required:item.word})
+    API.post('convertWriting', {word_required:item.word})
     .then(resp => {
         console.log(resp.data)
     })

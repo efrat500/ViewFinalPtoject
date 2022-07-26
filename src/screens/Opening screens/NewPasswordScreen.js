@@ -5,7 +5,7 @@ import CustemButton from '../../components/CustemButton'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import {Form, Formik} from 'formik'
 import * as Yup from 'yup'
-import axios from "axios"
+import API from '../../axiosAPI'
 
 const validationSchema = Yup.object({
     password: Yup.string().trim(). min(8,'Password is too shortת You need at least 8 characters!').required('Password is require'),
@@ -15,7 +15,7 @@ const validationSchema = Yup.object({
 const NewPasswordScreen = (props) => {
     const insertData = (values) => {
         console.log(route.params.name)
-        axios.put('http://192.168.1.21:5000/updatepassword', {username:route.params.name, password:values.password})
+        API.put('updatepassword', {username:route.params.name, password:values.password})
         .then(resp => {
             console.log(resp.data)
             if (resp.status == 200){

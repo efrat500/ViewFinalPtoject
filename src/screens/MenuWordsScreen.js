@@ -7,6 +7,7 @@ import { StyleSheet, TouchableOpacity, ScrollView,Alert } from 'react-native';
 import { Card, Title } from 'react-native-paper';
 import { useNavigation, useRoute} from '@react-navigation/native'
 import axios from "axios"
+import API from '../axiosAPI'
 
 
 const WordsScreen = () => {
@@ -15,7 +16,7 @@ const WordsScreen = () => {
     const navigation = useNavigation()
     
     const onWriting = () =>{
-        axios.post('http://192.168.1.21:5000/getdatareport', {username: route.params.name})
+        API.post('datareport', {username: route.params.name})
         .then(resp => {
             if (resp.data.size_list_translating < 1){
                 Alert.alert('Note','You dont have words to practice',[{text: 'Understood'}])
@@ -31,7 +32,7 @@ const WordsScreen = () => {
     }
 
     const onHearing = () =>{
-        axios.post('http://192.168.1.21:5000/getdatareport', {username: route.params.name})
+        API.post('datareport', {username: route.params.name})
         .then(resp => {
             if (resp.data.size_list_general < 1){
                 Alert.alert('Note','You dont have words to practice',[{text: 'Understood'}])
@@ -47,7 +48,7 @@ const WordsScreen = () => {
     }
 
     const onReading = () =>{
-        axios.post('http://192.168.1.21:5000/getdatareport', {username: route.params.name})
+        API.post('datareport', {username: route.params.name})
         .then(resp => {
             if (resp.data.size_list_reading < 1){
                 Alert.alert('Note','You dont have words to practice',[{text: 'Understood'}])

@@ -5,7 +5,7 @@ import CustemButton from '../../components/CustemButton'
 import { useNavigation } from '@react-navigation/native'
 import {Formik} from 'formik'
 import * as Yup from 'yup'
-import axios from "axios"
+import API from '../../axiosAPI'
 
 
 
@@ -22,7 +22,7 @@ const ForgotPasswordScreen = () => {
         console.log(values.username)
         console.log(values.email)
         console.log(values.question)
-        axios.post('http://192.168.1.21:5000/forgotpassword', {username: values.username ,email: values.email, question:values.question})
+        API.post('forgotpassword', {username: values.username ,email: values.email, question:values.question})
         .then(resp => {
             console.log(resp.data)
             console.log(resp.status)

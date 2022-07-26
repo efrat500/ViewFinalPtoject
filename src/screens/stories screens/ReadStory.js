@@ -1,11 +1,11 @@
 import { Image,View, Text, StyleSheet, Alert, FlatList, Pressable, TouchableOpacity, ImageBackground} from 'react-native'
 import React, {useState, useEffect} from 'react'
-import axios from "axios"
 import CustemButton from '../../components/CustemButton'
 import { ScrollView } from 'react-native-virtualized-view';
 import {Card, Button } from 'react-native-paper';
 import { useNavigation, useRoute } from '@react-navigation/native'
 import logo from '../../../assets/men.png';
+import API from '../../axiosAPI'
 
 
 const Story = () => {
@@ -17,43 +17,31 @@ const Story = () => {
 
     useEffect(() => {
         const axiosStories = async () => {
-            console.log("getStory")
-            const response = await axios.post('http://192.168.1.21:5000/getstory', {title_story: route.params.title_Story, username:route.params.name})
+            const response = await API.post('getstory', {title_story: route.params.title_Story, username:route.params.name})
             setStories(response.data.story)
-            console.log(response.data.story)
-           
         }
         axiosStories()
     }, [])
 
     var temp
     const onStartRead = () =>{
-        console.log("counterWorng= " + counterWorng)
         setButtonColorStart('black')
         setButtonStart("Continue reading")
-        console.log("onStartFunc")
-        axios.post('http://192.168.1.21:5000/speechToText', {title_story: route.params.title_Story, current_index: currentIndex, username: route.params.name, counterWorng:counterWorng })
+        API.post('speechToText', {title_story: route.params.title_Story, current_index: currentIndex, username: route.params.name, counterWorng:counterWorng })
         .then(resp => {
-            console.log(resp.data)
             temp = resp.data.translated
             if (resp.data.translated == "good"){
-                console.log("counterWorng= " + counterWorng)
                 setCounterWorng(0)
-                console.log("counterWorng= " + counterWorng)
                 counterWorng = 0
                 if (counterWorng == 1){
                     counterWorng = counterWorng - 1
                 }
                 setCounterWorng(0)
-                console.log("in good")
-                console.log("befor" + currentIndex)
                 setCurrentIndex(currentIndex+1)
                 currentIndex = currentIndex+1
-                console.log("after" + currentIndex)
-                console.log(stories.length)
                 if (currentIndex == stories.length){
                     var grade
-                    axios.post('http://192.168.1.21:5000/calculateGrade', {title_story: route.params.title_Story , username: route.params.name })
+                    API.post('calculateGrade', {title_story: route.params.title_Story , username: route.params.name })
                     .then(resp => {
                         console.log(resp.data.grade)
                         grade = resp.data.grade
@@ -91,7 +79,7 @@ const Story = () => {
                     console.log(stories.length)
                     if (currentIndex == stories.length){
                         var grade
-                        axios.post('http://192.168.1.21:5000/calculateGrade', {title_story: route.params.title_Story , username: route.params.name })
+                        API.post('calculateGrade', {title_story: route.params.title_Story , username: route.params.name })
                         .then(resp => {
                             console.log(resp.data.grade)
                             grade = resp.data.grade
@@ -119,7 +107,7 @@ const Story = () => {
 
     var trans
     const onPressFunction = () =>{
-        axios.post('http://192.168.1.21:5000/convertWriting', {word_required:stories[currentIndex]})
+        API.post('convertWriting', {word_required:stories[currentIndex]})
         .then(resp => {
             trans = resp.data.Playback
             console.log(trans)
