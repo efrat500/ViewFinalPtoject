@@ -15,7 +15,7 @@ const Story = () => {
     useEffect(() => {
         const axiosStories = async () => {
             console.log("getStory")
-            const response = await axios.post('http://192.168.1.21:5000/getstory', {title_story: route.params.title_Story})
+            const response = await axios.post('http://192.168.1.233:5000/getstory', {title_story: route.params.title_Story, username: route.params.name})
             setStories(response.data.story)
             console.log(stories)
            
@@ -31,7 +31,7 @@ const Story = () => {
             setonRepeatPress(0)
         }
         console.log("onStartFunc")
-        axios.post('http://192.168.1.21:5000/listenStory', {title_story: route.params.title_Story, current_index: currentIndex})
+        axios.post('http://192.168.1.233:5000/listenStory', {title_story: route.params.title_Story, current_index: currentIndex, username: route.params.name })
         .then(resp => {
             console.log(resp.data)
             console.log("befor" + currentIndex)
@@ -81,7 +81,7 @@ const Story = () => {
     }
     var trans
     const onPressFunction = () =>{
-        axios.post('http://192.168.1.21:5000/translatWord', {word_required:stories[currentIndex]})
+        axios.post('http://192.168.1.233:5000/translatWord', {word_required:stories[currentIndex]})
         .then(resp => {
             trans = resp.data.translated
             console.log(trans)

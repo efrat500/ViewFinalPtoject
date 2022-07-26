@@ -15,7 +15,7 @@ const validationSchema = Yup.object({
 const NewPasswordScreen = (props) => {
     const insertData = (values) => {
         console.log(route.params.name)
-        axios.put('http://192.168.1.21:5000/updatepassword', {username:route.params.name, password:values.password})
+        axios.put('http://192.168.1.233:5000/updatepassword', {username:route.params.name, password:values.password})
         .then(resp => {
             console.log(resp.data)
             if (resp.status == 200){

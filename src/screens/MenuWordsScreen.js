@@ -3,26 +3,63 @@ import Write from '../../assets/wordTran.png';
 import Hear from '../../assets/hearing.jpg';
 import Read from '../../assets/reading.jpg';
 import Dict from '../../assets/dict.png';
-import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, TouchableOpacity, ScrollView,Alert } from 'react-native';
 import { Card, Title } from 'react-native-paper';
 import { useNavigation, useRoute} from '@react-navigation/native'
+import axios from "axios"
 
 
 const WordsScreen = () => {
     const route = useRoute()
     console.log(route.params.name)
     const navigation = useNavigation()
+    
     const onWriting = () =>{
-        navigation.navigate('Translate Words', {name: route.params.name})
-        console.log(route.params.name)
+        axios.post('http://192.168.1.233:5000/getdatareport', {username: route.params.name})
+        .then(resp => {
+            if (resp.data.size_list_translating < 1){
+                Alert.alert('Note','You dont have words to practice',[{text: 'Understood'}])
+            }
+            else{
+                navigation.navigate('Translate Words', {name: route.params.name})
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+        .finally(() => console.log("done"))
     }
 
     const onHearing = () =>{
-        navigation.navigate('Listening Words', {name: route.params.name})
+        axios.post('http://192.168.1.233:5000/getdatareport', {username: route.params.name})
+        .then(resp => {
+            if (resp.data.size_list_general < 1){
+                Alert.alert('Note','You dont have words to practice',[{text: 'Understood'}])
+            }
+            else{
+                navigation.navigate('Listening Words', {name: route.params.name})
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+        .finally(() => console.log("done"))
     }
 
     const onReading = () =>{
-        navigation.navigate('Reading Words', {name: route.params.name})
+        axios.post('http://192.168.1.233:5000/getdatareport', {username: route.params.name})
+        .then(resp => {
+            if (resp.data.size_list_reading < 1){
+                Alert.alert('Note','You dont have words to practice',[{text: 'Understood'}])
+            }
+            else{
+                navigation.navigate('Reading Words', {name: route.params.name})
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+        .finally(() => console.log("done"))
     }
     const onDictionary = () =>{
         navigation.navigate('Dictionary Screen', {name: route.params.name})
