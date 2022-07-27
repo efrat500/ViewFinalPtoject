@@ -1,3 +1,5 @@
+![books](https://user-images.githubusercontent.com/73199918/181135237-3d5fdb51-2295-4a70-a031-836aad25f2da.png)
+
 # Fun English App
 
 The app lets the child to learn the English language, read, write, expand the vocabulary - and all this alone and independently, without our help!
