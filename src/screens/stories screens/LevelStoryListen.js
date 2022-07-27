@@ -1,11 +1,11 @@
-
 import { DevSettings,ImageBackground,Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, Alert} from 'react-native';
 import React, {useState, useEffect} from 'react'
 import { List } from 'react-native-paper';
-import API from '../../axiosAPI'
+import axios from "axios"
 import CustemButton from '../../components/CustemButton'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { combine } from 'qs/lib/utils';
+import API from '../../axiosAPI'
 
 const LevelStoryListen = () => {
     const route = useRoute()
@@ -82,6 +82,7 @@ const LevelStoryListen = () => {
         .then(resp => {
             console.log(resp.data.pass_level_hard)
             if (resp.data.pass_level_hard==1){
+                console.log("pass=1")
                 setExpanded3(!expanded3)
             }
             else{
@@ -115,7 +116,7 @@ const LevelStoryListen = () => {
         .finally(() => console.log("done"))
     }
 
-    const getStorty = () => {
+    const getStory = () => {
         API.post('getdatareport', {username:route.params.name})
         .then(resp => {
             if (resp.data.current_level == "advanced"){
@@ -137,39 +138,54 @@ const LevelStoryListen = () => {
             }
         }) 
     }
-    const Accordion = (mapStory, level, expanded = false, pressFunc = null) => (
-        <List.Accordion  style={styles.accordion1}
-                title={level}
-                expanded={expanded}
-                onPress={pressFunc}>
-                {mapStory.map((item, index)=>{
-                    return(
-                        <List.Item key={index} onPress={() => onReadStory(item)} title={item.title} />);
-                })}
-        </List.Accordion>
-    );
-
-    return ( <ImageBackground source={require('../../../assets/background.jpg')} style={{width: '100%', height: '100%'}}> 
+    return ( <ImageBackground source={require('../../../assets/background.jpg')} style={styles.background}> 
         <ScrollView>
         <List.Section title="">
             <View style={styles.view}>
-            {Accordion(stories1, "Easy")}
+            <List.Accordion  style={styles.accordion1}
+                title="Easy">
+                {stories1.map((item, index)=>{
+                    return(
+                        <List.Item key={index} onPress={() => onListenStory(item)} title={item.title} />);
+                })}
+            </List.Accordion>
             </View>
             <View style={styles.view}>
-            {Accordion(stories2, "Medium", expanded2, onPressFunction2)}
+            <List.Accordion style={styles.accordion1}
+                title="Medium"
+                expanded={expanded2}
+                onPress={onPressFunction2}>
+                {stories2.map((item, index)=>{
+                    return(<List.Item key={index} onPress={() => onListenStory(item)} title={item.title} />);
+                })}
+            </List.Accordion>
             </View>
             <View style={styles.view}>
-            {Accordion(stories3, "Hard", expanded3, onPressFunction3)}
+            <List.Accordion style={styles.accordion}
+                title="Hard"
+                expanded={expanded3}
+                onPress={onPressFunction3}>
+                {stories3.map((item, index)=>{
+                    return(<List.Item key={index} onPress={() => onListenStory(item)} title={item.title} />);
+                })}
+            </List.Accordion>
             </View>
             <View style={styles.view}>
-            {Accordion(stories4, "Advanced", expanded4, onPressFunction4)}
+            <List.Accordion style={styles.accordion}
+                title="Advanced"
+                expanded={expanded4}
+                onPress={onPressFunction4}>
+                {stories4.map((item, index)=>{
+                    return(<List.Item key={index} onPress={() => onListenStory(item)} title={item.title} />);
+                })}
+            </List.Accordion>
             </View>
         </List.Section>
         {expanded4 == true ? 
-         <CustemButton 
+            <CustemButton 
             text='Surprise' 
             // check befor press signin all the data is valid
-            onPress={getStort}
+            onPress={getStory}
         />  : null}
     </ScrollView>
     </ImageBackground>

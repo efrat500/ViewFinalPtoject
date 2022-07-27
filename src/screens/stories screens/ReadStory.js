@@ -68,11 +68,8 @@ const Story = () => {
                     setButtonColorStart('red')
                 }
                 else {
-                    console.log("else: counter= " + counterWorng)
                     Alert.alert('Learn this words:', resp.data.list_worng + ".\n",[{text: 'Understood'}])
                     setCounterWorng(0)
-                    console.log("after counter= " + counterWorng)
-                    console.log("befor" + currentIndex)
                     setCurrentIndex(currentIndex+1)
                     currentIndex = currentIndex+1
                     console.log("after" + currentIndex)
