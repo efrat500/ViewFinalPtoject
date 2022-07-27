@@ -15,7 +15,7 @@ const MenuScreen = ({}) => {
 
     const onReport = () =>{
         console.log(route.params.name)
-        API.post('getdatareport', {username: route.params.name})
+        API.post('datareport', {username: route.params.name})
         .then(resp => {
             if (resp.data.num_stories < 1){
                 Alert.alert('Note','Read at least 1 story to get a report on your progress',[{text: 'Understood'}])

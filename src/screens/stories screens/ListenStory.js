@@ -99,10 +99,10 @@ const Story = () => {
             <View style={styles.view}>
             <View style={{flexDirection: 'row'}}>
             <Image style={styles.logo} source={logo}></Image>
-            <Text style={styles.text}> {route.params.title_Story}</Text>
+            <Text style={{left: -20,flex: 1,marginLeft:-10,fontSize:30, fontWeight: 'bold',textAlign: 'center', marginTop: 50, color:'black',}}> {route.params.title_Story}</Text>
             </View>    
                 {stories.length == 0 ? null:
-                    <Card style={styles.card}>
+                    <Card style={{marginTop:-30,height:350, elavation: 3, backgroundColor : 'transparent',borderRadius: 7,borderWidth:  3,  borderColor:  'black'}}>
                     <ScrollView>
                     <View style={styles.view1}>
                         {currentIndex > 0 ? 

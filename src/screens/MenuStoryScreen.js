@@ -13,10 +13,10 @@ const StoryScreen = () => {
     const navigation = useNavigation()
 
     const onHearing = () =>{
-        navigation.navigate('Level Story Listen', {name:route.params.name})
+        navigation.navigate('Level Story', {name:route.params.name, isRead: false})
     }
     const onReading = () =>{
-        navigation.navigate('Level Story Read', {name:route.params.name})
+        navigation.navigate('Level Story', {name:route.params.name, isRead: true})
     }
     return (<ImageBackground style={styles.container}>
     <ScrollView>

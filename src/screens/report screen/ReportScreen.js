@@ -30,7 +30,7 @@ const ReportScreen = () => {
     const [calc_translating , setcalc_translating]=useState(0)
     useEffect(() => {
         const axiosStories = async () => {
-            const response = await API.post('getdatareport', {username: route.params.name})
+            const response = await API.post('datareport', {username: route.params.name})
             setReportlevel(response.data.current_level)
             console.log(response.data.current_level)
             setNumStories(response.data.num_stories)

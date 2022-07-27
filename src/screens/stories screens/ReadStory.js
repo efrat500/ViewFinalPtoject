@@ -155,6 +155,14 @@ const styles = StyleSheet.create({
         width: 100,
         marginTop: -20,
     },
+    text:{
+        marginLeft:-10,
+        fontSize:30, 
+        fontWeight: 'bold',
+        textAlign: 'center', 
+        marginTop: 50, 
+        color:'black',
+    },
     view:{
         padding:20,
         flex: 1,

@@ -16,7 +16,7 @@ const WordsScreen = () => {
     const navigation = useNavigation()
     
     const onWriting = () =>{
-        API.post('getdatareport', {username: route.params.name})
+        API.post('datareport', {username: route.params.name})
         .then(resp => {
             if (resp.data.size_list_translating < 1){
                 Alert.alert('Note','You dont have words to practice',[{text: 'Understood'}])
@@ -32,7 +32,7 @@ const WordsScreen = () => {
     }
 
     const onHearing = () =>{
-        API.post('getdatareport', {username: route.params.name})
+        API.post('datareport', {username: route.params.name})
         .then(resp => {
             if (resp.data.size_list_general < 1){
                 Alert.alert('Note','You dont have words to practice',[{text: 'Understood'}])
@@ -48,7 +48,7 @@ const WordsScreen = () => {
     }
 
     const onReading = () =>{
-        API.post('getdatareport', {username: route.params.name})
+        API.post('datareport', {username: route.params.name})
         .then(resp => {
             if (resp.data.size_list_reading < 1){
                 Alert.alert('Note','You dont have words to practice',[{text: 'Understood'}])
