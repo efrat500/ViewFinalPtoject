@@ -14,8 +14,9 @@ Our app will reflect to the child his progress and level, so that will motivate 
 
 The front end of the application is written in JS React Native, the backend is written is Python using Flask and we use MYSQL for the DB.
 <p align="center">
-  <img width="800" height="1000" src="https://user-images.githubusercontent.com/73199918/181163154-f32c70dc-8499-44d1-8046-82bb49688f37.png">
+  <img width="800" height="1000" src="https://user-images.githubusercontent.com/73199918/181186613-62c1b8d5-f14a-4a67-8782-4e0af26c9700.png">
 </p>
+
 
 
 
